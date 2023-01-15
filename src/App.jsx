@@ -1,8 +1,8 @@
 import './App.css';
 import { Routes,Route } from 'react-router-dom';
-import { NavBar } from './components/NavBar/NavBar';
-import { Footer } from './components/Footer/Footer';
-import { Header } from './components/Header/Header';
+import { NavBar } from './components/navbar/NavBar';
+import { Footer } from './components/footer/Footer';
+import { Header } from './components/header/Header';
 function App() {
   return (
     <div className="App">
