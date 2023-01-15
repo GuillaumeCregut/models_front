@@ -1,0 +1,10 @@
+.footer-page{
+    background-color: var(--second-color);
+    height: 40px;
+    display: flex;
+    align-items: center;
+
+    .copyright{
+        margin-left: 20px;
+    }
+}
