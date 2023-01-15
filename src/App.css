@@ -1,0 +1,9 @@
+*{
+    list-style-type: none;
+    text-decoration: none;
+}
+
+:root {
+    --main-color: #215732;
+    --second-color: #FFDF82;
+}
