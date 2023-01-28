@@ -6,14 +6,14 @@ import './NavBar.scss';
 export const NavBar = () => {
     return (
         <nav className="navbar-container">
-            <div class="navlink-container">
-                <input type="checkbox" class="toggle-btn"></input>
-                <div class="burger-menu"></div>
+            <div className="navlink-container">
+                <input type="checkbox" className="toggle-btn"></input>
+                <div className="burger-menu"></div>
                 <ul className="menu">
-                    <li><NavLink to='accueil'className={({isActive})=>isActive ? 'active-nav' : undefined}>Accueil</NavLink></li>
-                    <li><NavLink to='params'className={({isActive})=>isActive ? 'active-nav' : undefined}>Paramètres</NavLink></li>
-                    <li><NavLink to='profil'className={({isActive})=>isActive ? 'active-nav' : undefined}>Mon profil</NavLink></li>
-                    <li><NavLink to='kits'className={({isActive})=>isActive ? 'active-nav' : undefined}>Mes kits</NavLink></li>
+                    <li><NavLink to='accueil'className={({isActive})=>isActive ? 'main-font-20 active' : 'main-font-20'}>Accueil</NavLink></li>
+                    <li><NavLink to='params'className={({isActive})=>isActive ? 'main-font-20 active' : 'main-font-20'}>Paramètres</NavLink></li>
+                    <li><NavLink to='profil'className={({isActive})=>isActive ? 'main-font-20 active' : 'main-font-20'}>Mon profil</NavLink></li>
+                    <li><NavLink to='kits'className={({isActive})=>isActive ? 'main-font-20 active' : 'main-font-20'}>Mes kits</NavLink></li>
                 </ul>
             </div>
         </nav>
