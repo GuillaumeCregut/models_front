@@ -1,12 +1,15 @@
 .footer-page{
     background-color: var(--menu-color);
+    padding-left: 20px;
     font-family: var(--title-font);
     color : var(--title-color);
     height: 40px;
     display: flex;
     align-items: center;
-
+    position :fixed;
+    bottom: 0;
+    width: 100%;
     .copyright{
-        margin-left: 20px;
+        padding-left: 20px;
     }
 }
