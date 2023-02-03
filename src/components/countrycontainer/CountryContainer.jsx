@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { SimpleCardContainer } from '../simplecardcontainer/SimpleCardContainer';
 import './CountryContainer.scss';
 
 const CountryContainer = () => {
@@ -15,7 +16,15 @@ const CountryContainer = () => {
         getCountries();
     },[]);
     return (
-        <div>CountryContainer</div>
+        <div>CountryContainer
+            {countries.map(item=>(
+                <SimpleCardContainer
+                    key={item.id}
+                    item={item}
+                    kind='country'
+                />
+            ))}
+        </div>
     )
 }
 
