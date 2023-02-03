@@ -1,7 +1,10 @@
-import React from 'react'
+import CountryContainer from '../../components/countrycontainer/CountryContainer';
+import './Params.scss';
 
 export const Params = () => {
   return (
-    <div>Params</div>
+    <div>Params
+      <CountryContainer />
+    </div>
   )
 }
