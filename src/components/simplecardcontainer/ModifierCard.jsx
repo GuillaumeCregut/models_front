@@ -19,6 +19,8 @@ export const ModifierCard = ({ id,name, url, action, hide }) => {
     },[])
 
     const handleUpdate=(e)=>{
+        if(newName==='')
+            return -1;
         e.preventDefault();
         if(window.confirm('Voulez vous modifier ?')){
         const newItem={name:newName};

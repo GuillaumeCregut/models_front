@@ -10,6 +10,8 @@ const FormAddSimple = ({action, url,refresh}) => {
 
     const handleSubmit=(e)=>{
         e.preventDefault();
+        if(newName==='')
+            return-1;
         const newData={name:newName}
         if(window.confirm("Voulez vous ajouter l'élément ?")){
             axios
