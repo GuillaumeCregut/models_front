@@ -22,7 +22,7 @@ export const countrySlice=createSlice({
             })
         },
         deleteCountry:(state,{payload})=>{
-            state.country=state.country.filter((item.id!==payload));
+            state.country=state.country.filter((item)=>item.id!==payload);
         }
     }
 })
