@@ -1,0 +1,20 @@
+.signin-container{
+    padding : 20px;
+
+    .form-signin{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-signin-label{
+        margin: 5px 0;
+    }
+
+    .form-signin-input{
+        margin-left: 5px;
+    }
+
+    .form-signinbtn{
+        width: 150px;
+    }
+}
