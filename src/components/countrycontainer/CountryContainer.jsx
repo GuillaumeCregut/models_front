@@ -6,6 +6,7 @@ import { setCountry, deleteCountry,addCountry,updateCountry } from '../../featur
 
 import './CountryContainer.scss';
 import { AwaitLoad } from '../awaitload/AwaitLoad';
+import FormAddSimple from '../formaddsimple/FormAddSimple';
 
 const CountryContainer = () => {
     const dispatch = useDispatch();
@@ -34,7 +35,7 @@ const CountryContainer = () => {
     }
 
     return (
-        <div className="country-component">
+        <section className="country-component">
             <h2 className='country-title'>Les pays</h2>
             <div className='country-container'>
                 {isLoaded ? countriesData.map(item => (
@@ -47,7 +48,12 @@ const CountryContainer = () => {
                     : <AwaitLoad />
                 }
             </div>
-        </div>
+            <FormAddSimple
+             action ={addCountry}
+             url={url}
+             refresh={getCountries}
+             />
+        </section>
     )
 }
 
