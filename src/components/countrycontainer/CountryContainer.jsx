@@ -8,31 +8,34 @@ import './CountryContainer.scss';
 import { AwaitLoad } from '../awaitload/AwaitLoad';
 
 const CountryContainer = () => {
-    const dispatch=useDispatch();
-    const countriesData=useSelector((state)=>state.countries.country);
-    const [isLoaded,setIsLoaded]=useState(false);
-    const getCountries=()=>{
-        const url=`${process.env.REACT_APP_API_URL}country`;
-         axios.get(url)
-            .then((res)=>{
+    const dispatch = useDispatch();
+    const countriesData = useSelector((state) => state.countries.country);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const getCountries = () => {
+        const url = `${process.env.REACT_APP_API_URL}country`;
+        axios.get(url)
+            .then((res) => {
                 dispatch(setCountry(res.data))
                 setIsLoaded(true);
             });
     }
-    useEffect(()=>{
+    useEffect(() => {
         getCountries();
-    },[]);
+    }, []);
     return (
-        <div className='country-container'>
-            {isLoaded?countriesData.map(item=>(
-                <SimpleCardContainer
-                    key={item.id}
-                    item={item}
-                    kind='country'
-                />
-            ))
-            :<AwaitLoad />
-            }
+        <div className="country-component">
+            <h2 className='country-title'>Les pays</h2>
+            <div className='country-container'>
+                {isLoaded ? countriesData.map(item => (
+                    <SimpleCardContainer
+                        key={item.id}
+                        item={item}
+                        kind='country'
+                    />
+                ))
+                    : <AwaitLoad />
+                }
+            </div>
         </div>
     )
 }
