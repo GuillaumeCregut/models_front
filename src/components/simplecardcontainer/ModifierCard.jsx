@@ -63,6 +63,7 @@ export const ModifierCard = ({ id,name, url, action, hide }) => {
                         ref={nameRef}
                         value={newName}
                         className="input-name"
+                        autoComplete='off'
                         onChange={(e)=>setNewName(e.target.value)}
                         />
                 </label>
