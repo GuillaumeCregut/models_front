@@ -19,10 +19,13 @@ export const SimpleCardContainer = ({ item, wrapper }) => {
           })
           .catch((err)=>{
             if(err.response.status===404){
-              console.log('pas trouvé')
+              alert("L'élément n'existe pas")
             }
             if(err.response.status<404){
               alert("Vous n'êtes pas autoriser à supprimer")
+            }
+            if(err.response.status===500){
+              alert("Une erreur serveur est survenue")
             }
           })
     }
