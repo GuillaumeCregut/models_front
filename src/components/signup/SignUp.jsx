@@ -59,19 +59,39 @@ const SignUp = () => {
             //axios
             else {
                 //create  data
+                const newUser={
+                    firstname:firstname,
+                    lastname:lastname,
+                    login:login,
+                    password:password1,
+                    email:email
+                }
+                const url = `${process.env.REACT_APP_API_URL}users/`;
                 axios
-                .post('url','data')
+                .post(url,newUser)
                 .then ((res)=>{
+                    console.log(res)
                     setSuccess(true);
                 })
                 .catch((err)=>{
-                    alert(err)
-                    if(err?.response){
-                        setErrMsg('Aucune réponse du serveur');
-                        
+                    if(!err.response){
+                       setErrMsg(err.message)
                     }
-                    else if (err.response?.status){
+                    if (err.response?.status){
                         //Afficher le message d'erreur
+                        console.log(err)
+                        let errorMsg=err.response?.data;
+                        if(!errorMsg)
+                            errorMsg="Une erreur serveur est survenue."
+                        switch(err.response.status){
+                            case 409 : setErrMsg("cet utilisateur existe déjà");
+                                break;
+                            case 422 : setErrMsg(errorMsg);
+                                break;
+                            case 500 : setErrMsg("Une erreur serveur est survenue.");
+                                break;
+                            default : setErrMsg('Une erreur inattendue est survenue');
+                        }
                         errRef.current.focus();
                     }
                 })
