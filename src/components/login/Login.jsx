@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useRef, useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
+import jwt_decode from "jwt-decode";
 
 import './Login.scss';
 
@@ -32,6 +33,9 @@ const Login = (props) => {
                 if(resp?.data){
                     const accessToken=response.data?.accessToken;
                     //decode token to get rank, firstname, lastname
+                    var decoded = jwt_decode(token);
+ 
+                    console.log(decoded);
                     const user{
                         firstname,
                         lastname,
