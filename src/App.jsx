@@ -1,5 +1,5 @@
 import './App.css';
-import { Routes,Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { NavBar } from './components/navbar/NavBar';
 import { Footer } from './components/footer/Footer';
 import { Header } from './components/header/Header';
@@ -11,16 +11,18 @@ import { Kits } from './pages/kits/Kits';
 function App() {
   return (
     <div className="App">
-      <Header />
-      <NavBar />
-      <Routes>
-        <Route index element={<Home />} />
-        <Route path='accueil' element={<Home />} />
-        <Route path='params' element={<Params />} />
-        <Route path='profil' element={<Profil />} />
-        <Route path='kits' element={<Kits />} />
-        <Route path='*' element={<NotFound />} />
-      </Routes>
+      <div>
+        <Header />
+        <NavBar />
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path='accueil' element={<Home />} />
+          <Route path='params' element={<Params />} />
+          <Route path='profil' element={<Profil />} />
+          <Route path='kits' element={<Kits />} />
+          <Route path='*' element={<NotFound />} />
+        </Routes>
+      </div>
       <Footer />
     </div>
   );
