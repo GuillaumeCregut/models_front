@@ -1,11 +1,11 @@
 import React from 'react'
-import SignIn from '../../components/signin/SignIn'
+import SignUp from '../../components/signup/SignUp'
 
 export const Profil = () => {
   return (
     <div>
       Profil
-      <SignIn />
+      <SignUp />
     </div>
   )
 }

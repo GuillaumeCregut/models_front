@@ -1,0 +1,35 @@
+.signup-container{
+    padding : 20px;
+
+    .form-signup{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-signup-label{
+        margin: 5px 0;
+    }
+
+    .form-signup-input{
+        margin-left: 5px;
+    }
+
+    .form-signupbtn{
+        width: 150px;
+    }
+    .signup-err-off{
+        display: none;
+    }
+    
+    .signup-hide{
+        display: none;
+    }
+    
+    .signup-invalid{
+        display: inline-block;
+    }
+    
+    .signup-info{
+        margin-top: 10px;
+    }
+}
