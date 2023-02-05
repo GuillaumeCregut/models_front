@@ -1,7 +1,7 @@
 import axios from 'axios';
-import React, { useEffect, useRef, useState,useContext} from 'react'
+import React, { useEffect, useRef, useState} from 'react'
 import { useNavigate } from 'react-router-dom';
-import AuthContext from '../../context/auth.provider';
+import useAuth from '../../hooks/useAuth';
 
 import './Login.scss';
 
@@ -9,7 +9,7 @@ const Login = (props) => {
     const [login, setLogin]=useState('');
     const[pass,setPass]=useState('');
     const [errMsg, setErrMsg]=useState(false);
-    const setAuth=useContext(AuthContext);
+    const {setAuth}=useAuth();
     const loginRef=useRef();
     const errRef=useRef();
 
