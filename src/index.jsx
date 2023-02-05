@@ -5,7 +5,8 @@ import { Provider } from "react-redux";
 import store from "./app/store";
 import App from './App';
 import { AuthProvider } from './context/auth.provider';
-
+import { disableReactDevTools } from '@fvilers/disable-react-devtools';
+//disableReactDevTools();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
