@@ -1,4 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect } from 'react';
+import {FaCheck, FaTimes, FaInfoCircle} from 'react-icons/fa';
 import axios from "axios";
 import './SignUp.scss';
 
@@ -125,9 +126,9 @@ const SignUp = () => {
                                 placeholder="email"
                                 required />
                         </label>
-                        <label htmlFor="login" className='form-signup-label'>Login :
-                            <span className={validLogin ? "signup-valid" : "signup-hide"}>OK</span>
-                            <span className={validLogin || !login ? "signup-hide" : "signup-invalid"}>Wrong</span>
+                        <label htmlFor="login" className='form-signup-label'><span>Login :
+                            <FaCheck className={validLogin ? "signup-valid" : "signup-hide"}/>
+                            <FaTimes className={validLogin || !login ? "signup-hide" : "signup-invalid"} /></span>
                             <input
                                 type="text"
                                 className='form-signup-input'
@@ -143,12 +144,12 @@ const SignUp = () => {
                                 required />
                         </label>
                         <p id="uidnote" className={loginFocus && login && !validLogin ? "signup-instruction" : "signup-err-off"}>
-                            Doit être de 4 à 24 caractères, doit commencer par une lettre.<br />
+                        <FaInfoCircle/> Doit être de 4 à 24 caractères, doit commencer par une lettre.<br />
                             Lettres, nombres underscore et tirets sont autorisés.
                         </p>
-                        <label htmlFor="password1" className='form-signup-label'>Mot de passe :
-                            <span className={validPwd ? "signup-valid" : "signup-hide"}>OK</span>
-                            <span className={validPwd || !password1 ? "signup-hide" : "signup-invalid"}>Wrong</span>
+                        <label htmlFor="password1" className='form-signup-label'><span>Mot de passe :
+                            <FaCheck className={validPwd ? "signup-valid" : "signup-hide"} />
+                            <FaTimes className={validPwd || !password1 ? "signup-hide" : "signup-invalid"} /></span>
                             <input
                                 type="password"
                                 className='form-signup-input'
@@ -162,12 +163,12 @@ const SignUp = () => {
                                 required />
                         </label>
                         <p id="pwdnote" className={pwd1Focus && password1 && !validPwd ? "signup-instruction" : "signup-err-off"}>
-                            Doit être de 8 à 24 caractères, Doit inclure une majuscule, un chiffre et un caracère spécial.<br />
+                            Doit être de 8 à 24 caractères, Doit inclure une majuscule, un chiffre et un caractère spécial.<br />
                             Sont autorisés : <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span><span aria-label="percent">%</span>
                         </p>
-                        <label htmlFor="password2" className='form-signup-label'>Mot de passe (vérification) :
-                            <span className={validMatch && password2 && validPwd ? "signup-valid" : "signup-hide"}>OK</span>
-                            <span className={validMatch || !password2 ? "signup-hide" : "signup-invalid"}>Wrong</span>
+                        <label htmlFor="password2" className='form-signup-label'><span>Mot de passe (vérification) :
+                            <FaCheck className={validMatch && password2 && validPwd ? "signup-valid" : "signup-hide"} />
+                            <FaTimes className={validMatch || !password2 ? "signup-hide" : "signup-invalid"} /></span>
                             <input
                                 type="password"
                                 className='form-signup-input'
@@ -180,7 +181,7 @@ const SignUp = () => {
                                 required />
                         </label>
                         <button
-                            className='form-signupbtn'
+                            className={validLogin && validPwd && validMatch && firstname !== '' && lastname !== '' && email !== '' ? 'form-signup-btn form-signup-btn-valid':"form-signup-btn"}
                             disabled={!validLogin || !validPwd || !validMatch || firstname === '' || lastname === '' || email === '' ? true : false}
                         >Valider</button>
                     </form>
