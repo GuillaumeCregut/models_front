@@ -1,5 +1,7 @@
-import React, { useEffect, useRef, useState} from 'react'
+import axios from 'axios';
+import React, { useEffect, useRef, useState,useContext} from 'react'
 import { useNavigate } from 'react-router-dom';
+import AuthContext from '../../context/auth.provider';
 
 import './Login.scss';
 
@@ -7,7 +9,7 @@ const Login = (props) => {
     const [login, setLogin]=useState('');
     const[pass,setPass]=useState('');
     const [errMsg, setErrMsg]=useState(false);
-  
+    const setAuth=useContext(AuthContext);
     const loginRef=useRef();
     const errRef=useRef();
 
@@ -19,13 +21,33 @@ const Login = (props) => {
         setErrMsg('');
     },[login, pass])
 
-
-    const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-    const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
-
     const handleSubmit=(e)=>{
         e.preventDefault();
         const url = `${process.env.REACT_APP_API_URL}auth/`;
+        /*
+            //Check datas
+            //Create data
+            axios.post(url,data,{withCredentials:true})
+            .then((resp)=>{
+                if(resp?.data){
+                    const accessToken=response.data?.accessToken;
+                    //decode token to get rank, firstname, lastname
+                    const user{
+                        firstname,
+                        lastname,
+                        rank,
+                        token:accessToken
+                    }
+                    setAuth(user);
+                }
+            })
+            .catch((err)=>{
+                    setErrMsg('');
+                    errRef.current.focus();
+            })
+
+
+        */
     }
 
     return (
