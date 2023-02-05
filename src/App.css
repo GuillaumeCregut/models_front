@@ -31,9 +31,15 @@ body{
     line-height: 30px;
 }
 
+.App{
+    margin-bottom: 150px;
+}
+
 @media screen and (max-width: 768px) {
     .main-font-20{
         font-size: 16px;
         line-height: 20px;
     }
+    
+   
 }
