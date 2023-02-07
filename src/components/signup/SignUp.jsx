@@ -17,7 +17,6 @@ const SignUp = () => {
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
     const [validMatch, setValidMatch] = useState(false);
-    const [pwd2Focus, setPwd2Focus] = useState(false);
     const [pwd1Focus, setPwd1Focus] = useState(false);
     const [loginFocus, setLoginFocus] = useState(false);
 
@@ -196,8 +195,6 @@ const SignUp = () => {
                                 onChange={(e) => { setPassword2(e.target.value) }}
                                 id="password2"
                                 aria-invalid={validMatch ? "false" : "true"}
-                                onFocus={() => setPwd2Focus(true)}
-                                onBlur={() => setPwd2Focus(false)}
                                 required />
                         </label>
                         <button
