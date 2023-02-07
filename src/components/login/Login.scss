@@ -9,6 +9,13 @@
         text-align: center;
     }
 
+    .login-error-msg{
+        margin: 5px;
+        padding: 5px;
+        background-color: rgb(208, 135, 135);
+        color : red;
+    }
+
     .login-form{
         display: flex;
         flex-direction: column;
