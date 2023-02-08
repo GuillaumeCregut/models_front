@@ -6,14 +6,14 @@ import jwt_decode from "jwt-decode";
 
 import './Login.scss';
 
-const Login = (props) => {
+const Login = () => {
     const [login, setLogin] = useState('');
     const [pass, setPass] = useState('');
     const [errMsg, setErrMsg] = useState(false);
     const { setAuth } = useAuth();
     const loginRef = useRef();
     const errRef = useRef();
-
+    const navigate=useNavigate();
     useEffect(() => {
         loginRef.current.focus();
     }, [])
@@ -45,6 +45,7 @@ const Login = (props) => {
                             token: token
                         }
                         setAuth(user);
+                        navigate('/');
                     }
                 })
                 .catch((err) => {

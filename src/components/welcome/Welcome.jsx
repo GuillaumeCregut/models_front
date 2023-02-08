@@ -9,9 +9,14 @@ const Welcome = () => {
     const {auth}=useAuth();
     const {firstname,lastname}=auth;
     const navigate=useNavigate();
-
     const handleClick=()=>{
-        navigate('/login');
+        
+        if(auth?.token){
+            console.log('logout')
+        }
+        else{
+            navigate('/login');
+        }
     }
 
     console.log('welcome: ',auth)
