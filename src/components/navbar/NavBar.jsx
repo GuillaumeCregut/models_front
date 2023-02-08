@@ -16,7 +16,7 @@ export const NavBar = () => {
                     <li><NavLink to='params'className={({isActive})=>isActive ? 'main-font-20 active' : 'main-font-20'}>Paramètres</NavLink></li>
                     <li><NavLink to='profil'className={({isActive})=>isActive ? 'main-font-20 active' : 'main-font-20'}>Mon profil</NavLink></li>
                     <li><NavLink to='kits'className={({isActive})=>isActive ? 'main-font-20 active' : 'main-font-20'}>Mes kits</NavLink></li>
-                    {auth.rank===ranks.admin?<li><NavLink to='admin'className={({isActive})=>isActive ? 'main-font-20 active' : 'main-font-20'}>Admin</NavLink></li>:null}
+                    {auth?.rank===ranks.admin?<li><NavLink to='admin'className={({isActive})=>isActive ? 'main-font-20 active' : 'main-font-20'}>Admin</NavLink></li>:null}
                 </ul>
             </div>
         </nav>
