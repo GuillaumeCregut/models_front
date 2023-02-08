@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import ranks from '../../feature/ranks';
 import './NavBar.scss';
+import Welcome from '../welcome/Welcome';
 
 export const NavBar = () => {
     const {auth}=useAuth();
@@ -19,6 +20,7 @@ export const NavBar = () => {
                     {auth?.rank===ranks.admin?<li><NavLink to='admin'className={({isActive})=>isActive ? 'main-font-20 active' : 'main-font-20'}>Admin</NavLink></li>:null}
                 </ul>
             </div>
+            <Welcome />
         </nav>
     )
 }

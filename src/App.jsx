@@ -11,6 +11,7 @@ import { Kits } from './pages/kits/Kits';
 import RequireAuth from './components/requireauth/RequireAuth';
 import AdminPage from './pages/adminpage/AdminPage';
 import ranks from './feature/ranks';
+import Login from './components/login/Login';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path='params' element={<Params />} />
           <Route path='profil' element={<Profil />} />
           <Route path='kits' element={<Kits />} />
+          <Route path='login' element={<Login />}/>
           <Route path='*' element={<NotFound />} />
           {/* Admin routes*/}
           <Route element={<RequireAuth  allowedRoles={ranks.admin}/>}>
