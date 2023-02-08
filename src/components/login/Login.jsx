@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import jwt_decode from "jwt-decode";
 
@@ -93,7 +93,7 @@ const Login = () => {
                 <button className='login-btn'>Connexion</button>
             </form>
             <p className="login-footer">
-                Pas encore de compte ? Inscrivez-vous
+                Pas encore de compte ? <Link to='/signup'>Inscrivez-vous</Link>
             </p>
         </section>
     )
