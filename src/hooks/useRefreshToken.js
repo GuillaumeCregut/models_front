@@ -10,11 +10,17 @@ const useRefreshToken=()=>{
         .get(url,{withCredentials:true})
         .then((resp)=>{
             console.log(resp.data);
-            //setAuth
+            newToken=resp.data;
+            setAuth(prev=>{
+                console.log(prev);
+                return {...prev,token:newToken}
+            })
         })
         .catch((err)=>{
-
+            newToken=''
+            console.log('erreur refesh'); //to modify
         })
+        return newToken;
     }
     return refresh;
 }

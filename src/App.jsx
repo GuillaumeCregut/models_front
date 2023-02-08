@@ -8,6 +8,10 @@ import { Home } from './pages/home/Home';
 import { Params } from './pages/params/Params';
 import { Profil } from './pages/profil/Profil';
 import { Kits } from './pages/kits/Kits';
+import RequireAuth from './components/requireauth/RequireAuth';
+import AdminPage from './pages/adminpage/AdminPage';
+import ranks from './feature/ranks';
+
 function App() {
   return (
     <div className="App">
@@ -21,6 +25,10 @@ function App() {
           <Route path='profil' element={<Profil />} />
           <Route path='kits' element={<Kits />} />
           <Route path='*' element={<NotFound />} />
+          {/* Admin routes*/}
+          <Route element={<RequireAuth  allowedRoles={ranks.admin}/>}>
+            <Route path='admin' element={<AdminPage />} />
+          </Route>
         </Routes>
       </div>
       <Footer />

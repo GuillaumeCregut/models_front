@@ -44,7 +44,6 @@ const Login = (props) => {
                             rank: decoded.rank,
                             token: token
                         }
-                        console.log(user)
                         setAuth(user);
                     }
                 })
