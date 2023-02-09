@@ -1,18 +1,31 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
+/* Common components*/
 import { NavBar } from './components/navbar/NavBar';
 import { Footer } from './components/footer/Footer';
 import { Header } from './components/header/Header';
 import { NotFound } from './components/notfournd/NotFound';
+import Login from './components/login/Login';
+import SignUp from './components/signup/SignUp';
+/* Pages principales*/
 import { Home } from './pages/home/Home';
 import { Params } from './pages/params/Params';
 import { Profil } from './pages/profil/Profil';
 import { Kits } from './pages/kits/Kits';
-import RequireAuth from './components/requireauth/RequireAuth';
+/* Composants de la page admin */
 import AdminPage from './pages/adminpage/AdminPage';
+/*Composants de la page paramètres */
+import ParamsHome from './components/paramshome/ParamsHome';
+import AreaContainer from './components/areacontainer/AreaContainer';
+import BuilderContainer from './components/buildercontainer/BuilderContainer';
+import BrandContainer from './components/brandcontainer/BrandContainer';
+import CategoryContainer from './components/categorycontainer/CategoryContainer';
+import ScaleContainer from './components/scalecontainer/ScaleContainer';
+import CountryContainer from './components/countrycontainer/CountryContainer';
+import ModelsContainer from './components/modelscontainer/ModelsContainer';
+/*Secure files */
+import RequireAuth from './components/requireauth/RequireAuth';
 import ranks from './feature/ranks';
-import Login from './components/login/Login';
-import SignUp from './components/signup/SignUp';
 
 function App() {
   return (
@@ -23,7 +36,16 @@ function App() {
         <Routes>
           <Route index element={<Home />} />
           <Route path='accueil' element={<Home />} />
-          <Route path='params' element={<Params />} />
+          <Route path='params' element={<Params />}>
+            <Route index element={<ParamsHome />} />
+            <Route path='periodes' element={<AreaContainer />} />
+            <Route path='constructeurs' element={<BuilderContainer />} />
+            <Route path='marques' element={<BrandContainer />} />
+            <Route path='categorie' element={<CategoryContainer />} />
+            <Route path='echelles' element={<ScaleContainer />} />
+            <Route path='pays' element={<CountryContainer />} />
+            <Route path='modeles' element={<ModelsContainer />} />
+          </Route>
           <Route path='profil' element={<Profil />} />
           <Route path='kits' element={<Kits />} />
           <Route path='login' element={<Login />}/>
