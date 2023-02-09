@@ -4,6 +4,7 @@
     grid-template-rows: 1fr;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
+    height: 100%;
 //grid-area: 1 / 2 / 2 / 3; autre page 
     @media screen and (max-width: 768px) {
         grid-template-columns: 1fr;
