@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import './ModifierCard.scss';
 import close from '../../assets/pictures/close.png';
-import axios from 'axios';
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useDispatch } from 'react-redux';
 
 export const ModifierCard = ({ id,name, url, action, hide }) => {
@@ -10,6 +10,9 @@ export const ModifierCard = ({ id,name, url, action, hide }) => {
     const nameRef = useRef();
     const formRef = useRef();
     const dispatch=useDispatch();
+    const axiosPrivate=useAxiosPrivate();
+
+
     const handleClose = () => {
         hide(false);
     }
@@ -24,7 +27,7 @@ export const ModifierCard = ({ id,name, url, action, hide }) => {
         e.preventDefault();
         if(window.confirm('Voulez vous modifier ?')){
         const newItem={name:newName};
-         axios
+        axiosPrivate
              .put(url,newItem)
              .then(()=>{
                     dispatch(action([newItem,id]))

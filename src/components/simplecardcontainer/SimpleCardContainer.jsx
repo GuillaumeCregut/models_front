@@ -1,7 +1,9 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import UpDateRemoveBtn from '../updateremovebtn/UpDateRemoveBtn';
 import { ModifierCard } from './ModifierCard';
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import './SimpleCardContainer.scss';
 
 
@@ -10,10 +12,10 @@ export const SimpleCardContainer = ({ item, wrapper }) => {
   const dispatch = useDispatch();
   const { deleteAction, updateAction, kind, url } = wrapper;
   const urlApi = `${url}/${item.id}`;
-
+  const axiosPrivate=useAxiosPrivate();
   const handleDelete = () => {
     if (window.confirm(`Voulez vous supprimer ${kind} ${item.name} ?`)) {
-      axios
+      axiosPrivate
         .delete(urlApi)
         .then(() => {
           dispatch(deleteAction(item.id))
@@ -31,6 +33,9 @@ export const SimpleCardContainer = ({ item, wrapper }) => {
         })
     }
   }
+  const handleUpdate=()=>{
+    setDisplayModifier(!displayModifier)
+  }
 
   return (
     <div className="container-Card">
@@ -44,10 +49,14 @@ export const SimpleCardContainer = ({ item, wrapper }) => {
           hide={setDisplayModifier}
         />
         : null}
-      <div className="btn-container">
+        <UpDateRemoveBtn 
+          updateAction={handleUpdate}
+          deleteAction={handleDelete}
+        />
+      {/* <div className="btn-container">
         <button onClick={() => setDisplayModifier(!displayModifier)}>Modifier</button>
         <button onClick={handleDelete}>Supprimer</button>
-      </div>
+      </div> */}
     </div>
   )
 }
