@@ -12,6 +12,7 @@ export const SimpleCardContainer = ({ item, wrapper }) => {
   const { deleteAction, updateAction, kind, url } = wrapper;
   const urlApi = `${url}/${item.id}`;
   const axiosPrivate=useAxiosPrivate();
+
   const handleDelete = () => {
     if (window.confirm(`Voulez vous supprimer ${kind} ${item.name} ?`)) {
       axiosPrivate
@@ -52,10 +53,6 @@ export const SimpleCardContainer = ({ item, wrapper }) => {
           updateAction={handleUpdate}
           deleteAction={handleDelete}
         />
-      {/* <div className="btn-container">
-        <button onClick={() => setDisplayModifier(!displayModifier)}>Modifier</button>
-        <button onClick={handleDelete}>Supprimer</button>
-      </div> */}
     </div>
   )
 }
