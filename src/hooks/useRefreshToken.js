@@ -9,16 +9,14 @@ const useRefreshToken=()=>{
         await axios
         .get(url,{withCredentials:true})
         .then((resp)=>{
-            console.log(resp.data);
             newToken=resp.data;
             setAuth(prev=>{
-                console.log(prev);
                 return {...prev,token:newToken}
             })
         })
         .catch((err)=>{
             newToken=''
-            console.log('erreur refesh'); //to modify
+            console.err('Failed to obtain secure connection'); //to modify
         })
         return newToken;
     }
