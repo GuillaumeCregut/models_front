@@ -7,7 +7,6 @@ const UpDateRemoveBtn = ({deleteAction,updateAction}) => {
 
     const { auth } = useAuth();
     let rankUser = auth?.rank;
-    console.log(rankUser);
     if(!rankUser)
         rankUser=0;
     return (

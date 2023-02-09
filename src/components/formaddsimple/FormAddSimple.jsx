@@ -1,6 +1,8 @@
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
+import useAuth from '../../hooks/useAuth';
+import ranks from "../../feature/ranks";
 
 import './FormAddSimple.scss';
 
@@ -8,6 +10,12 @@ const FormAddSimple = ({action, url,refresh}) => {
     const [newName,setNewName]=useState('');
     const dispatch=useDispatch();
     const axiosPrivate=useAxiosPrivate();
+    const {auth}=useAuth();
+    let rankUser=auth?.rank;
+    if (!rankUser){
+        rankUser=0;
+    }
+
     const handleSubmit=(e)=>{
         e.preventDefault();
         if(newName==='')
@@ -21,13 +29,13 @@ const FormAddSimple = ({action, url,refresh}) => {
                     dispatch(refresh)
                 })
                 .catch((err)=>{
-
+                    alert("Vous n'êtes pas autorisé à ajouter un élément.")
                 })
         }
     }
     
     return (
-        <section className='form-add-simple-container'>
+        rankUser>=ranks.moderate&&<section className='form-add-simple-container'>
             <h3>Nouvel élément</h3>
             <form 
                 className='form-add-simple'
