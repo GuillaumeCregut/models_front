@@ -17,7 +17,7 @@ import SignUp from './components/signup/SignUp';
 function App() {
   return (
     <div className="App">
-      <div>
+      <div className='app-container'>
         <Header />
         <NavBar />
         <Routes>
