@@ -4,6 +4,15 @@ import ranks from "../../feature/ranks";
 
 import './FormAddSimple.scss';
 
+/**
+ * 
+ * @param {action}  Action d'ajout à réaliser.
+ * 
+ * Prend en paramètre une fonction permettant l'ajout dans le store et dans la base de données
+ * 
+ * @returns 
+ */
+
 const FormAddSimple = ({action}) => {
     const [newName,setNewName]=useState('');
     const {auth}=useAuth();
