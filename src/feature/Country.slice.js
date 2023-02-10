@@ -10,6 +10,7 @@ export const countrySlice=createSlice({
             state.country=payload;
         },
         addCountry:(state,{payload})=>{
+            console.log(payload)
             state.country.push(payload);
         },
         updateCountry:(state,{payload})=>{

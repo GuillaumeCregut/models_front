@@ -20,11 +20,12 @@ const CountryContainer = () => {
         if(window.confirm("Voulez vous ajouter l'élément ?")){
             axiosPrivate
                 .post(url,newData)
-                .then(()=>{
-                    dispatch(addCountry(newData));
-                    dispatch(getCountries)
+                .then((resp)=>{
+                    const newCountry=resp.data;
+                    dispatch(addCountry(newCountry));
                 })
                 .catch((err)=>{
+                    console.log(err);
                     alert("Vous n'êtes pas autorisé à ajouter un élément.")
                 })
         }
