@@ -1,15 +1,20 @@
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux';
 import useAuth from '../../hooks/useAuth';
 import ranks from "../../feature/ranks";
 
 import './FormAddSimple.scss';
 
-const FormAddSimple = ({action, url,refresh}) => {
+/**
+ * 
+ * @param {action}  Action d'ajout à réaliser.
+ * 
+ * Prend en paramètre une fonction permettant l'ajout dans le store et dans la base de données
+ * 
+ * @returns 
+ */
+
+const FormAddSimple = ({action}) => {
     const [newName,setNewName]=useState('');
-    const dispatch=useDispatch();
-    const axiosPrivate=useAxiosPrivate();
     const {auth}=useAuth();
     let rankUser=auth?.rank;
     if (!rankUser){
@@ -21,17 +26,8 @@ const FormAddSimple = ({action, url,refresh}) => {
         if(newName==='')
             return-1;
         const newData={name:newName}
-        if(window.confirm("Voulez vous ajouter l'élément ?")){
-            axiosPrivate
-                .post(url,newData)
-                .then(()=>{
-                    dispatch(action(newData));
-                    dispatch(refresh)
-                })
-                .catch((err)=>{
-                    alert("Vous n'êtes pas autorisé à ajouter un élément.")
-                })
-        }
+        action(newData);
+        setNewName('');
     }
     
     return (

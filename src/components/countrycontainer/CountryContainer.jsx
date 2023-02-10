@@ -1,18 +1,36 @@
 import axios from 'axios';
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { SimpleCardContainer } from '../simplecardcontainer/SimpleCardContainer';
 import { setCountry, deleteCountry,addCountry,updateCountry } from '../../feature/Country.slice';
-
-import './CountryContainer.scss';
 import { AwaitLoad } from '../awaitload/AwaitLoad';
 import FormAddSimple from '../formaddsimple/FormAddSimple';
+
+import './CountryContainer.scss';
 
 const CountryContainer = () => {
     const dispatch = useDispatch();
     const countriesData = useSelector((state) => state.countries.country);
     const [isLoaded, setIsLoaded] = useState(false);
     const url = `${process.env.REACT_APP_API_URL}country`;
+    const axiosPrivate=useAxiosPrivate();
+
+    const addAction=(newData)=>{
+        if(window.confirm("Voulez vous ajouter l'élément ?")){
+            axiosPrivate
+                .post(url,newData)
+                .then((resp)=>{
+                    const newCountry=resp.data;
+                    dispatch(addCountry(newCountry));
+                })
+                .catch((err)=>{
+                    console.log(err);
+                    alert("Vous n'êtes pas autorisé à ajouter un élément.")
+                })
+        }
+    }
+
 
     const getCountries = () => {
         axios.get(url)
@@ -21,6 +39,8 @@ const CountryContainer = () => {
                 setIsLoaded(true);
             });
     }
+
+
 
     useEffect(() => {
         getCountries();
@@ -49,9 +69,7 @@ const CountryContainer = () => {
                 }
             </div>
             <FormAddSimple
-             action ={addCountry}
-             url={url}
-             refresh={getCountries}
+            action={addAction}
              />
         </section>
     )
