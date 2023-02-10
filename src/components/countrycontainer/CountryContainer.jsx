@@ -1,4 +1,5 @@
 import axios from 'axios';
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { SimpleCardContainer } from '../simplecardcontainer/SimpleCardContainer';
@@ -13,6 +14,22 @@ const CountryContainer = () => {
     const countriesData = useSelector((state) => state.countries.country);
     const [isLoaded, setIsLoaded] = useState(false);
     const url = `${process.env.REACT_APP_API_URL}country`;
+    const axiosPrivate=useAxiosPrivate();
+
+    const addAction=(newData)=>{
+        if(window.confirm("Voulez vous ajouter l'élément ?")){
+            axiosPrivate
+                .post(url,newData)
+                .then(()=>{
+                    dispatch(addCountry(newData));
+                    dispatch(getCountries)
+                })
+                .catch((err)=>{
+                    alert("Vous n'êtes pas autorisé à ajouter un élément.")
+                })
+        }
+    }
+
 
     const getCountries = () => {
         axios.get(url)
@@ -21,6 +38,8 @@ const CountryContainer = () => {
                 setIsLoaded(true);
             });
     }
+
+
 
     useEffect(() => {
         getCountries();
@@ -49,9 +68,8 @@ const CountryContainer = () => {
                 }
             </div>
             <FormAddSimple
-             action ={addCountry}
-             url={url}
-             refresh={getCountries}
+            //  action ={addCountry}
+            action={addAction}
              />
         </section>
     )
