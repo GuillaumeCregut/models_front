@@ -48,7 +48,7 @@ const CategoryContainer = () => {
     const wrapper={
         deleteAction: deleteCategory,
         updateAction: updateCategory,
-        kind: "la marque",
+        kind: "la catégorie",
         url:url
     }
 
