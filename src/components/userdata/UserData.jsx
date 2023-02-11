@@ -1,23 +1,44 @@
-import axios from 'axios';
-import React, { useEffect } from 'react'
-import { Navigate,useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useAuth from '../../hooks/useAuth';
+import Login from '../login/Login';
 
 const UserData = () => {
+    const [user, setUser]=useState(null);
+    const [isloaded,setIsLoaded]=useState(false);
     const {auth}=useAuth();
-    const location=useLocation();
+    const axiosPrivate=useAxiosPrivate();
     const idUser=auth?.id;
     useEffect(()=>{
         const url = `${process.env.REACT_APP_API_URL}users/${idUser}`;
-       // axios.get
-    },[])
+        if(idUser){
+            axiosPrivate
+                .get(url)
+                .then((resp)=>{
+                    if(resp?.data){
+                        setUser(resp.data);
+                        setIsLoaded(true)
+                    }
+
+                    
+                })
+                .catch((err)=>{
+                    console.log(err)
+                })
+        }
+    },[idUser])
 
     return (
-        idUser
+        idUser&&isloaded
         ?   <div>
-             Toto
+            <h3>Mon profil</h3>
+               <p>Nom : {user.lastname}</p>
+               <p>Prénom :{user.firstname}</p>
+               <p>Login : {user.login}</p>
+               <p>Mot de passe :</p>
+               <p>Email : {user.email}</p>
             </div>
-        :<Navigate to='/login' state={{from:location}} replace /> 
+        :<Login /> 
     )
 }
 
