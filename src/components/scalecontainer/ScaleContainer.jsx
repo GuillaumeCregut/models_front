@@ -39,6 +39,9 @@ const ScaleContainer = () => {
             });
     }
 
+    useEffect(() => {
+        getScales();
+    }, []);
 
     const wrapper={
         deleteAction: deleteScale,
@@ -49,9 +52,23 @@ const ScaleContainer = () => {
 
 
     return (
-        <div>
-            Echelles
+        <section className="category-component">
+        <h2 className='category-title'>Les pays</h2>
+        <div className='category-container'>
+            {isLoaded ? scalesData.map(item => (
+                <SimpleCardContainer
+                    key={item.id}
+                    item={item}
+                    wrapper={wrapper}
+                />
+            ))
+                : <AwaitLoad />
+            }
         </div>
+        <FormAddSimple
+        action={addAction}
+         />
+    </section>
     )
 }
 
