@@ -3,6 +3,7 @@ import brandSlice from "../feature/Brand.slice";
 import  categorySlice  from "../feature/Category.slice";
 import CountrySlice from "../feature/Country.slice";
 import  periodSlice  from "../feature/Period.slice";
+import scaleSlice from "../feature/Scale.slice";
 
 
 export default configureStore({
@@ -11,6 +12,7 @@ export default configureStore({
         periods : periodSlice,
         brands: brandSlice,
         categories: categorySlice,
+        scales:scaleSlice,
        
     },
     //devTools :false //to avoid visible store in dev tools
