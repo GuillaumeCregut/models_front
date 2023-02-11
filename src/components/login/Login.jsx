@@ -41,6 +41,7 @@ const Login = () => {
                         const user = {
                             firstname: decoded.firstname,
                             lastname: decoded.lastname,
+                            id:decoded.user_id,
                             rank: decoded.rank,
                             token: token
                         }
