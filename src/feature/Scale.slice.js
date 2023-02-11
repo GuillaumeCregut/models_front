@@ -27,5 +27,5 @@ export const scaleSlice=createSlice({
     }
 })
 
-export const{setCategory,addCategory,updateScale,deleteScale}=scaleSlice.actions;
+export const{setScale,addScale,updateScale,deleteScale}=scaleSlice.actions;
 export default scaleSlice.reducer;
