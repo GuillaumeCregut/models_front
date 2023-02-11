@@ -51,8 +51,6 @@ const BrandContainer = () => {
         getBrands();
     }, []);
 
-    console.log('datas ',brandsData)
-
     return (
         <section className="brand-component">
         <h2 className='brand-title'>Les pays</h2>
