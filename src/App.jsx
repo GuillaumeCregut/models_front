@@ -28,13 +28,42 @@ import RequireAuth from './components/requireauth/RequireAuth';
 import ranks from './feature/ranks';
 import { useEffect } from 'react';
 import useAuth from './hooks/useAuth';
+import axios from 'axios';
+import jwt_decode from "jwt-decode";
 
 function App() {
-  const {auth,setAuth}=useAuth();
-  useEffect(()=>{
-    const localStorageUser=JSON.parse(localStorage.getItem('ModelsKitUser'));
+  const { auth, setAuth } = useAuth();
+  const localStorageUser = JSON.parse(localStorage.getItem('ModelsKitUser'));
 
-  },[]);
+
+  useEffect( () => {
+    const refreshContext = async () => {
+      const url = `${process.env.REACT_APP_API_URL}auth/reload`;
+      await axios
+        .post(url, localStorageUser, { withCredentials: true })
+        .then((resp) => {
+          const token = resp.data?.accessToken;
+          if (token) {
+            var decoded = jwt_decode(token);
+            const user = {
+              firstname: decoded.firstname,
+              lastname: decoded.lastname,
+              rank: decoded.rank,
+              token: token
+            }
+            const toto=setAuth(user);
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
+
+    if (!auth?.firsname) {
+      const url = `${process.env.REACT_APP_API_URL}auth/reload`;
+      refreshContext()
+    }
+  }, []);
 
 
   return (
@@ -57,11 +86,11 @@ function App() {
           </Route>
           <Route path='profil' element={<Profil />} />
           <Route path='kits' element={<Kits />} />
-          <Route path='login' element={<Login />}/>
+          <Route path='login' element={<Login />} />
           <Route path="signup" element={<SignUp />} />
           <Route path='*' element={<NotFound />} />
           {/* Admin routes*/}
-          <Route element={<RequireAuth  allowedRoles={ranks.admin}/>}>
+          <Route element={<RequireAuth allowedRoles={ranks.admin} />}>
             <Route path='admin' element={<AdminPage />} />
           </Route>
         </Routes>
