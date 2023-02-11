@@ -45,6 +45,11 @@ const Login = () => {
                             token: token
                         }
                         setAuth(user);
+                        const userToStorage={
+                            firstname:decoded.firstname,
+                            lastname:decoded.lastname
+                        }
+                        localStorage.setItem('ModelsKitUser',JSON.stringify(userToStorage))
                         navigate('/');
                     }
                 })
