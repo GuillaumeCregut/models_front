@@ -26,8 +26,17 @@ import ModelsContainer from './components/modelscontainer/ModelsContainer';
 /*Secure files */
 import RequireAuth from './components/requireauth/RequireAuth';
 import ranks from './feature/ranks';
+import { useEffect } from 'react';
+import useAuth from './hooks/useAuth';
 
 function App() {
+  const {auth,setAuth}=useAuth();
+  useEffect(()=>{
+    const localStorageUser=JSON.parse(localStorage.getItem('ModelsKitUser'));
+
+  },[]);
+
+
   return (
     <div className="App">
       <div className='app-container'>
