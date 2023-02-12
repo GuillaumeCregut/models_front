@@ -13,6 +13,7 @@ const UserData = () => {
     const {auth}=useAuth();
     const axiosPrivate=useAxiosPrivate();
     const idUser=auth?.id;
+
     useEffect(()=>{
         const url = `${process.env.REACT_APP_API_URL}users/${idUser}`;
         if(idUser){
@@ -23,8 +24,6 @@ const UserData = () => {
                         setUser(resp.data);
                         setIsLoaded(true)
                     }
-
-                    
                 })
                 .catch((err)=>{
                     console.log(err)
@@ -32,13 +31,15 @@ const UserData = () => {
         }
     },[idUser])
 
-    
+    const updateUser=(newUser)=>{
+        alert('on envoie')
+    }
 
     return (
         idUser&&isloaded
         ?  
             isModify
-                    ?<UpdateData  user={user} cancelAction={setIsModify}/>
+                    ?<UpdateData  user={user} cancelAction={setIsModify} updateUser={updateUser}/>
                     : (<div className='user-data-container'> 
                         <h3 className='user-data-title'>Mon profil</h3>
                         <p>Nom : {user.lastname}</p>
@@ -48,7 +49,6 @@ const UserData = () => {
                         <p>Email : {user.email}</p>
                         <button onClick={()=>setIsModify(!isModify)}>Modifier les valeurs</button>
                         </div>)
-               
         :<Login /> 
     )
 }
