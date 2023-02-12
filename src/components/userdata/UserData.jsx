@@ -37,13 +37,14 @@ const UserData = () => {
         axiosPrivate
         .put(url,newUser)
         .then((res)=>{
-            console.log(res)
+            setIsReplied(!isReplied)
         })
         .catch((err)=>{
             console.log(err)
         })
         console.log(newUser);
         setIsModify(false);
+        
     }
 
     return (
