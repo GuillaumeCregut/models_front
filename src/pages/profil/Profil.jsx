@@ -1,13 +1,12 @@
 import React from 'react'
-import Login from '../../components/login/Login'
-import SignUp from '../../components/signup/SignUp'
+import UserData from '../../components/userdata/UserData'
+
 
 export const Profil = () => {
   return (
     <div>
       Profil
-      {/* <SignUp /> */}
-      <Login />
+      <UserData />
     </div>
   )
 }
