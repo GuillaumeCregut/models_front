@@ -40,11 +40,9 @@ const UserData = () => {
             setIsReplied(!isReplied)
         })
         .catch((err)=>{
-            console.log(err)
+            console.err(err)
         })
-        console.log(newUser);
         setIsModify(false);
-        
     }
 
     return (
