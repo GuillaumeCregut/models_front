@@ -3,9 +3,13 @@ import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useAuth from '../../hooks/useAuth';
 import Login from '../login/Login';
 
+import './UserData.scss';
+import UpdateData from './UpdateData';
+
 const UserData = () => {
     const [user, setUser]=useState(null);
     const [isloaded,setIsLoaded]=useState(false);
+    const [isModify,setIsModify]=useState(false);
     const {auth}=useAuth();
     const axiosPrivate=useAxiosPrivate();
     const idUser=auth?.id;
@@ -28,16 +32,23 @@ const UserData = () => {
         }
     },[idUser])
 
+    
+
     return (
         idUser&&isloaded
-        ?   <div>
-            <h3>Mon profil</h3>
-               <p>Nom : {user.lastname}</p>
-               <p>Prénom :{user.firstname}</p>
-               <p>Login : {user.login}</p>
-               <p>Mot de passe :</p>
-               <p>Email : {user.email}</p>
-            </div>
+        ?  
+            isModify
+                    ?<UpdateData  user={user} cancelAction={setIsModify}/>
+                    : (<div className='user-data-container'> 
+                        <h3 className='user-data-title'>Mon profil</h3>
+                        <p>Nom : {user.lastname}</p>
+                        <p>Prénom :{user.firstname}</p>
+                        <p>Login : {user.login}</p>
+                        
+                        <p>Email : {user.email}</p>
+                        <button onClick={()=>setIsModify(!isModify)}>Modifier les valeurs</button>
+                        </div>)
+               
         :<Login /> 
     )
 }
