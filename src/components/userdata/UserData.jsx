@@ -10,6 +10,7 @@ const UserData = () => {
     const [user, setUser]=useState(null);
     const [isloaded,setIsLoaded]=useState(false);
     const [isModify,setIsModify]=useState(false);
+    const [isReplied,setIsReplied]=useState(false);
     const {auth}=useAuth();
     const axiosPrivate=useAxiosPrivate();
     const idUser=auth?.id;
@@ -29,10 +30,20 @@ const UserData = () => {
                     console.log(err)
                 })
         }
-    },[idUser])
+    },[idUser,isReplied])
 
     const updateUser=(newUser)=>{
-        alert('on envoie')
+        const url = `${process.env.REACT_APP_API_URL}users/${idUser}`;
+        axiosPrivate
+        .put(url,newUser)
+        .then((res)=>{
+            console.log(res)
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
+        console.log(newUser);
+        setIsModify(false);
     }
 
     return (

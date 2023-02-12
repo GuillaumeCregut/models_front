@@ -43,7 +43,7 @@ const Login = () => {
                             lastname: decoded.lastname,
                             id:decoded.user_id,
                             rank: decoded.rank,
-                            token: token
+                            token: {accessToken : token}
                         }
                         setAuth(user);
                         const userToStorage={
