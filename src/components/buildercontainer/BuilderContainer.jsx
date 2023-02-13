@@ -25,8 +25,8 @@ const BuilderContainer = () => {
     const axiosPrivate = useAxiosPrivate();
     const { auth } = useAuth();
     let rankUser = auth?.rank;
-    if(!rankUser)
-        rankUser=1; //to be 0
+    if (!rankUser)
+        rankUser = 1; //to be 0
 
     useEffect(() => {
         //Loading countries if null
@@ -69,47 +69,29 @@ const BuilderContainer = () => {
             tempBuilder = buildersData.filter((item) => item.name.toLowerCase().includes(findElement.toLowerCase()))
         }
         setFilteredBuilder([...tempBuilder]);
-    }, [findElement, isLoaded,buildersData])
+    }, [findElement, isLoaded, buildersData])
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(window.confirm("Voulez vous ajouter l'élément ?")){
-        if(newBuilder!==''){
-            const addNewBuilder={
-                name:newBuilder,
-                country:selectedCountry
+        if (window.confirm("Voulez vous ajouter l'élément ?")) {
+            if (newBuilder !== '') {
+                const addNewBuilder = {
+                    name: newBuilder,
+                    country: selectedCountry
+                }
+                axiosPrivate
+                    .post(url, addNewBuilder)
+                    .then((resp) => {
+                        const newBuilderDb = resp.data;
+                        dispatch(addBuilder(newBuilderDb));
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                        alert("Vous n'êtes pas autorisé à ajouter un élément.")
+                    })
             }
-            axiosPrivate
-                .post(url,addNewBuilder)
-                .then((resp)=>{
-                    const newBuilderDb=resp.data;
-                    dispatch(addBuilder(newBuilderDb));
-                })
-                .catch((err)=>{
-                    console.log(err);
-                    alert("Vous n'êtes pas autorisé à ajouter un élément.")
-                })
         }
-/*
- if(window.confirm("Voulez vous ajouter l'élément ?")){
-            axiosPrivate
-                .post(url,newData)
-                .then((resp)=>{
-                    const newPeriod=resp.data;
-                    dispatch(addPeriod(newPeriod));
-                })
-                .catch((err)=>{
-                    console.log(err);
-                    alert("Vous n'êtes pas autorisé à ajouter un élément.")
-                })
-        }
-
-
-*/
-
-
-        }
-        else{
+        else {
             alert("Veuillez remplir tous les champs");
         }
 
@@ -132,50 +114,50 @@ const BuilderContainer = () => {
                     filteredBuiler.map((item) => (
                         <BuilderFrame
                             key={item.id}
-                            builder={item} 
-                            />
+                            builder={item}
+                        />
                     ))
                     : <AwaitLoad />
                 }
             </div>
-            {rankUser>=ranks.user
-            ?
-            <section className='add-builder-container'>
-                <h2 className='add-builder-title'>Ajouter un constructeur</h2>
-                <form className="builder-add-form" onSubmit={handleSubmit}>
-                    <label htmlFor="builder-name" className='builder-add-label'>Nom du constructeur :
-                        <input
-                            type="text"
-                            id="builder-name"
-                            value={newBuilder}
-                            onChange={(e) => setNewBuilder(e.target.value)}
-                            required
-                            autoComplete='off'
-                            className='builder-add-name'
-                        />
-                    </label>
-                    <label htmlFor="country-select" className='builder-add-label'>Pays :
-                        <select 
-                            id="country-select" 
-                            value={selectedCountry} 
-                            onChange={(e) => setSelectedCountry(e.target.value)}
-                            className='builder-add-select'
+            {rankUser >= ranks.user
+                ?
+                <section className='add-builder-container'>
+                    <h2 className='add-builder-title'>Ajouter un constructeur</h2>
+                    <form className="builder-add-form" onSubmit={handleSubmit}>
+                        <label htmlFor="builder-name" className='builder-add-label'>Nom du constructeur :
+                            <input
+                                type="text"
+                                id="builder-name"
+                                value={newBuilder}
+                                onChange={(e) => setNewBuilder(e.target.value)}
+                                required
+                                autoComplete='off'
+                                className='builder-add-name'
+                            />
+                        </label>
+                        <label htmlFor="country-select" className='builder-add-label'>Pays :
+                            <select
+                                id="country-select"
+                                value={selectedCountry}
+                                onChange={(e) => setSelectedCountry(e.target.value)}
+                                className='builder-add-select'
                             >
-                            {countryLoaded
-                                ? countryData.map((item) => (
-                                    <option
-                                        key={item.id}
-                                        value={item.id}>{item.name}</option>
-                                ))
-                                : null
-                            }
-                        </select>
-                    </label>
-                    <button className='builder-add-btn'>Ajouter</button>
-                </form>
-            </section>
-            :null
-        }   
+                                {countryLoaded
+                                    ? countryData.map((item) => (
+                                        <option
+                                            key={item.id}
+                                            value={item.id}>{item.name}</option>
+                                    ))
+                                    : null
+                                }
+                            </select>
+                        </label>
+                        <button className='builder-add-btn'>Ajouter</button>
+                    </form>
+                </section>
+                : null
+            }
         </section>
     )
 }

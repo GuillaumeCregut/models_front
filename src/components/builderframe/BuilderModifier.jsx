@@ -14,7 +14,7 @@ const BuilderModifier = ({ name, country,action, hide }) => {
     const [selectedCountry, setSelectedCountry] = useState(country);
     const countryData = useSelector((state) => state.countries.country);
     const dispatch = useDispatch();
-
+    const selectRef=useRef();
 
     useEffect(()=>{
         const getCountries = () => {
@@ -42,9 +42,12 @@ const BuilderModifier = ({ name, country,action, hide }) => {
 
     const handleUpdate=(e)=>{
         e.preventDefault();
+        const selectedOption=selectRef.current.selectedIndex;
+        const countryName=selectRef.current.options[selectedOption].text;
         const newBuilder={
             countryId:selectedCountry,
-            name:newName
+            name:newName,
+            countryName
         }
         action(newBuilder);
     }
@@ -67,6 +70,7 @@ const BuilderModifier = ({ name, country,action, hide }) => {
                 <label htmlFor="country-select" className='builder-add-label'>Pays :
                         <select 
                             id="country-select" 
+                            ref={selectRef}
                             value={selectedCountry} 
                             onChange={(e) => setSelectedCountry(e.target.value)}
                             className='builder-add-select'
