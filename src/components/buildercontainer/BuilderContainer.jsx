@@ -27,6 +27,7 @@ const BuilderContainer = () => {
     let rankUser = auth?.rank;
     if(!rankUser)
         rankUser=1; //to be 0
+
     useEffect(() => {
         //Loading countries if null
         const getCountries = () => {
@@ -37,7 +38,6 @@ const BuilderContainer = () => {
                     setCountryLoaded(true);
                 });
         }
-
         if (!countryData) {
             getCountries();
         }
@@ -64,7 +64,6 @@ const BuilderContainer = () => {
     }, []);
 
     useEffect(() => {
-        console.log('Filtrage');
         let tempBuilder = [];
         if (isLoaded) {
             tempBuilder = buildersData.filter((item) => item.name.toLowerCase().includes(findElement.toLowerCase()))
@@ -74,12 +73,42 @@ const BuilderContainer = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        if(window.confirm("Voulez vous ajouter l'élément ?")){
         if(newBuilder!==''){
             const addNewBuilder={
                 name:newBuilder,
                 country:selectedCountry
             }
+            axiosPrivate
+                .post(url,addNewBuilder)
+                .then((resp)=>{
+                    const newBuilderDb=resp.data;
+                    dispatch(addBuilder(newBuilderDb));
+                })
+                .catch((err)=>{
+                    console.log(err);
+                    alert("Vous n'êtes pas autorisé à ajouter un élément.")
+                })
             console.log(addNewBuilder);
+        }
+/*
+ if(window.confirm("Voulez vous ajouter l'élément ?")){
+            axiosPrivate
+                .post(url,newData)
+                .then((resp)=>{
+                    const newPeriod=resp.data;
+                    dispatch(addPeriod(newPeriod));
+                })
+                .catch((err)=>{
+                    console.log(err);
+                    alert("Vous n'êtes pas autorisé à ajouter un élément.")
+                })
+        }
+
+
+*/
+
+
         }
         else{
             alert("Veuillez remplir tous les champs");

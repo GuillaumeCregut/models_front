@@ -1,14 +1,21 @@
 import {useState} from 'react';
 import UpDateRemoveBtn from '../updateremovebtn/UpDateRemoveBtn';
+import {  updateBuilder,  deleteBuilder } from '../../feature/Builder.slice';
+import { useDispatch } from 'react-redux';
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
 import './BuilderFrame.scss';
 import BuilderModifier from './BuilderModifier';
 
 const BuilderFrame = ({builder}) => {
     const [displayModifier, setDisplayModifier] = useState(false);
+    const axiosPrivate = useAxiosPrivate();
+    const dispatch = useDispatch();
+    const url = `${process.env.REACT_APP_API_URL}builder/${builder.id}`;
 
     const handleDelete=()=>{
-        console.log(`Supprimer ${builder.id}`)
+        console.log(url);
+        //axiosPrivate.delete(url)
     }
 
     const handleUpdateShow=()=>{
