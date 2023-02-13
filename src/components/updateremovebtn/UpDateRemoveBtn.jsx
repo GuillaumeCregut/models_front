@@ -1,5 +1,6 @@
 import React from 'react'
 import useAuth from '../../hooks/useAuth';
+import ranks from '../../feature/ranks';
 
 import './UpDateRemoveBtn.scss';
 
@@ -10,7 +11,7 @@ const UpDateRemoveBtn = ({deleteAction,updateAction}) => {
     if(!rankUser)
         rankUser=0;
     return (
-       rankUser===5 && <div className="btn-container">
+       rankUser===ranks.admin && <div className="btn-container">
             <button onClick={updateAction}>Modifier</button>
             <button onClick={deleteAction}>Supprimer</button>
         </div>
