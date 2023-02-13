@@ -4,6 +4,7 @@ import { AwaitLoad } from '../awaitload/AwaitLoad';
 import { useDispatch, useSelector } from 'react-redux';
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { addBuilder, updateBuilder, setBuilder, deleteBuilder } from '../../feature/Builder.slice';
+import BuilderFrame from '../builderframe/BuilderFrame';
 const BuilderContainer = () => {
     const url = `${process.env.REACT_APP_API_URL}builder`;
     const [isLoaded, setIsLoaded] = useState(false);
@@ -35,7 +36,9 @@ const BuilderContainer = () => {
             {isLoaded ?
                 (<ul>
                     {buildersData.map((item) => (
-                        <li key={item.id}>{item.name} - {item.countryName}</li>
+                        <BuilderFrame 
+                         key={item.id}
+                         builder={item} />
                     ))}
                 </ul>)
                 : <AwaitLoad />
