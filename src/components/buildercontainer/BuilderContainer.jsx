@@ -89,7 +89,6 @@ const BuilderContainer = () => {
                     console.log(err);
                     alert("Vous n'êtes pas autorisé à ajouter un élément.")
                 })
-            console.log(addNewBuilder);
         }
 /*
  if(window.confirm("Voulez vous ajouter l'élément ?")){
