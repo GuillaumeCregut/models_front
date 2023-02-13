@@ -104,12 +104,13 @@ const BuilderContainer = () => {
                     filteredBuiler.map((item) => (
                         <BuilderFrame
                             key={item.id}
-                            builder={item} />
+                            builder={item} 
+                            />
                     ))
                     : <AwaitLoad />
                 }
             </div>
-            {rankUser===ranks.user
+            {rankUser>=ranks.user
             ?
             <section className='add-builder-container'>
                 <h2 className='add-builder-title'>Ajouter un constructeur</h2>
