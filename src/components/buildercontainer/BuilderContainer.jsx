@@ -1,28 +1,45 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-
+import { AwaitLoad } from '../awaitload/AwaitLoad';
+import { useDispatch, useSelector } from 'react-redux';
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import { addBuilder, updateBuilder, setBuilder, deleteBuilder } from '../../feature/Builder.slice';
 const BuilderContainer = () => {
     const url = `${process.env.REACT_APP_API_URL}builder`;
-    const [builders,setBuilders]=useState([]);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const dispatch = useDispatch();
+    const buildersData = useSelector((state) => state.builders.builder);
+    const axiosPrivate = useAxiosPrivate();
 
-    useEffect(()=>{
-        axios
-        .get(url)
-        .then((res)=>{
-            setBuilders(res.data)
-        })
-        .catch((err)=>{
-            console.log(err);
-        })
-    },[]);
+    useEffect(() => {
+        const getBuilders = () => {
+            axios
+                .get(url)
+                .then((res) => {
+                    dispatch(setBuilder(res.data));
+                    setIsLoaded(true);
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+        }
+        if (!buildersData)
+            getBuilders();
+        else
+            setIsLoaded(true);
+    }, []);
     return (
         <div>
+
             Constructeurs
-            <ul>
-                {builders.map((item)=>(
-                    <li key={item.id}>{item.name} - {item.countryName}</li>
-                ))}
-            </ul>
+            {isLoaded ?
+                (<ul>
+                    {buildersData.map((item) => (
+                        <li key={item.id}>{item.name} - {item.countryName}</li>
+                    ))}
+                </ul>)
+                : <AwaitLoad />
+            }
         </div>
     )
 }
