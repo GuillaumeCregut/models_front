@@ -26,7 +26,7 @@ const BuilderContainer = () => {
     const { auth } = useAuth();
     let rankUser = auth?.rank;
     if (!rankUser)
-        rankUser = 1; //to be 0
+        rankUser = 0;
 
     useEffect(() => {
         //Loading countries if null
