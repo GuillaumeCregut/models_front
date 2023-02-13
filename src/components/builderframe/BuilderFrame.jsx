@@ -15,7 +15,16 @@ const BuilderFrame = ({builder}) => {
 
     const handleDelete=()=>{
         console.log(url);
-        //axiosPrivate.delete(url)
+        axiosPrivate
+                .delete(url)
+                .then((resp)=>{
+                   
+                    dispatch(deleteBuilder(builder.id));
+                })
+                .catch((err)=>{
+                    console.log(err);
+                    alert("Vous n'êtes pas autorisé à ajouter un élément.")
+                })
     }
 
     const handleUpdateShow=()=>{

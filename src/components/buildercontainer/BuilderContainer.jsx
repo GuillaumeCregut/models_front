@@ -69,7 +69,7 @@ const BuilderContainer = () => {
             tempBuilder = buildersData.filter((item) => item.name.toLowerCase().includes(findElement.toLowerCase()))
         }
         setFilteredBuilder([...tempBuilder]);
-    }, [findElement, isLoaded])
+    }, [findElement, isLoaded,buildersData])
 
     const handleSubmit = (e) => {
         e.preventDefault();
