@@ -25,7 +25,6 @@ export const builderSlice=createSlice({
             })
         },
         deleteBuilder:(state,{payload})=>{
-            console.log(payload)
             state.builder=state.builder.filter((item)=>item.id!==payload);
         }
     }

@@ -33,7 +33,6 @@ const BuilderFrame = ({ builder }) => {
 
     const handleUpdate = (item) => {
         //Update store and BDD
-        item.id = builder.id;
         const addNewBuilder = {
             name: item.name,
             country: item.countryId
@@ -42,7 +41,7 @@ const BuilderFrame = ({ builder }) => {
         .put(url,addNewBuilder)
         .then((resp) => {
             console.log('passe')
-            dispatch(updateBuilder(item));
+            dispatch(updateBuilder([item,builder.id]));
         })
         .catch((err) => {
             console.log(err);
