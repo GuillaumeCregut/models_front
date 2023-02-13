@@ -90,12 +90,13 @@ const BuilderContainer = () => {
     return (
         <section className='builders-container-page'>
             <h2 className='builders-container-title'>Constructeurs</h2>
-            <label htmlFor="find-builder">Rechercher un constructeur :
+            <label htmlFor="find-builder" className='builder-search-label'>Rechercher un constructeur :
                 <input
                     type="text"
                     id="find-builder"
                     value={findElement}
                     onChange={(e) => setFindElement(e.target.value)}
+                    className='find-builder-input'
                 />
             </label>
             <div className="builder-container">
@@ -110,10 +111,10 @@ const BuilderContainer = () => {
             </div>
             {rankUser===ranks.user
             ?
-            <section>
-                <h2>Ajouter un constructeur</h2>
+            <section className='add-builder-container'>
+                <h2 className='add-builder-title'>Ajouter un constructeur</h2>
                 <form className="builder-add-form" onSubmit={handleSubmit}>
-                    <label htmlFor="builder-name">Constructeur :
+                    <label htmlFor="builder-name" className='builder-add-label'>Nom du constructeur :
                         <input
                             type="text"
                             id="builder-name"
@@ -121,10 +122,16 @@ const BuilderContainer = () => {
                             onChange={(e) => setNewBuilder(e.target.value)}
                             required
                             autoComplete='off'
+                            className='builder-add-name'
                         />
                     </label>
-                    <label htmlFor="country-select">Pays :
-                        <select id="country-select" value={selectedCountry} onChange={(e) => setSelectedCountry(e.target.value)}>
+                    <label htmlFor="country-select" className='builder-add-label'>Pays :
+                        <select 
+                            id="country-select" 
+                            value={selectedCountry} 
+                            onChange={(e) => setSelectedCountry(e.target.value)}
+                            className='builder-add-select'
+                            >
                             {countryLoaded
                                 ? countryData.map((item) => (
                                     <option
@@ -135,7 +142,7 @@ const BuilderContainer = () => {
                             }
                         </select>
                     </label>
-                    <button>Ajouter</button>
+                    <button className='builder-add-btn'>Ajouter</button>
                 </form>
             </section>
             :null
