@@ -1,10 +1,12 @@
 import React from 'react'
 
+import './BuilderFrame.scss';
+
 const BuilderFrame = ({builder}) => {
     return (
-        <li>
+        <div className='builderElement'>
             {builder.name} - {builder.countryName}
-        </li>
+        </div>
     )
 }
 
