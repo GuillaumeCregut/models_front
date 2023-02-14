@@ -11,6 +11,7 @@ import BrandSelector from '../selectors/brandselector/BrandSelector';
 const ModelsContainer = () => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [selectedCountry, setSelectedCountry] = useState(1);
+    const [selectedBrand, setSelectedBrand] = useState(1);
     const modelData = useSelector((state) => state.models.model)
     const url = `${process.env.REACT_APP_API_URL}model`;
     const dispatch = useDispatch();
@@ -45,12 +46,18 @@ const ModelsContainer = () => {
                     par échelle
                     par période
                     par constructeur
-                    par fabriquant
-                    <BrandSelector />
-                    par pays
-                    <CountrySelector
-                        setSelectedCountry={setSelectedCountry}
-                        selectedCountry={selectedCountry} />
+                    <p>par fabriquant
+                        <BrandSelector
+                            selectedBrand={selectedBrand}
+                            setSelectedBrand={setSelectedBrand}
+                        />
+                    </p>
+                    <p>par pays
+                        <CountrySelector
+                            setSelectedCountry={setSelectedCountry}
+                            selectedCountry={selectedCountry}
+                        />
+                    </p>
                     par nom
                 </div>
                 <div className="model-container">
