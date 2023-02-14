@@ -5,9 +5,12 @@ import './ModelBlock.scss';
 const ModelBlock = ({model}) => {
     const url = `${process.env.REACT_APP_URL}`;
     return (
-        <div>
-            {model.name}   {model.picture?`${url}${model.picture}`:null}
-        </div>
+        <article className='model-block'>
+            {model.name}   {model.picture
+            ?<img src={ `${url}${model.picture}`} alt="" className='model-picture'/>
+           
+            :null}
+        </article>
     )
 }
 

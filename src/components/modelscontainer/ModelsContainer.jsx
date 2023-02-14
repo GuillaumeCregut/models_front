@@ -43,6 +43,7 @@ const ModelsContainer = () => {
                 par constructeur
                 par fabriquant
                 par pays
+                par nom
             </div>
             <div className="model-container">
                 {isLoaded
