@@ -10,6 +10,7 @@ import BrandSelector from '../selectors/brandselector/BrandSelector';
 import CategorySelector from '../selectors/categoryselector/CategorySelector';
 import PeriodSelector from '../selectors/periodSelector/PeriodSelector';
 import ScaleSelector from '../selectors/scaleselector/ScaleSelector';
+import BuilderSelector from '../selectors/builderselector/BuilderSelector';
 
 const ModelsContainer = () => {
     const [isLoaded, setIsLoaded] = useState(false);
@@ -18,6 +19,7 @@ const ModelsContainer = () => {
     const [selectedCategory, setSelectedCategory] = useState(1);
     const [selectedPeriod, setSelectedPeriod] = useState(1);
     const [selectedScale, setSelectedScale] = useState(1);
+    const [selectedBuilder,setSelectedBuiler]=useState(1);
     const modelData = useSelector((state) => state.models.model)
     const url = `${process.env.REACT_APP_API_URL}model`;
     const dispatch = useDispatch();
@@ -69,7 +71,12 @@ const ModelsContainer = () => {
                             setSelectedPeriod={setSelectedPeriod}
                         />
                     </p>
-                    par constructeur
+                    <p>par constructeur
+                        <BuilderSelector 
+                            id='builder-selector'
+
+                        />    
+                    </p>
                     <p>par fabriquant
                         <BrandSelector
                             id="brand-selector"
