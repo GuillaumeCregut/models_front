@@ -3,11 +3,13 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { setModel } from '../../feature/Model.slice';
 import { AwaitLoad } from '../awaitload/AwaitLoad';
+import CountrySelector from '../countryselector/CountrySelector';
 import ModelBlock from '../modelblock/ModelBlock';
 import './ModelsContainer.scss';
 
 const ModelsContainer = () => {
     const [isLoaded, setIsLoaded] = useState(false);
+    const [selectedCountry, setSelectedCountry] = useState(1);
     const modelData = useSelector((state) => state.models.model)
     const url = `${process.env.REACT_APP_API_URL}model`;
     const dispatch = useDispatch();
@@ -43,6 +45,9 @@ const ModelsContainer = () => {
                 par constructeur
                 par fabriquant
                 par pays
+                <CountrySelector 
+                 setSelectedCountry={setSelectedCountry}
+                 selectedCountry={selectedCountry} />
                 par nom
             </div>
             <div className="model-container">
