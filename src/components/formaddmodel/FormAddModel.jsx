@@ -11,7 +11,7 @@ const FormAddModel = () => {
     const [selectedScale, setSelectedScale] = useState(0);
     const [selectedBuilder, setSelectedBuilder] = useState(0);
     const [selectedPeriod, setSelectedPeriod] = useState(0);
-    const [selectedCateogry, setSelectedCategory] = useState(0);
+    const [selectedCategory, setSelectedCategory] = useState(0);
     const [selectedBrand, setSelectedBrand] = useState(0);
     const nameRef = useRef();
     const refRef = useRef();
@@ -21,13 +21,16 @@ const FormAddModel = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        if((parseInt(selectedBrand)!==0)&&(parseInt(selectedBuilder)!==0)&&(parseInt(selectedScale)!==0)&&(parseInt(selectedCategory)!==0)&&(parseInt(selectedPeriod)!==0)){
+            console.log('OK')
+        }
         const newModel={
             name : nameRef.current.value,
             reference : refRef.current.value,
             brand:selectedBrand,
             builder:selectedBuilder,
             scale : selectedScale,
-            category:selectedCateogry,
+            category:selectedCategory,
             period:selectedPeriod,
             scalemates:linkRef.current.value,
             //file:,
@@ -83,15 +86,15 @@ const FormAddModel = () => {
                 <label htmlFor="new-category">Catégorie :
                     <CategorySelector
                         id='new-category'
-                        selectedCateogry={selectedCateogry}
-                        setSlectedCategory={setSelectedCategory}
+                        selectedCategory={selectedCategory}
+                        setSelectedCategory={setSelectedCategory}
                     />
                 </label>
                 <label htmlFor="new-period">Période :
                     <PeriodSelector
                         id='new-period'
                         selectedPeriod={selectedPeriod}
-                        setSlectedPeriod={setSelectedPeriod}
+                        setSelectedPeriod={setSelectedPeriod}
                     />
                 </label>
                 <label htmlFor="new-reference">Lien scalemates :

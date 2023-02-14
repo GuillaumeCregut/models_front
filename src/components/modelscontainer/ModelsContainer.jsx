@@ -19,12 +19,12 @@ import './ModelsContainer.scss';
 
 const ModelsContainer = () => {
     const [isLoaded, setIsLoaded] = useState(false);
-    const [selectedCountry, setSelectedCountry] = useState(1);
-    const [selectedBrand, setSelectedBrand] = useState(1);
-    const [selectedCategory, setSelectedCategory] = useState(1);
-    const [selectedPeriod, setSelectedPeriod] = useState(1);
-    const [selectedScale, setSelectedScale] = useState(1);
-    const [selectedBuilder,setSelectedBuiler]=useState(1);
+    const [selectedCountry, setSelectedCountry] = useState(0);
+    const [selectedBrand, setSelectedBrand] = useState(0);
+    const [selectedCategory, setSelectedCategory] = useState(0);
+    const [selectedPeriod, setSelectedPeriod] = useState(0);
+    const [selectedScale, setSelectedScale] = useState(0);
+    const [selectedBuilder,setSelectedBuiler]=useState(0);
     const [newModel, setNewModel]=useState(null);
     const modelData = useSelector((state) => state.models.model)
     const url = `${process.env.REACT_APP_API_URL}model`;
@@ -85,6 +85,8 @@ const ModelsContainer = () => {
                     <p>par constructeur
                         <BuilderSelector 
                             id='builder-selector'
+                            selectedBuilder={selectedBuilder}
+                            setSelectedBuiler={setSelectedBuiler}
 
                         />    
                     </p>
