@@ -7,3 +7,9 @@ export const axiosPrivate =axios.create({
     headers:{'Content-Type': 'application/json'},
     withCredentials :true
 })
+
+export const axiosPrivateMultiPart=axios.create({
+    baseURL:url,
+    headers:{'Content-Type':'multipart/form-data'},
+    withCredentials :true
+})

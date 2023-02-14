@@ -4,10 +4,10 @@ import { AwaitLoad } from '../awaitload/AwaitLoad';
 import { useDispatch, useSelector } from 'react-redux';
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { addBuilder, updateBuilder, setBuilder, deleteBuilder } from '../../feature/Builder.slice';
-import { setCountry } from '../../feature/Country.slice';
 import BuilderFrame from '../builderframe/BuilderFrame';
 import useAuth from '../../hooks/useAuth';
 import ranks from '../../feature/ranks';
+import CountrySelector from '../selectors/countryselector/CountrySelector';
 
 import './BuilderContainer.scss';
 
@@ -16,34 +16,15 @@ const BuilderContainer = () => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [findElement, setFindElement] = useState('');
     const [filteredBuiler, setFilteredBuilder] = useState([]);
-    const [countryLoaded, setCountryLoaded] = useState(false);
     const [selectedCountry, setSelectedCountry] = useState(1);
     const [newBuilder, setNewBuilder] = useState('');
     const buildersData = useSelector((state) => state.builders.builder);
-    const countryData = useSelector((state) => state.countries.country);
     const dispatch = useDispatch();
     const axiosPrivate = useAxiosPrivate();
     const { auth } = useAuth();
     let rankUser = auth?.rank;
     if (!rankUser)
         rankUser = 0;
-
-    useEffect(() => {
-        //Loading countries if null
-        const getCountries = () => {
-            const urlCountry = `${process.env.REACT_APP_API_URL}country`;
-            axios.get(urlCountry)
-                .then((res) => {
-                    dispatch(setCountry(res.data))
-                    setCountryLoaded(true);
-                });
-        }
-        if (!countryData) {
-            getCountries();
-        }
-        else
-            setCountryLoaded(true);
-    }, [])
 
     useEffect(() => {
         const getBuilders = () => {
@@ -137,21 +118,11 @@ const BuilderContainer = () => {
                             />
                         </label>
                         <label htmlFor="country-select" className='builder-add-label'>Pays :
-                            <select
+                            <CountrySelector
                                 id="country-select"
-                                value={selectedCountry}
-                                onChange={(e) => setSelectedCountry(e.target.value)}
-                                className='builder-add-select'
-                            >
-                                {countryLoaded
-                                    ? countryData.map((item) => (
-                                        <option
-                                            key={item.id}
-                                            value={item.id}>{item.name}</option>
-                                    ))
-                                    : null
-                                }
-                            </select>
+                                setSelectedCountry={setSelectedCountry}
+                                selectedCountry={selectedCountry} 
+                                />
                         </label>
                         <button className='builder-add-btn'>Ajouter</button>
                     </form>
