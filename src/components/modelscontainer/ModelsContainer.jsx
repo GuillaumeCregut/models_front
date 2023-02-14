@@ -48,12 +48,14 @@ const ModelsContainer = () => {
                     par constructeur
                     <p>par fabriquant
                         <BrandSelector
+                            id="brand-selector"
                             selectedBrand={selectedBrand}
                             setSelectedBrand={setSelectedBrand}
                         />
                     </p>
                     <p>par pays
                         <CountrySelector
+                        id="country-selector"
                             setSelectedCountry={setSelectedCountry}
                             selectedCountry={selectedCountry}
                         />

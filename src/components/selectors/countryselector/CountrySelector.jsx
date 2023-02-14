@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import './CountrySelector.scss';
 
-const CountrySelector = ({selectedCountry, setSelectedCountry}) => {
+const CountrySelector = ({selectedCountry, setSelectedCountry,id}) => {
     const [countryLoaded, setCountryLoaded] = useState(false);
     const countryData = useSelector((state) => state.countries.country);
     const dispatch = useDispatch();
@@ -29,7 +29,7 @@ const CountrySelector = ({selectedCountry, setSelectedCountry}) => {
 
     return (
         <select
-        id="country-select"
+        id={id}
         value={selectedCountry}
         onChange={(e) => setSelectedCountry(e.target.value)}
         className='country-selector'

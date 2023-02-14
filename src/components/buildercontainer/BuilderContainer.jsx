@@ -119,6 +119,7 @@ const BuilderContainer = () => {
                         </label>
                         <label htmlFor="country-select" className='builder-add-label'>Pays :
                             <CountrySelector
+                                id="country-select"
                                 setSelectedCountry={setSelectedCountry}
                                 selectedCountry={selectedCountry} 
                                 />
