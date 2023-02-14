@@ -33,7 +33,7 @@ const BrandSelector = ({ selectedBrand, setSelectedBrand,id }) => {
             onChange={(e) => setSelectedBrand(e.target.value)}
             className='brand-selector'
         >
-
+            <option value="0">--</option>
             {brandLoaded
                 ? brandData.map((item) => (
                     <option

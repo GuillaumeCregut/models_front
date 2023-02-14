@@ -38,6 +38,7 @@ const PeriodSelector = ({selectedPeriod,setSelectedPeriod, id}) => {
         onChange={(e) => setSelectedPeriod(e.target.value)}
         className='period-selector'
         >
+            <option value="0">--</option>
             {periodLoaded
             ?periodData.map((item)=>(
                 <option key={item.id}

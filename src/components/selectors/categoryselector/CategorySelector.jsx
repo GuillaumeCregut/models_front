@@ -37,6 +37,7 @@ const CategorySelector = ({id,selectedCategory,setSelectedCategory}) => {
         onChange={(e) => setSelectedCategory(e.target.value)}
         className='category-selector'
         >
+            <option value="0">--</option>
              {categoryLoaded
                 ? categoryData.map((item) => (
                     <option

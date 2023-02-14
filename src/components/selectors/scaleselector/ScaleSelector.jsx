@@ -33,6 +33,7 @@ const ScaleSelector = ({ id, selectedScale, setSelectedScale }) => {
             onChange={(e) => setSelectedScale(e.target.value)}
             className='scale-selector'
         >
+            <option value="0">--</option>
             {scaleLoaded
                 ? scaleData.map((item) => (
                     <option

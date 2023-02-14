@@ -36,6 +36,7 @@ const BuilderSelector = ({id,selectedBuilder, setSelectedBuilder}) => {
             onChange={(e) => setSelectedBuilder(e.target.value)}
             className='builder-selector'
         >
+            <option value="0">--</option>
          {builderLoaded
          ?builderData.map((item)=>(
             <option 

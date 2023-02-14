@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import BrandSelector from "../selectors/brandselector/BrandSelector";
 import BuilderSelector from "../selectors/builderselector/BuilderSelector";
 import CategorySelector from "../selectors/categoryselector/CategorySelector";
@@ -6,7 +7,7 @@ import PeriodSelector from "../selectors/periodSelector/PeriodSelector";
 import ScaleSelector from "../selectors/scaleselector/ScaleSelector";
 
 
-const FormAddModel = ({ setNewModel }) => {
+const FormAddModel = () => {
     const [selectedScale, setSelectedScale] = useState(0);
     const [selectedBuilder, setSelectedBuilder] = useState(0);
     const [selectedPeriod, setSelectedPeriod] = useState(0);
@@ -15,10 +16,23 @@ const FormAddModel = ({ setNewModel }) => {
     const nameRef = useRef();
     const refRef = useRef();
     const linkRef = useRef();
+    const axiosPrivate=useAxiosPrivate();
     //Prévoir le fichier photo
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        const newModel={
+            name : nameRef.current.value,
+            reference : refRef.current.value,
+            brand:selectedBrand,
+            builder:selectedBuilder,
+            scale : selectedScale,
+            category:selectedCateogry,
+            period:selectedPeriod,
+            scalemates:linkRef.current.value,
+            //file:,
+        }
+        console.log(newModel);
     }
 
     return (
@@ -26,10 +40,24 @@ const FormAddModel = ({ setNewModel }) => {
             <h2>Ajouter un modèle</h2>
             <form onSubmit={handleSubmit} className='form-add-model' encType="multipart/form-data">
                 <label htmlFor="new-name">Nom du modèle :
-                    <input type="text" id="new-name" ref={nameRef} />
+                    <input
+                        type="text"
+                        id="new-name"
+                        ref={nameRef}
+                        className='add-model-form-input'
+                        autoComplete="off"
+                        required
+                    />
                 </label>
                 <label htmlFor="new-reference">Référence :
-                    <input type="text" id="new-reference" ref={refRef} />
+                    <input
+                        type="text"
+                        id="new-reference"
+                        ref={refRef}
+                        className='add-model-form-input'
+                        autoComplete="off"
+                        required
+                    />
                 </label>
                 <label htmlFor="new-brand">Marque du kit :
                     <BrandSelector
@@ -42,7 +70,7 @@ const FormAddModel = ({ setNewModel }) => {
                     <BuilderSelector
                         id='new-builder'
                         selectedBuilder={selectedBuilder}
-                         setSelectedBuilder={setSelectedBuilder}
+                        setSelectedBuilder={setSelectedBuilder}
                     />
                 </label>
                 <label htmlFor="new-scale">Echelle :
@@ -66,7 +94,17 @@ const FormAddModel = ({ setNewModel }) => {
                         setSlectedPeriod={setSelectedPeriod}
                     />
                 </label>
+                <label htmlFor="new-reference">Lien scalemates :
+                    <input
+                        type="text"
+                        id="new-reference"
+                        ref={linkRef}
+                        className='add-model-form-input'
+                        autoComplete="off"
+                    />
+                </label>
                 <label htmlFor="new-picture">Photo</label>
+                <button>Ajouter</button>
             </form>
 
         </div>
