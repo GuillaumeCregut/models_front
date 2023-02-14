@@ -3,6 +3,7 @@ import brandSlice from "../feature/Brand.slice";
 import  builderSlice from "../feature/Builder.slice";
 import  categorySlice  from "../feature/Category.slice";
 import CountrySlice from "../feature/Country.slice";
+import modelSlice from "../feature/Model.slice";
 import  periodSlice  from "../feature/Period.slice";
 import scaleSlice from "../feature/Scale.slice";
 
@@ -15,7 +16,7 @@ export default configureStore({
         categories: categorySlice,
         scales:scaleSlice,
         builders:builderSlice,
-       
+        models:modelSlice,
     },
     //devTools :false //to avoid visible store in dev tools
 })
