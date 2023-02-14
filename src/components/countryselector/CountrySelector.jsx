@@ -1,0 +1,47 @@
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { setCountry } from '../../feature/Country.slice';
+import { useDispatch, useSelector } from 'react-redux';
+
+const CountrySelector = ({selectedCountry, setSelectedCountry}) => {
+    const [countryLoaded, setCountryLoaded] = useState(false);
+    const countryData = useSelector((state) => state.countries.country);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        //Loading countries if null
+        const getCountries = () => {
+            const urlCountry = `${process.env.REACT_APP_API_URL}country`;
+            axios.get(urlCountry)
+                .then((res) => {
+                    dispatch(setCountry(res.data))
+                    setCountryLoaded(true);
+                });
+        }
+        if (!countryData) {
+            getCountries();
+        }
+        else
+            setCountryLoaded(true);
+    }, [])
+
+    return (
+        <select
+        id="country-select"
+        value={selectedCountry}
+        onChange={(e) => setSelectedCountry(e.target.value)}
+        className='builder-add-select'
+    >
+        {countryLoaded
+            ? countryData.map((item) => (
+                <option
+                    key={item.id}
+                    value={item.id}>{item.name}</option>
+            ))
+            : null
+        }
+    </select>
+    )
+}
+
+export default CountrySelector
