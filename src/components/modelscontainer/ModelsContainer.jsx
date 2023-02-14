@@ -11,6 +11,7 @@ import CategorySelector from '../selectors/categoryselector/CategorySelector';
 import PeriodSelector from '../selectors/periodSelector/PeriodSelector';
 import ScaleSelector from '../selectors/scaleselector/ScaleSelector';
 import BuilderSelector from '../selectors/builderselector/BuilderSelector';
+import FormAddModel from '../formaddmodel/FormAddModel';
 
 const ModelsContainer = () => {
     const [isLoaded, setIsLoaded] = useState(false);
@@ -106,7 +107,7 @@ const ModelsContainer = () => {
                 </div>
             </div>
             <div className="add-model">
-                <h2>Ajouter un modèle</h2>
+                <FormAddModel />
             </div>
 
         </section>

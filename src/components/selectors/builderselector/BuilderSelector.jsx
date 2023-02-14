@@ -17,7 +17,6 @@ const BuilderSelector = ({id,selectedBuilder, setSelectedBuilder}) => {
                 .get(url)
                 .then((resp)=>{
                     dispatch(setBuilder(resp.data));
-                    console.log(resp.data);
                     setBuilderLoaded(true);
                 })
                 .catch((err)=>{
@@ -41,7 +40,7 @@ const BuilderSelector = ({id,selectedBuilder, setSelectedBuilder}) => {
          ?builderData.map((item)=>(
             <option 
                 key={item.id}
-                value={item.id}>{item.name}</option>
+                value={item.id}>{item.name} ({item.countryName})</option>
          ))
         :null
         }   
