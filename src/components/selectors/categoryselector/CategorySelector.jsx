@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './CategorySelector.scss';
 
 const CategorySelector = ({id,selectedCategory,setSelectedCategory}) => {
-    const [categoryLoaded,setCategoryLoaded]=useState(1);
+    const [categoryLoaded,setCategoryLoaded]=useState(false);
     const dispatch=useDispatch();
     const categoryData=useSelector((state) => state.categories.category);
 

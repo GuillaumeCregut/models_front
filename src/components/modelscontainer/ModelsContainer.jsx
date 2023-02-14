@@ -7,11 +7,13 @@ import CountrySelector from '../selectors/countryselector/CountrySelector';
 import ModelBlock from '../modelblock/ModelBlock';
 import './ModelsContainer.scss';
 import BrandSelector from '../selectors/brandselector/BrandSelector';
+import CategorySelector from '../selectors/categoryselector/CategorySelector';
 
 const ModelsContainer = () => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [selectedCountry, setSelectedCountry] = useState(1);
     const [selectedBrand, setSelectedBrand] = useState(1);
+    const [selectedCategory, setSelectedCategory]=useState(1);
     const modelData = useSelector((state) => state.models.model)
     const url = `${process.env.REACT_APP_API_URL}model`;
     const dispatch = useDispatch();
@@ -42,7 +44,13 @@ const ModelsContainer = () => {
             <div className="main-model-container">
                 <div className="filter-models">
                     <p>Filtrage des modèles</p>
-                    par catégorie
+                    <p>par catégorie
+                        <CategorySelector
+                            id="category-select"
+                            selectedCategory={selectedCategory}
+                            setSelectedCategory={setSelectedCategory}
+                        />    
+                    </p>
                     par échelle
                     par période
                     par constructeur
