@@ -43,12 +43,25 @@ const FormAddModel = () => {
                 .post(url,formData)
                 .then((resp)=>{
                     dispatch(addModel(resp.data));
+                    clearForm();
                 })
                 .catch((err)=>{
                     console.error(err);
                 })
         }
 
+    }
+
+    const clearForm=()=>{
+        setFileUpload(null);
+        setSelectedCategory(0);
+        setSelectedBrand(0);
+        setSelectedBuilder(0);
+        setSelectedPeriod(0);
+        setSelectedScale(0);
+        refRef.current.value='';
+        nameRef.current.value='';
+        linkRef.current.value='';
     }
 
     useEffect(()=>{
