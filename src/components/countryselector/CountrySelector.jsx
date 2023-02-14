@@ -3,6 +3,8 @@ import axios from 'axios';
 import { setCountry } from '../../feature/Country.slice';
 import { useDispatch, useSelector } from 'react-redux';
 
+import './CountrySelector.scss';
+
 const CountrySelector = ({selectedCountry, setSelectedCountry}) => {
     const [countryLoaded, setCountryLoaded] = useState(false);
     const countryData = useSelector((state) => state.countries.country);
@@ -30,7 +32,7 @@ const CountrySelector = ({selectedCountry, setSelectedCountry}) => {
         id="country-select"
         value={selectedCountry}
         onChange={(e) => setSelectedCountry(e.target.value)}
-        className='builder-add-select'
+        className='country-selector'
     >
         {countryLoaded
             ? countryData.map((item) => (
