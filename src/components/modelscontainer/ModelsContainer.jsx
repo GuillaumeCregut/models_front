@@ -1,8 +1,11 @@
 import React from 'react'
 
-const ModelsContainer = (props) => {
+import './ModelsContainer.scss';
+
+const ModelsContainer = () => {
+
     return (
-        <div>
+        <div className='model-component'>
             Modèles
         </div>
     )
