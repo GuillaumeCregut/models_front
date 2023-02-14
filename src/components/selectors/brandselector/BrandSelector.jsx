@@ -3,7 +3,7 @@ import axios from 'axios';
 import { setBrand } from '../../../feature/Brand.slice';
 import { useDispatch, useSelector } from 'react-redux';
 
-const BrandSelector = ({ selectedBrand, setSelectedBrand }) => {
+const BrandSelector = ({ selectedBrand, setSelectedBrand,id }) => {
     const [brandLoaded, setBrandLoaded] = useState(false);
     const brandData = useSelector((state) => state.brands.brand);
     const dispatch = useDispatch();
@@ -26,7 +26,7 @@ const BrandSelector = ({ selectedBrand, setSelectedBrand }) => {
 
     return (
         <select
-            id="brand-select"
+            id={id}
             value={selectedBrand}
             onChange={(e) => setSelectedBrand(e.target.value)}
             className='brand-selector'
