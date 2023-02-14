@@ -6,6 +6,7 @@ import { AwaitLoad } from '../awaitload/AwaitLoad';
 import CountrySelector from '../selectors/countryselector/CountrySelector';
 import ModelBlock from '../modelblock/ModelBlock';
 import './ModelsContainer.scss';
+import BrandSelector from '../selectors/brandselector/BrandSelector';
 
 const ModelsContainer = () => {
     const [isLoaded, setIsLoaded] = useState(false);
@@ -45,6 +46,7 @@ const ModelsContainer = () => {
                     par période
                     par constructeur
                     par fabriquant
+                    <BrandSelector />
                     par pays
                     <CountrySelector
                         setSelectedCountry={setSelectedCountry}
