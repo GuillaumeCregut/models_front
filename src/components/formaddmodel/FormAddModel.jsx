@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
-import { FileDrop } from 'react-file-drop'
-
+import { FileDrop } from 'react-file-drop';
+import useAxiosPrivateMulti from '../../hooks/useAxiosMulti';
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import BrandSelector from "../selectors/brandselector/BrandSelector";
 import BuilderSelector from "../selectors/builderselector/BuilderSelector";
@@ -22,12 +22,11 @@ const FormAddModel = () => {
     const nameRef = useRef();
     const refRef = useRef();
     const linkRef = useRef();
-    const axiosPrivate = useAxiosPrivate();
+    const axiosPrivate = useAxiosPrivateMulti();
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const url=`${process.env.REACT_APP_API_URL}model`;
-        console.log(fileUpload);
         if ((parseInt(selectedBrand) !== 0) && (parseInt(selectedBuilder) !== 0) && (parseInt(selectedScale) !== 0) && (parseInt(selectedCategory) !== 0) && (parseInt(selectedPeriod) !== 0) && (nameRef.current.value !== '') && (refRef.current.value !== '')) {
             const formData=new FormData();
             formData.append('file',fileUpload);
@@ -39,10 +38,10 @@ const FormAddModel = () => {
             formData.append('category',selectedCategory);
             formData.append('period',selectedPeriod);
             formData.append('scalemates',linkRef.current.value);
-            axios
+            axiosPrivate
                 .post(url,formData)
                 .then((resp)=>{
-
+                    console.log(resp.data)
                 })
                 .catch((err)=>{
                     console.error(err);
