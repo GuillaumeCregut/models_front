@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { setModel } from '../../feature/Model.slice';
 import { AwaitLoad } from '../awaitload/AwaitLoad';
-import CountrySelector from '../countryselector/CountrySelector';
+import CountrySelector from '../selectors/countryselector/CountrySelector';
 import ModelBlock from '../modelblock/ModelBlock';
 import './ModelsContainer.scss';
 
@@ -37,33 +37,36 @@ const ModelsContainer = () => {
     return (
         <section className='model-component'>
             <h2 className="model-title">Les modèles</h2>
-            <div className="filter-models">
-                <p>Filtrage des modèles</p>
-                par catégorie
-                par échelle
-                par période
-                par constructeur
-                par fabriquant
-                par pays
-                <CountrySelector 
-                 setSelectedCountry={setSelectedCountry}
-                 selectedCountry={selectedCountry} />
-                par nom
-            </div>
-            <div className="model-container">
-                {isLoaded
-                    ? modelData.map((item) => (
-                        <ModelBlock
-                            key={item.id}
-                            model={item}
-                        />
-                    )
-                    )
-                    : <AwaitLoad />}
+            <div className="main-model-container">
+                <div className="filter-models">
+                    <p>Filtrage des modèles</p>
+                    par catégorie
+                    par échelle
+                    par période
+                    par constructeur
+                    par fabriquant
+                    par pays
+                    <CountrySelector
+                        setSelectedCountry={setSelectedCountry}
+                        selectedCountry={selectedCountry} />
+                    par nom
+                </div>
+                <div className="model-container">
+                    {isLoaded
+                        ? modelData.map((item) => (
+                            <ModelBlock
+                                key={item.id}
+                                model={item}
+                            />
+                        )
+                        )
+                        : <AwaitLoad />}
+                </div>
             </div>
             <div className="add-model">
-                
+                <h2>Ajouter un modèle</h2>
             </div>
+
         </section>
     )
 }

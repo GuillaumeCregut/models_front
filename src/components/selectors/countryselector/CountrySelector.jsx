@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { setCountry } from '../../feature/Country.slice';
+import { setCountry } from '../../../feature/Country.slice';
 import { useDispatch, useSelector } from 'react-redux';
 
 import './CountrySelector.scss';

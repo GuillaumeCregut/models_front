@@ -7,9 +7,9 @@ import { addBuilder, updateBuilder, setBuilder, deleteBuilder } from '../../feat
 import BuilderFrame from '../builderframe/BuilderFrame';
 import useAuth from '../../hooks/useAuth';
 import ranks from '../../feature/ranks';
+import CountrySelector from '../selectors/countryselector/CountrySelector';
 
 import './BuilderContainer.scss';
-import CountrySelector from '../countryselector/CountrySelector';
 
 const BuilderContainer = () => {
     const url = `${process.env.REACT_APP_API_URL}builder`;
