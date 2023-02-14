@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { FileDrop } from 'react-file-drop'
 
@@ -22,26 +23,34 @@ const FormAddModel = () => {
     const refRef = useRef();
     const linkRef = useRef();
     const axiosPrivate = useAxiosPrivate();
-    //Prévoir le fichier photo
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        const url=`${process.env.REACT_APP_API_URL}model`;
         console.log(fileUpload);
         if ((parseInt(selectedBrand) !== 0) && (parseInt(selectedBuilder) !== 0) && (parseInt(selectedScale) !== 0) && (parseInt(selectedCategory) !== 0) && (parseInt(selectedPeriod) !== 0) && (nameRef.current.value !== '') && (refRef.current.value !== '')) {
-            const newModel = {
-                name: nameRef.current.value,
-                reference: refRef.current.value,
-                brand: selectedBrand,
-                builder: selectedBuilder,
-                scale: selectedScale,
-                category: selectedCategory,
-                period: selectedPeriod,
-                scalemates: linkRef.current.value,
-                //file:,
-            }
+            const formData=new FormData();
+            formData.append('file',fileUpload);
+            formData.append('name',nameRef.current.value);
+            formData.append('reference',refRef.current.value);
+            formData.append('brand',selectedBrand);
+            formData.append('builder',selectedBuilder);
+            formData.append('scale',selectedScale);
+            formData.append('category',selectedCategory);
+            formData.append('period',selectedPeriod);
+            formData.append('scalemates',linkRef.current.value);
+            axios
+                .post(url,formData)
+                .then((resp)=>{
+
+                })
+                .catch((err)=>{
+                    console.error(err);
+                })
         }
 
     }
+
     useEffect(()=>{
         if(fileUpload){
             const img = URL.createObjectURL(fileUpload) 
