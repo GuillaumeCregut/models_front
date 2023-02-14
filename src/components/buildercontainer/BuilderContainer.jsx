@@ -16,7 +16,6 @@ const BuilderContainer = () => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [findElement, setFindElement] = useState('');
     const [filteredBuiler, setFilteredBuilder] = useState([]);
-    const [countryLoaded, setCountryLoaded] = useState(false);
     const [selectedCountry, setSelectedCountry] = useState(1);
     const [newBuilder, setNewBuilder] = useState('');
     const buildersData = useSelector((state) => state.builders.builder);
