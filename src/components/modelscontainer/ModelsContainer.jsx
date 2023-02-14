@@ -5,13 +5,17 @@ import { setModel } from '../../feature/Model.slice';
 import { AwaitLoad } from '../awaitload/AwaitLoad';
 import CountrySelector from '../selectors/countryselector/CountrySelector';
 import ModelBlock from '../modelblock/ModelBlock';
-import './ModelsContainer.scss';
 import BrandSelector from '../selectors/brandselector/BrandSelector';
 import CategorySelector from '../selectors/categoryselector/CategorySelector';
 import PeriodSelector from '../selectors/periodSelector/PeriodSelector';
 import ScaleSelector from '../selectors/scaleselector/ScaleSelector';
 import BuilderSelector from '../selectors/builderselector/BuilderSelector';
 import FormAddModel from '../formaddmodel/FormAddModel';
+import useAuth from '../../hooks/useAuth';
+import useAxiosPrivate from '../../hooks/useAxiosPrivate';
+import ranks from '../../feature/ranks';
+
+import './ModelsContainer.scss';
 
 const ModelsContainer = () => {
     const [isLoaded, setIsLoaded] = useState(false);
@@ -21,9 +25,15 @@ const ModelsContainer = () => {
     const [selectedPeriod, setSelectedPeriod] = useState(1);
     const [selectedScale, setSelectedScale] = useState(1);
     const [selectedBuilder,setSelectedBuiler]=useState(1);
+    const [newModel, setNewModel]=useState(null);
     const modelData = useSelector((state) => state.models.model)
     const url = `${process.env.REACT_APP_API_URL}model`;
     const dispatch = useDispatch();
+    const axiosPrivate=useAxiosPrivate();
+    const { auth } = useAuth();
+    let rankUser = auth?.rank;
+    if (!rankUser)
+        rankUser = 0;
 
     useEffect(() => {
         const getModels = async () => {
@@ -106,9 +116,13 @@ const ModelsContainer = () => {
                         : <AwaitLoad />}
                 </div>
             </div>
-            <div className="add-model">
-                <FormAddModel />
+           {rankUser>=ranks.user
+           ? <div className="add-model">
+                <FormAddModel 
+                    setNewModel={setNewModel}
+                />
             </div>
+            :null}
 
         </section>
     )
