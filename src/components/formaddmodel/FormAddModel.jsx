@@ -1,13 +1,13 @@
-import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { FileDrop } from 'react-file-drop';
 import useAxiosPrivateMulti from '../../hooks/useAxiosMulti';
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import BrandSelector from "../selectors/brandselector/BrandSelector";
 import BuilderSelector from "../selectors/builderselector/BuilderSelector";
 import CategorySelector from "../selectors/categoryselector/CategorySelector";
 import PeriodSelector from "../selectors/periodSelector/PeriodSelector";
 import ScaleSelector from "../selectors/scaleselector/ScaleSelector";
+import { useDispatch } from 'react-redux';
+import {addModel } from '../../feature/Model.slice';
 
 import './FormAddModel.scss';
 
@@ -23,6 +23,7 @@ const FormAddModel = () => {
     const refRef = useRef();
     const linkRef = useRef();
     const axiosPrivate = useAxiosPrivateMulti();
+    const dispatch=useDispatch();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -41,7 +42,7 @@ const FormAddModel = () => {
             axiosPrivate
                 .post(url,formData)
                 .then((resp)=>{
-                    console.log(resp.data)
+                    dispatch(addModel(resp.data));
                 })
                 .catch((err)=>{
                     console.error(err);
@@ -130,7 +131,6 @@ const FormAddModel = () => {
                     <FileDrop
                     onDrop={(files, event) => {
                         setFileUpload(files[0]);
-                        // console.log('onDrop!', files, event)
                     }}
                     
                     > {fileUpload
