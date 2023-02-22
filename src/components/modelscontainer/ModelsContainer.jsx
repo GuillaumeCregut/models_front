@@ -16,6 +16,7 @@ const ModelsContainer = () => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [filter,setFilter]=useState(null);
     const [newModel, setNewModel]=useState(null);
+    const [modelsFiltered, setModelsFiltered]=useState([]);
     const modelData = useSelector((state) => state.models.model)
     const url = `${process.env.REACT_APP_API_URL}model`;
     const dispatch = useDispatch();
@@ -30,8 +31,8 @@ const ModelsContainer = () => {
             await axios
                 .get(url)
                 .then((resp) => {
-                    console.log(resp.data)
-                    dispatch(setModel(resp.data))
+                    dispatch(setModel(resp.data));
+                    setModelsFiltered(resp.data)
                     setIsLoaded(true);
                 })
                 .catch((err) => {
@@ -42,11 +43,24 @@ const ModelsContainer = () => {
             getModels();
         }
         else
+            setModelsFiltered([...modelData]);
             setIsLoaded(true);
     }, []);
 
     useEffect(()=>{
-        
+        if(filter){
+        const temp=modelData.filter((item)=>{
+            let i=false;
+            for(const property in filter){
+                if(filter[property]!==item[property])
+                return false
+            }
+            return true;
+        })
+        console.log(temp)
+        setModelsFiltered([...temp]);
+        }
+            
     },[filter]);
 
     return (
@@ -57,7 +71,7 @@ const ModelsContainer = () => {
                <FilterModel setFilter={setFilter}/>
                 <div className="model-container">
                     {isLoaded
-                        ? modelData.map((item) => (
+                        ? modelsFiltered.map((item) => (
                             <ModelBlock
                                 key={item.id}
                                 model={item}

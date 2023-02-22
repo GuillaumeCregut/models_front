@@ -18,14 +18,21 @@ const FilterModel = ({setFilter}) => {
     const refName=useRef();
 
     const handleFilter = () => {
-        const newFilter={
-            country:selectedCountry,
-            brand:selectedBrand,
-            category:selectedCategory,
-            scale: selectedScale,
-            builder: selectedBuilder,
-            name: refName.current.value
-        }
+        const newFilter={};
+        if  (parseInt(selectedCountry)!==0)
+            newFilter.countryId=parseInt(selectedCountry);
+        if(parseInt(selectedBrand)!==0)
+            newFilter.brand=parseInt(selectedBrand);
+        if(parseInt(selectedCategory)!==0)
+            newFilter.category=parseInt(selectedCategory);
+        if(parseInt(selectedScale)!==0)
+            newFilter.scale= parseInt(selectedScale);
+        if(parseInt(selectedBuilder)!==0)
+            newFilter.builder= parseInt(selectedBuilder);
+        if(parseInt(selectedPeriod)!==0)
+            newFilter.period= parseInt(selectedPeriod);
+        if(refName.current.value!=='')
+            newFilter.name= refName.current.value
         setFilter(newFilter);
     }
 
