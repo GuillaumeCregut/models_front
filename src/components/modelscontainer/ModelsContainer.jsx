@@ -14,7 +14,7 @@ import './ModelsContainer.scss';
 
 const ModelsContainer = () => {
     const [isLoaded, setIsLoaded] = useState(false);
-    const [filter, setFilter] = useState(null);
+    const [filter, setFilter] = useState({});
     const [newModel, setNewModel] = useState(null);
     const [modelsFiltered, setModelsFiltered] = useState([]);
     const modelData = useSelector((state) => state.models.model)
