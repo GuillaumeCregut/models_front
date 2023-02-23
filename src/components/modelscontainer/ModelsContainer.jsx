@@ -14,13 +14,13 @@ import './ModelsContainer.scss';
 
 const ModelsContainer = () => {
     const [isLoaded, setIsLoaded] = useState(false);
-    const [filter,setFilter]=useState(null);
-    const [newModel, setNewModel]=useState(null);
-    const [modelsFiltered, setModelsFiltered]=useState([]);
+    const [filter, setFilter] = useState(null);
+    const [newModel, setNewModel] = useState(null);
+    const [modelsFiltered, setModelsFiltered] = useState([]);
     const modelData = useSelector((state) => state.models.model)
     const url = `${process.env.REACT_APP_API_URL}model`;
     const dispatch = useDispatch();
-    const axiosPrivate=useAxiosPrivate();
+    const axiosPrivate = useAxiosPrivate();
     const { auth } = useAuth();
     let rankUser = auth?.rank;
     if (!rankUser)
@@ -44,32 +44,35 @@ const ModelsContainer = () => {
         }
         else
             setModelsFiltered([...modelData]);
-            setIsLoaded(true);
+        setIsLoaded(true);
     }, []);
 
-    useEffect(()=>{
-        if(filter){
-        const temp=modelData.filter((item)=>{
-            let i=false;
-            for(const property in filter){
-                if(property==='name' && item.name.toLowerCase().includes(filter[property].toLowerCase()))
-                    return true;
-                if(filter[property]!==item[property])
-                return false
+    useEffect(() => {
+        const temp = modelData.filter((item) => {
+            if (filter) {
+                let i = false;
+                for (const property in filter) {
+                    if (property === 'name' && item.name.toLowerCase().includes(filter[property].toLowerCase()))
+                        return true;
+                    if (filter[property] !== item[property])
+                        return false
+                }
+                return true;
             }
-            return true;
+            else
+                return true;
         })
         setModelsFiltered([...temp]);
-        }
-            
-    },[filter]);
+
+
+    }, [filter, modelData]);
 
     return (
         <section className='model-component'>
             <h2 className="model-title">Les modèles</h2>
             <div className="main-model-container">
-                
-               <FilterModel setFilter={setFilter}/>
+
+                <FilterModel setFilter={setFilter} />
                 <div className="model-container">
                     {isLoaded
                         ? modelsFiltered.map((item) => (
@@ -82,13 +85,13 @@ const ModelsContainer = () => {
                         : <AwaitLoad />}
                 </div>
             </div>
-           {rankUser>=ranks.user
-           ? <div className="add-model">
-                <FormAddModel 
-                    setNewModel={setNewModel}
-                />
-            </div>
-            :null}
+            {rankUser >= ranks.user
+                ? <div className="add-model">
+                    <FormAddModel
+                        setNewModel={setNewModel}
+                    />
+                </div>
+                : null}
 
         </section>
     )
