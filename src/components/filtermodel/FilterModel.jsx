@@ -42,56 +42,65 @@ const FilterModel = ({setFilter}) => {
         <div className="filter-models">
             <p>Filtrage des modèles</p>
             <div className="filters-list">
-                <label htmlFor="category-select">par catégorie
+                <div className='filter-element-container'>
+                <label htmlFor="category-select" className='model-filter-label'>par catégorie
                     <CategorySelector
                         id="category-select"
+                        className="filter-selector"
                         selectedCategory={selectedCategory}
                         setSelectedCategory={setSelectedCategory}
                     />
                 </label>
 
-                <label htmlFor="scale-selector">par échelle
+                <label htmlFor="scale-selector" className='model-filter-label'>par échelle
                     <ScaleSelector
                         selectedScale={selectedScale}
                         setSelectedScale={setSelectedScale}
                         id='scale-selector'
+                        className="filter-selector"
                     />
                 </label>
-
-                <label htmlFor="period-selector">par période
+                </div>
+                <div className='filter-element-container'>
+                <label htmlFor="period-selector" className='model-filter-label'>par période
                     <PeriodSelector
                         id="period-selector"
+                        className="filter-selector"
                         selectedPeriod={selectedPeriod}
                         setSelectedPeriod={setSelectedPeriod}
                     />
                 </label>
 
-                <label htmlFor="builder-selector">par constructeur
+                <label htmlFor="builder-selector" className='model-filter-label'>par constructeur
                     <BuilderSelector
                         id='builder-selector'
+                        className="filter-selector"
                         selectedBuilder={selectedBuilder}
                         setSelectedBuilder={setSelectedBuilder}
 
                     />
                 </label>
-
-                <label htmlFor="brand-selector">par fabriquant
+                </div>
+                <div className='filter-element-container'>
+                <label htmlFor="brand-selector" className='model-filter-label'>par fabriquant
                     <BrandSelector
                         id="brand-selector"
+                        className="filter-selector"
                         selectedBrand={selectedBrand}
                         setSelectedBrand={setSelectedBrand}
                     />
                 </label>
 
-                <label htmlFor="country-selector">par pays
+                <label htmlFor="country-selector" className='model-filter-label'>par pays
                     <CountrySelector
                         id="country-selector"
+                        className="filter-selector"
                         setSelectedCountry={setSelectedCountry}
                         selectedCountry={selectedCountry}
                     />
                 </label>
-
-                <label htmlFor="model-name">par nom
+                </div>
+                <label htmlFor="model-name" className='model-filter-label'>par nom
                 <input type="text" id="model-name"  ref={refName}/>
                 </label>
             </div>

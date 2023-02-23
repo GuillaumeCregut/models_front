@@ -1,6 +1,22 @@
 .filter-models {
-
+    padding: 5px;
     .filters-list {
         display: flex;
+        flex-wrap: wrap;
+    }
+
+    .filter-element-container{
+        width: 45%;
+    }
+
+    .model-filter-label{
+        display: flex;
+        margin: 5px;
+        flex-wrap: wrap;
+    }
+    @media screen and (max-width: 768px) {
+      .filter-selector{
+        font-size: 0.6rem;
+      }
     }
 }
