@@ -36,11 +36,27 @@ body{
    
 }
 
+.model-modal {
+    position: absolute;
+    top: 120px;
+    left: 50%;
+    width: 680px;
+    height: 340px;
+    transform: translateX(-50%);
+    background-color: papayawhip;
+}
+
 @media screen and (max-width: 768px) {
     .main-font-20{
         font-size: 16px;
         line-height: 20px;
     }
     
-   
+    .model-modal {
+        width: 100%;
+        height: 100%;
+        top:0;
+        left:0;
+        transform: translatex(0);
+    }
 }

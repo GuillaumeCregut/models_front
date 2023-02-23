@@ -48,22 +48,23 @@ const ModelsContainer = () => {
     }, []);
 
     useEffect(() => {
-        const temp = modelData.filter((item) => {
-            if (filter) {
-                let i = false;
-                for (const property in filter) {
-                    if (property === 'name' && item.name.toLowerCase().includes(filter[property].toLowerCase()))
-                        return true;
-                    if (filter[property] !== item[property])
-                        return false
+        if (isLoaded) {
+            const temp = modelData.filter((item) => {
+                if (filter) {
+                    let i = false;
+                    for (const property in filter) {
+                        if (property === 'name' && item.name.toLowerCase().includes(filter[property].toLowerCase()))
+                            return true;
+                        if (filter[property] !== item[property])
+                            return false
+                    }
+                    return true;
                 }
-                return true;
-            }
-            else
-                return true;
-        })
-        setModelsFiltered([...temp]);
-
+                else
+                    return true;
+            })
+            setModelsFiltered([...temp]);
+        }
 
     }, [filter, modelData]);
 
@@ -79,6 +80,7 @@ const ModelsContainer = () => {
                             <ModelBlock
                                 key={item.id}
                                 model={item}
+                            // showModal={setModal}
                             />
                         )
                         )

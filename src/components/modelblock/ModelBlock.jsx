@@ -6,12 +6,14 @@ import ranks from '../../feature/ranks';
 import { deleteModel } from '../../feature/Model.slice';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 import { useDispatch } from 'react-redux';
+import Modal from 'react-modal';
 
 import './ModelBlock.scss';
 
 const ModelBlock = ({ model }) => {
     const url = `${process.env.REACT_APP_URL}`;
     const [displayBack, setDisplayBack] = useState(false);
+    const [showModal, setShowModal] = useState(false);
     const { auth } = useAuth();
     const axiosPrivate = useAxiosPrivate();
     const dispatch = useDispatch();
@@ -24,11 +26,15 @@ const ModelBlock = ({ model }) => {
     }
 
     const handleUpdate = () => {
+        setShowModal(true);
+    }
 
+    const closeModal = () => {
+        setShowModal(false)
     }
 
     const handleDelete = () => {
-        const urlApi=`${process.env.REACT_APP_API_URL}model/${model.id}`
+        const urlApi = `${process.env.REACT_APP_API_URL}model/${model.id}`
         if (window.confirm(`Voulez vous supprimer  ${model.name} ?`)) {
             axiosPrivate
                 .delete(urlApi)
@@ -37,10 +43,10 @@ const ModelBlock = ({ model }) => {
                 })
                 .catch((err) => {
                     console.error(err)
-                 })
+                })
         }
     }
-
+    Modal.setAppElement('#root');
     return (
         <article className='model-block'>
             <div className="model-card-container" onClick={turnCard} >
@@ -67,6 +73,12 @@ const ModelBlock = ({ model }) => {
             <div className={rankUser === ranks.admin ? "card-btn-container" : ''}><UpDateRemoveBtn
                 deleteAction={handleDelete}
                 updateAction={handleUpdate} /></div>
+            <Modal
+                isOpen={showModal}
+                className="model-modal"
+                onRequestClose={closeModal}>
+                <button onClick={closeModal}>close</button>
+            </Modal>
         </article>
     )
 }

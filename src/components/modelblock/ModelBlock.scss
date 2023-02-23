@@ -1,39 +1,42 @@
-.model-block{
-    padding :10px;
-    margin :10px;
+.model-block {
+    padding: 10px;
+    margin: 10px;
     border: 1px solid black;
-  
 
-    .model-picture{
+
+    .model-picture {
         width: 100%;
         height: auto;
     }
 
-    .card-settings{
+    .card-settings {
         height: 200px;
         width: 200px;
         border: 1px solid black;
-        box-shadow:  0 4px 8px rgba(0,0,0,0.2);
-        -webkit-box-shadow:  0 4px 8px rgba(0,0,0,0.2);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
-    .flip-card-front, .flip-card-back{
+    .flip-card-front,
+    .flip-card-back {
         height: 100%;
     }
 
-    .flip-card-front{
+    .flip-card-front {
         background-color: #bbb;
-        color : black;
-       
-     }
+        color: black;
 
-     .flip-card-back{
+    }
+
+    .flip-card-back {
         background-color: #2980b9;
         color: white;
     }
 
-    .card-btn-container{
+    .card-btn-container {
         position: relative;
         height: 50px;
     }
+
+    
 }
