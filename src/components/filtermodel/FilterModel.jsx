@@ -43,38 +43,32 @@ const FilterModel = ({setFilter}) => {
             <p>Filtrage des modèles</p>
             <div className="filters-list">
                 <div className='filter-element-container'>
-                <label htmlFor="category-select" className='model-filter-label'>par catégorie
+                <label htmlFor="category-select" className='model-filter-label'>par catégorie :
                     <CategorySelector
                         id="category-select"
-                        className="filter-selector"
                         selectedCategory={selectedCategory}
                         setSelectedCategory={setSelectedCategory}
                     />
                 </label>
-
-                <label htmlFor="scale-selector" className='model-filter-label'>par échelle
+                <label htmlFor="scale-selector" className='model-filter-label'>par échelle :
                     <ScaleSelector
                         selectedScale={selectedScale}
                         setSelectedScale={setSelectedScale}
-                        id='scale-selector'
-                        className="filter-selector"
+                        id='scale-selector' 
                     />
                 </label>
                 </div>
                 <div className='filter-element-container'>
-                <label htmlFor="period-selector" className='model-filter-label'>par période
+                <label htmlFor="period-selector" className='model-filter-label'>par période :
                     <PeriodSelector
                         id="period-selector"
-                        className="filter-selector"
                         selectedPeriod={selectedPeriod}
                         setSelectedPeriod={setSelectedPeriod}
                     />
                 </label>
-
-                <label htmlFor="builder-selector" className='model-filter-label'>par constructeur
+                <label htmlFor="builder-selector" className='model-filter-label'>par constructeur :
                     <BuilderSelector
                         id='builder-selector'
-                        className="filter-selector"
                         selectedBuilder={selectedBuilder}
                         setSelectedBuilder={setSelectedBuilder}
 
@@ -82,29 +76,28 @@ const FilterModel = ({setFilter}) => {
                 </label>
                 </div>
                 <div className='filter-element-container'>
-                <label htmlFor="brand-selector" className='model-filter-label'>par fabriquant
+                <label htmlFor="brand-selector" className='model-filter-label'>par fabriquant :
                     <BrandSelector
                         id="brand-selector"
-                        className="filter-selector"
                         selectedBrand={selectedBrand}
                         setSelectedBrand={setSelectedBrand}
                     />
                 </label>
-
-                <label htmlFor="country-selector" className='model-filter-label'>par pays
+                <label htmlFor="country-selector" className='model-filter-label'>par pays :
                     <CountrySelector
                         id="country-selector"
-                        className="filter-selector"
                         setSelectedCountry={setSelectedCountry}
                         selectedCountry={selectedCountry}
                     />
                 </label>
                 </div>
-                <label htmlFor="model-name" className='model-filter-label'>par nom
-                <input type="text" id="model-name"  ref={refName}/>
+                <label htmlFor="model-name" className='model-filter-label'>par nom :
+                <input type="text" id="model-name"  ref={refName} className='filter-nbame-input'/>
                 </label>
             </div>
-            <button onClick={handleFilter}>Trier</button>
+            <div>
+            <button onClick={handleFilter} className='btn-filter'>Trier</button>
+            </div>
         </div>
     )
 }
