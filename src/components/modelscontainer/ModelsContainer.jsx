@@ -52,12 +52,13 @@ const ModelsContainer = () => {
         const temp=modelData.filter((item)=>{
             let i=false;
             for(const property in filter){
+                if(property==='name' && item.name.toLowerCase().includes(filter[property].toLowerCase()))
+                    return true;
                 if(filter[property]!==item[property])
                 return false
             }
             return true;
         })
-        console.log(temp)
         setModelsFiltered([...temp]);
         }
             

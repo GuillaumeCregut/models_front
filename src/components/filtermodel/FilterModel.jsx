@@ -6,6 +6,7 @@ import PeriodSelector from '../selectors/periodSelector/PeriodSelector';
 import ScaleSelector from '../selectors/scaleselector/ScaleSelector';
 import BuilderSelector from '../selectors/builderselector/BuilderSelector';
 
+import './FilterModel.scss';
 
 const FilterModel = ({setFilter}) => {
     const [selectedCountry, setSelectedCountry] = useState(0);
@@ -40,7 +41,7 @@ const FilterModel = ({setFilter}) => {
     return (
         <div className="filter-models">
             <p>Filtrage des modèles</p>
-            <div className="filter-list">
+            <div className="filters-list">
                 <label htmlFor="category-select">par catégorie
                     <CategorySelector
                         id="category-select"
