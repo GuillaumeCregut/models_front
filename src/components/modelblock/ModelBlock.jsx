@@ -32,6 +32,7 @@ const ModelBlock = ({ model }) => {
                             Constructeur :{model.builderName} <br />
                             Pays : {model.countryName}<br />
                             Catégorie : {model.categoryName}<br />
+                            Période : {model.periodName}
                            {model.link
                            ?<p> <a href={model.link} target="_blank" rel='noreferrer'>Lien Scalemates </a></p>
                            :null}

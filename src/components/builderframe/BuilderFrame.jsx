@@ -40,7 +40,6 @@ const BuilderFrame = ({ builder }) => {
         axiosPrivate
         .put(url,addNewBuilder)
         .then((resp) => {
-            console.log('passe')
             dispatch(updateBuilder([item,builder.id]));
         })
         .catch((err) => {
