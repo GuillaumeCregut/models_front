@@ -6,7 +6,6 @@ import { AwaitLoad } from '../awaitload/AwaitLoad';
 import ModelBlock from '../modelblock/ModelBlock';
 import FormAddModel from '../formaddmodel/FormAddModel';
 import useAuth from '../../hooks/useAuth';
-import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 import ranks from '../../feature/ranks';
 import FilterModel from '../filtermodel/FilterModel';
 
@@ -14,13 +13,11 @@ import './ModelsContainer.scss';
 
 const ModelsContainer = () => {
     const [isLoaded, setIsLoaded] = useState(false);
-    const [filter, setFilter] = useState(null);
-    const [newModel, setNewModel] = useState(null);
+    const [filter, setFilter] = useState({});
     const [modelsFiltered, setModelsFiltered] = useState([]);
     const modelData = useSelector((state) => state.models.model)
     const url = `${process.env.REACT_APP_API_URL}model`;
     const dispatch = useDispatch();
-    const axiosPrivate = useAxiosPrivate();
     const { auth } = useAuth();
     let rankUser = auth?.rank;
     if (!rankUser)
@@ -48,22 +45,22 @@ const ModelsContainer = () => {
     }, []);
 
     useEffect(() => {
-        const temp = modelData.filter((item) => {
-            if (filter) {
-                let i = false;
-                for (const property in filter) {
-                    if (property === 'name' && item.name.toLowerCase().includes(filter[property].toLowerCase()))
-                        return true;
-                    if (filter[property] !== item[property])
-                        return false
+        if (isLoaded) {
+            const temp = modelData.filter((item) => {
+                if (filter) {
+                    for (const property in filter) {
+                        if (property === 'name' && item.name.toLowerCase().includes(filter[property].toLowerCase()))
+                            return true;
+                        if (filter[property] !== item[property])
+                            return false
+                    }
+                    return true;
                 }
-                return true;
-            }
-            else
-                return true;
-        })
-        setModelsFiltered([...temp]);
-
+                else
+                    return true;
+            })
+            setModelsFiltered([...temp]);
+        }
 
     }, [filter, modelData]);
 
@@ -79,6 +76,7 @@ const ModelsContainer = () => {
                             <ModelBlock
                                 key={item.id}
                                 model={item}
+                            // showModal={setModal}
                             />
                         )
                         )
@@ -87,9 +85,7 @@ const ModelsContainer = () => {
             </div>
             {rankUser >= ranks.user
                 ? <div className="add-model">
-                    <FormAddModel
-                        setNewModel={setNewModel}
-                    />
+                    <FormAddModel />
                 </div>
                 : null}
 
