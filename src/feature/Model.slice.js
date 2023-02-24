@@ -15,8 +15,8 @@ export const modelSlice=createSlice({
         updateModel:(state,{payload})=>{
             state.model=state.model.map((item)=>{
                 if(item.id===payload[1]){
-                    const name=payload[0].name; //to be modified
-                    return {...item,name}
+                   
+                    return {...payload[0]}
                 }else
                     return item;
             })

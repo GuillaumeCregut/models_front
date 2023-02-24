@@ -3,7 +3,7 @@ import ReactCardFlip from 'react-card-flip';
 import useAuth from '../../hooks/useAuth';
 import UpDateRemoveBtn from '../updateremovebtn/UpDateRemoveBtn';
 import ranks from '../../feature/ranks';
-import { deleteModel } from '../../feature/Model.slice';
+import { deleteModel,updateModel } from '../../feature/Model.slice';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 import useAxiosPrivateMulti from '../../hooks/useAxiosMulti';
 import { useDispatch } from 'react-redux';
@@ -60,12 +60,13 @@ const ModelBlock = ({ model }) => {
     }
 
     const closeModal = () => {
-        setShowModal(false)
+        setShowModal(false);
+        setFileUpload(false);
+        setUrlImage(model.picture ? `${url}${model.picture}` : '')
     }
 
     const handleUpdate = () => {
         const formData = new FormData();
-        console.log(newName)
         if (fileUpload)
             formData.append('file', fileUpload);
         formData.append('name', newName);
@@ -81,8 +82,10 @@ const ModelBlock = ({ model }) => {
         if (window.confirm(`Voulez vous modifier  ${model.name} ?`)) {
             axiosMulti
                 .put(urlApi,formData)
-                .then(() => {
-                  //  dispatch(deleteModel(model.id))
+                .then((resp) => {
+                    if(resp?.data){
+                        dispatch(updateModel([resp.data,model.id]))
+                    }
                 })
                 .catch((err) => {
                     console.error(err)
