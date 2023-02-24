@@ -5,6 +5,7 @@ import UpDateRemoveBtn from '../updateremovebtn/UpDateRemoveBtn';
 import ranks from '../../feature/ranks';
 import { deleteModel } from '../../feature/Model.slice';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
+import useAxiosPrivateMulti from '../../hooks/useAxiosMulti';
 import { useDispatch } from 'react-redux';
 import Modal from 'react-modal';
 import { FileDrop } from 'react-file-drop';
@@ -15,6 +16,7 @@ import ScaleSelector from '../selectors/scaleselector/ScaleSelector';
 import PeriodSelector from '../selectors/periodSelector/PeriodSelector';
 
 import './ModelBlock.scss';
+
 
 const ModelBlock = ({ model }) => {
     const url = `${process.env.REACT_APP_URL}`;
@@ -27,10 +29,15 @@ const ModelBlock = ({ model }) => {
     const [selectedScale, setSelectedScale] = useState(model.scale);
     const [selectedBuilder, setSelectedBuilder] = useState(model.builder);
     const [fileUpload, setFileUpload] = useState(null);
-    const [urlImage, setUrlImage] = useState('');
+    const [urlImage, setUrlImage] = useState(model.picture ? `${url}${model.picture}` : '');
+    const [newName, setNewName] = useState(model.name);
+    const [newRef, setNewRef] = useState(model.reference);
+    const [newLink, setNewLink] = useState(model.link ? model.link : '');
+
     ////
     const { auth } = useAuth();
     const axiosPrivate = useAxiosPrivate();
+    const axiosMulti=useAxiosPrivateMulti();
     const dispatch = useDispatch();
     let rankUser = auth?.rank;
     if (!rankUser)
@@ -57,7 +64,30 @@ const ModelBlock = ({ model }) => {
     }
 
     const handleUpdate = () => {
-        alert('toto')
+        const formData = new FormData();
+        console.log(newName)
+        if (fileUpload)
+            formData.append('file', fileUpload);
+        formData.append('name', newName);
+        formData.append('reference',newRef);
+        formData.append('brand', selectedBrand);
+        formData.append('builder', selectedBuilder);
+        formData.append('scale', selectedScale);
+        formData.append('category', selectedCategory);
+        formData.append('period', selectedPeriod);
+        if(newLink!=='')
+            formData.append('scalemates', newLink);
+        const urlApi = `${process.env.REACT_APP_API_URL}model/${model.id}`;
+        if (window.confirm(`Voulez vous modifier  ${model.name} ?`)) {
+            axiosMulti
+                .put(urlApi,formData)
+                .then(() => {
+                  //  dispatch(deleteModel(model.id))
+                })
+                .catch((err) => {
+                    console.error(err)
+                })
+        }
     }
 
     const handleDelete = () => {
@@ -136,14 +166,14 @@ const ModelBlock = ({ model }) => {
                                 selectedPeriod={selectedPeriod}
                                 setSelectedPeriod={setSelectedPeriod} />
                         </label>
-                        <label htmlFor="">Nom :
-
+                        <label htmlFor="new-name">Nom :
+                            <input type="text" id="new-name" value={newName} onChange={(e) => setNewName(e.target.value)} />
                         </label>
-                        <label htmlFor="">Référence :
-
+                        <label htmlFor="new-ref">Référence :
+                            <input type="text" id="new-ref" value={newRef} onChange={(e) => setNewRef(e.target.value)} />
                         </label>
-                        <label htmlFor="">Lien scalmates :
-
+                        <label htmlFor="new-link">Lien scalmates :
+                            <input type="text" id="new-link" value={newLink} onChange={(e) => setNewLink(e.target.value)} />
                         </label>
                     </div>
                     <div className='modal-dropzone'>
@@ -154,8 +184,8 @@ const ModelBlock = ({ model }) => {
                                     setFileUpload(files[0]);
                                 }}
 
-                            > {fileUpload
-                                ? <img src={urlImage} alt={fileUpload.name} className='form-add-model-img' />
+                            > {urlImage
+                                ? <img src={urlImage} alt={model.name} className='form-add-model-img' />
                                 : 'Glisser la photo'}</FileDrop>
 
                         </div>
