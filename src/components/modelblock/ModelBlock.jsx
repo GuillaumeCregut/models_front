@@ -38,7 +38,6 @@ const ModelBlock = ({ model }) => {
 
     useEffect(() => {
         if (fileUpload) {
-            console.log('On passe')
             const img = URL.createObjectURL(fileUpload)
             setUrlImage(img)
         }

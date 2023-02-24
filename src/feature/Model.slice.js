@@ -22,7 +22,6 @@ export const modelSlice=createSlice({
             })
         },
         deleteModel:(state,{payload})=>{
-            console.log((payload))
             state.model=state.model.filter((item)=>item.id!==payload);
         }
     }
