@@ -38,7 +38,8 @@ const FormAddModel = () => {
             formData.append('scale',selectedScale);
             formData.append('category',selectedCategory);
             formData.append('period',selectedPeriod);
-            formData.append('scalemates',linkRef.current.value);
+            if(linkRef.current.value!=='')
+                formData.append('scalemates',linkRef.current.value);
             axiosPrivate
                 .post(url,formData)
                 .then((resp)=>{
