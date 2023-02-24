@@ -91,6 +91,7 @@ const ModelBlock = ({ model }) => {
                     console.error(err)
                 })
         }
+        closeModal();
     }
 
     const handleDelete = () => {
