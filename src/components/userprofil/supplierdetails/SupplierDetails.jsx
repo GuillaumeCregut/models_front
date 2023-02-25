@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import {  useState } from "react";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 
 import "./SupplierDetails.scss";
@@ -7,8 +7,6 @@ const SupplierDetails = ({supplier, setSuppliers,suppliers}) => {
     const [update,setUpdate]=useState(false);
     const [newName,setNewName]=useState(supplier.name);
     const axiosPrivate=useAxiosPrivate();
-    const nameSupplier =useRef();
-    console.log(supplier);
 
     const handleEdit=()=>{
         setUpdate(prev=>!prev)

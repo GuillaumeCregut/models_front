@@ -149,7 +149,7 @@ const UpdateData = ({ user, cancelAction,updateUser }) => {
                     </>
                     : null
                 }
-                <button>Valider les modifications</button>
+                <button className='update-user-data-btn'>Valider les modifications</button>
             </form>
             <button onClick={() => cancelAction(false)}> Annuler</button>
         </div>
