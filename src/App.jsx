@@ -30,6 +30,7 @@ import { useEffect } from 'react';
 import useAuth from './hooks/useAuth';
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
+import UserData from './components/userdata/UserData';
 
 function App() {
   const { auth, setAuth } = useAuth();
@@ -85,7 +86,10 @@ function App() {
             <Route path='pays' element={<CountryContainer />} />
             <Route path='modeles' element={<ModelsContainer />} />
           </Route>
-          <Route path='profil' element={<Profil />} />
+          <Route path='profil' element={<Profil />} >
+            <Route index element={<UserData />} />
+            <Route path="infos" element={<UserData />} />
+          </Route>
           <Route path='kits' element={<Kits />} />
           <Route path='login' element={<Login />} />
           <Route path="signup" element={<SignUp />} />
