@@ -1,7 +1,6 @@
-import React from 'react'
 import { NavLink } from 'react-router-dom';
 import './ParamsMenu.scss';
-const ParamsMenu = (props) => {
+const ParamsMenu = () => {
     return (
         <div className="params-menu">
             <ul className="params-links-container">
