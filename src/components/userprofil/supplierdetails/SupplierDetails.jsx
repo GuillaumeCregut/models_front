@@ -1,9 +1,9 @@
 
 const SupplierDetails = ({supplier}) => {
     return (
-        <div>
+        <li>
             {supplier.name}
-        </div>
+        </li>
     )
 }
 
