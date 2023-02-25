@@ -59,6 +59,8 @@ const UserSupplier = () => {
                     <SupplierDetails
                         key={item.id}
                         supplier={item}
+                        suppliers={suppliers}
+                        setSuppliers={setSuppliers}
                     />
                 ))}
 
