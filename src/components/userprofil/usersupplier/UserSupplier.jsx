@@ -42,6 +42,7 @@ const UserSupplier = () => {
                     .post(url,newSupplier)
                     .then((resp)=>{
                         setSuppliers((prev)=>[...prev,resp.data]);
+                        nameRef.current.value='';
                     })
                     .catch((err)=>{
                         console.error(err);
@@ -53,7 +54,7 @@ const UserSupplier = () => {
 
     return (
         <div className="supplier-page">
-            <h2>Fournisseurs</h2>
+            <h2 className="supplier-title">Fournisseurs</h2>
             <ul className="supplier-container">
                 {suppliers.map((item) => (
                     <SupplierDetails
@@ -66,9 +67,9 @@ const UserSupplier = () => {
 
             </ul>
             <div className="form-add-supplier-container">
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} className="form-add-supplier">
                     <label htmlFor="name-supplier">Nom du fournisseur : <input type="text" id="name-supplier" ref={nameRef}/></label>
-                    <button>Ajouter</button>
+                    <button className="form-add-supplier-btn">Ajouter</button>
                 </form>
             </div>
         </div>

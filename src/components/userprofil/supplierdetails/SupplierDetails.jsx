@@ -1,5 +1,7 @@
 import { useRef, useState } from "react";
-import useAxiosPrivate from "../../../hooks/useAxiosPrivate"
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
+
+import "./SupplierDetails.scss";
 
 const SupplierDetails = ({supplier, setSuppliers,suppliers}) => {
     const [update,setUpdate]=useState(false);
@@ -26,6 +28,7 @@ const SupplierDetails = ({supplier, setSuppliers,suppliers}) => {
                 })
         }
     }
+
     const handleUpdate=()=>{
         const id=supplier.id;
         if(window.confirm("Voulez vous modifier ce fournisseur ?")){
@@ -54,7 +57,7 @@ const SupplierDetails = ({supplier, setSuppliers,suppliers}) => {
     }
 
     return (
-        <li>
+        <li className="supplier-details-container">
            {update
            ? <p><input type="text" value={newName} onChange={(e)=>setNewName(e.target.value)}/> <button onClick={handleUpdate}>Valider</button> <button onClick={handleEdit}>Fermer</button></p>
            :<div><button onClick={handleDelete}>-</button>{supplier.name} <button  onClick={handleEdit}>Modifier</button></div>}
