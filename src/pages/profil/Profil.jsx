@@ -1,6 +1,6 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom';
-import ProfilMenu from '../../components/profilmenu/ProfilMenu';
+import ProfilMenu from '../../components/userprofil/profilmenu/ProfilMenu';
 
 import './Profil.scss';
 
