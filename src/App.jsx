@@ -15,14 +15,14 @@ import { Kits } from './pages/kits/Kits';
 /* Composants de la page admin */
 import AdminPage from './pages/adminpage/AdminPage';
 /*Composants de la page paramètres */
-import ParamsHome from './components/paramshome/ParamsHome';
-import AreaContainer from './components/areacontainer/AreaContainer';
-import BuilderContainer from './components/buildercontainer/BuilderContainer';
-import BrandContainer from './components/brandcontainer/BrandContainer';
-import CategoryContainer from './components/categorycontainer/CategoryContainer';
-import ScaleContainer from './components/scalecontainer/ScaleContainer';
-import CountryContainer from './components/countrycontainer/CountryContainer';
-import ModelsContainer from './components/modelscontainer/ModelsContainer';
+import ParamsHome from './components/parameters/paramshome/ParamsHome'; 
+import AreaContainer from './components/parameters/areacontainer/AreaContainer';
+import BuilderContainer from './components/parameters/buildercontainer/BuilderContainer';
+import BrandContainer from './components/parameters/brandcontainer/BrandContainer';
+import CategoryContainer from './components/parameters/categorycontainer/CategoryContainer';
+import ScaleContainer from './components/parameters/scalecontainer/ScaleContainer';
+import CountryContainer from './components/parameters/countrycontainer/CountryContainer';
+import ModelsContainer from './components/parameters/modelscontainer/ModelsContainer';
 /*Secure files */
 import RequireAuth from './components/requireauth/RequireAuth';
 import ranks from './feature/ranks';
@@ -30,6 +30,7 @@ import { useEffect } from 'react';
 import useAuth from './hooks/useAuth';
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
+import UserData from './components/userdata/UserData';
 
 function App() {
   const { auth, setAuth } = useAuth();
@@ -60,7 +61,7 @@ function App() {
         })
     }
 
-    if (!auth?.firsname) {
+    if (!auth?.firtsname) {
       const url = `${process.env.REACT_APP_API_URL}auth/reload`;
       refreshContext()
     }
@@ -84,8 +85,13 @@ function App() {
             <Route path='echelles' element={<ScaleContainer />} />
             <Route path='pays' element={<CountryContainer />} />
             <Route path='modeles' element={<ModelsContainer />} />
+            <Route path='*' element={<NotFound />} />
           </Route>
-          <Route path='profil' element={<Profil />} />
+          <Route path='profil' element={<Profil />} >
+            <Route index element={<UserData />} />
+            <Route path="infos" element={<UserData />} />
+            <Route path='*' element={<NotFound />} />
+          </Route>
           <Route path='kits' element={<Kits />} />
           <Route path='login' element={<Login />} />
           <Route path="signup" element={<SignUp />} />

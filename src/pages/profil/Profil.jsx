@@ -1,12 +1,14 @@
 import React from 'react'
-import UserData from '../../components/userdata/UserData'
+import { Outlet } from 'react-router-dom';
+import ProfilMenu from '../../components/userprofil/profilmenu/ProfilMenu';
 
+import './Profil.scss';
 
 export const Profil = () => {
   return (
-    <div>
-      Profil
-      <UserData />
-    </div>
+    <main className='profil-page'>
+      <ProfilMenu />
+      <Outlet />
+    </main>
   )
 }
