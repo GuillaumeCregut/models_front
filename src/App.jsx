@@ -1,4 +1,4 @@
-import './App.css';
+import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 /* Common components*/
 import { NavBar } from './components/navbar/NavBar';
@@ -26,11 +26,14 @@ import ModelsContainer from './components/parameters/modelscontainer/ModelsConta
 /*Secure files */
 import RequireAuth from './components/requireauth/RequireAuth';
 import ranks from './feature/ranks';
-import { useEffect } from 'react';
 import useAuth from './hooks/useAuth';
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
-import UserData from './components/userdata/UserData';
+/*User profil components */
+import UserData from './components/userprofil/userdata/UserData';
+import UserSupplier from './components/userprofil/usersupplier/UserSupplier';
+
+import './App.css';
 
 function App() {
   const { auth, setAuth } = useAuth();
@@ -90,6 +93,7 @@ function App() {
           <Route path='profil' element={<Profil />} >
             <Route index element={<UserData />} />
             <Route path="infos" element={<UserData />} />
+            <Route path="fournisseurs" element={<UserSupplier />} />
             <Route path='*' element={<NotFound />} />
           </Route>
           <Route path='kits' element={<Kits />} />

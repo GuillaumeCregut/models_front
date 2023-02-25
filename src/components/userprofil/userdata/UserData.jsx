@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import useAuth from '../../hooks/useAuth';
-import Login from '../login/Login';
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
+import useAuth from '../../../hooks/useAuth';
+import Login from '../../login/Login';
 
 import './UserData.scss';
 import UpdateData from './UpdateData';
