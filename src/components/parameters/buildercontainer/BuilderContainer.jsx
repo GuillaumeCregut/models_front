@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { AwaitLoad } from '../../awaitload/AwaitLoad';
 import { useDispatch, useSelector } from 'react-redux';
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
-import { addBuilder, updateBuilder, setBuilder, deleteBuilder } from '../../../feature/Builder.slice';
+import { addBuilder,  setBuilder } from '../../../feature/Builder.slice';
 import BuilderFrame from '../builderframe/BuilderFrame';
 import useAuth from '../../../hooks/useAuth';
 import ranks from '../../../feature/ranks';
@@ -75,7 +75,6 @@ const BuilderContainer = () => {
         else {
             alert("Veuillez remplir tous les champs");
         }
-
     }
 
     return (

@@ -85,10 +85,12 @@ function App() {
             <Route path='echelles' element={<ScaleContainer />} />
             <Route path='pays' element={<CountryContainer />} />
             <Route path='modeles' element={<ModelsContainer />} />
+            <Route path='*' element={<NotFound />} />
           </Route>
           <Route path='profil' element={<Profil />} >
             <Route index element={<UserData />} />
             <Route path="infos" element={<UserData />} />
+            <Route path='*' element={<NotFound />} />
           </Route>
           <Route path='kits' element={<Kits />} />
           <Route path='login' element={<Login />} />
