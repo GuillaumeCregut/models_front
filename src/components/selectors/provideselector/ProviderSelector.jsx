@@ -25,7 +25,7 @@ const ProviderSelector = ({id, provider, setProvider}) => {
         }
         getProviders();
     },[]);
-    console.log(providers)
+
     return (
         <select
         id={id}
@@ -34,7 +34,7 @@ const ProviderSelector = ({id, provider, setProvider}) => {
             <option value="0">--</option>
              {providers.length>0
             ?providers.map((providerItem)=>(
-                <option value={providerItem.id}>{providerItem.name}</option>
+                <option value={providerItem.id} key={providerItem.id}>{providerItem.name}</option>
             ))
             :null
             }
