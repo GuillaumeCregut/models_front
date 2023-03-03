@@ -22,7 +22,12 @@ const OrderModel = ({addModel}) => {
     }
     return (
         <div>
+            Liste des modèles favoris
+            <div className="order-model-favorite">
+
+            </div>
             Liste des modèles
+            
             <label htmlFor="price">Prix :
             <input type="text"  id="price" value={price} onChange={(e)=>setPrice(e.target.value)}/></label>
             <label htmlFor="qtty">Quantité :
