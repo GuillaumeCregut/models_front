@@ -114,7 +114,7 @@ const ModelBlock = ({ model }) => {
                 <ReactCardFlip isFlipped={displayBack} flipDirection="horizontal" containerClassName="card-settings">
                     <div className='flip-card-front'>
                         {model.picture
-                            ? <img src={`${url}${model.picture}`} alt="" className='model-picture' />
+                            ? <img src={`${url}${model.picture}`} alt={model.name} className='model-picture' />
                             : null}
                     </div>
                     <div className='flip-card-back'>
