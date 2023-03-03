@@ -38,11 +38,14 @@ const Orders = () => {
         }
         else {
             if (parseInt(provider) !== 0) { //penser à tester si la liste est vide.
+                const list=listModel.map((model)=>{
+                    return {idmodel:model.idModel,qtty:model.qtty,price:model.price}
+                })
                 const dataSend = {
                     owner: idUser,
                     supplier: parseInt(provider),
                     reference: orderRefRef.current.value,
-                    list: []
+                    list: list
                 }
                 /*
                     {idModel
@@ -59,6 +62,8 @@ const Orders = () => {
     }
 
     const addModel = (model) => {
+        if(parseInt(model.qtty)<1)
+            return -1;
         let newList = [];
         const id = listModel.findIndex((item) => item.idModel === model.idModel);
         //Si on a  le modele dans la liste
@@ -71,6 +76,7 @@ const Orders = () => {
             }
             else {
                 oldModel.qtty = newQtty;
+                oldModel.price=parseFloat(oldModel.price);
                 //Rajouter le modèle au tableau
                     newList = listModel.map((item) => {
                     if (item.idModel === model.idModel)
@@ -81,7 +87,7 @@ const Orders = () => {
             setListModel([...newList]);
         } //On a pas le modele dans la liste, on le rajoute
         else {
-            setListModel([...listModel, model]);
+            setListModel([...listModel, {idModel:model.idModel,price:parseFloat(model.price),qtty:parseInt(model.qtty)}]);
         }
     }
     return (idUser !== 0
@@ -107,6 +113,11 @@ const Orders = () => {
                             provider={provider}
                             setProvider={setProvider} />
                     </label>
+                    <div className="model-list-added">
+                        {listModel.map((model)=>(
+                            <p key={model.idModel}>{model.idModel} {model.price} {model.qtty}</p>
+                        ))}
+                    </div>
                     <button>Valider</button>
                 </form>
             </div>
