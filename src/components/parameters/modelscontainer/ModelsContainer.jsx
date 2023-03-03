@@ -8,20 +8,44 @@ import FormAddModel from '../formaddmodel/FormAddModel';
 import useAuth from '../../../hooks/useAuth';
 import ranks from '../../../feature/ranks';
 import FilterModel from '../filtermodel/FilterModel';
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 
 import './ModelsContainer.scss';
 
 const ModelsContainer = () => {
     const [isLoaded, setIsLoaded] = useState(false);
+    const [fullList, setFullList]=useState([]);
+    const [fullListLoaded, setFullListLoaded]=useState(false);
+    const [isFavoriteLoaded,setIsFavoriteLoaded]=useState(false);
+    const [favoriteModels,setFavoriteModels]=useState([]);
     const [filter, setFilter] = useState({});
     const [modelsFiltered, setModelsFiltered] = useState([]);
     const modelData = useSelector((state) => state.models.model)
     const url = `${process.env.REACT_APP_API_URL}model`;
+    const axiosPrivate=useAxiosPrivate();
     const dispatch = useDispatch();
     const { auth } = useAuth();
+    let idUser=auth?.id;
+    if(!idUser){
+        idUser=0;
+    }
     let rankUser = auth?.rank;
     if (!rankUser)
         rankUser = 0;
+
+    useEffect(()=>{
+        if(isFavoriteLoaded&&isLoaded){
+            const newArray=modelData.map((model)=>{
+                const index=favoriteModels.findIndex((item)=>item.modelId===model.id)
+                if(index!==-1)
+                    return {...model,like:true}
+                else
+                    return {...model,like:false}
+            })
+            setFullList([...newArray]);
+            setFullListLoaded(true);
+        }
+    },[isFavoriteLoaded,isLoaded]);
 
     useEffect(() => {
         const getModels = async () => {
@@ -43,10 +67,29 @@ const ModelsContainer = () => {
             setModelsFiltered([...modelData]);
         setIsLoaded(true);
     }, []);
+    
+    useEffect(()=>{
+        const getFavorites=()=>{
+            const url = `${process.env.REACT_APP_API_URL}model/favorite/${idUser}`;
+            axiosPrivate
+                .get(url)
+                .then((resp)=>{
+                    setFavoriteModels(resp.data)
+                    setIsFavoriteLoaded(true);
+
+                })
+                .catch((err)=>{
+                    console.error(err);
+                })
+        }
+        if(idUser!==0)
+            getFavorites();
+
+    },[idUser]);
 
     useEffect(() => {
-        if (isLoaded) {
-            const temp = modelData.filter((item) => {
+        if (fullListLoaded) {
+            const temp = fullList.filter((item) => {
                 if (filter) {
                     for (const property in filter) {
                         if (property === 'name' && item.name.toLowerCase().includes(filter[property].toLowerCase()))
@@ -62,7 +105,7 @@ const ModelsContainer = () => {
             setModelsFiltered([...temp]);
         }
 
-    }, [filter, modelData]);
+    }, [filter, fullList]);
 
     return (
         <section className='model-component'>

@@ -34,6 +34,7 @@ import UserData from './components/userprofil/userdata/UserData';
 import UserSupplier from './components/userprofil/usersupplier/UserSupplier';
 
 import './App.css';
+import Orders from './components/userprofil/orders/Orders';
 
 function App() {
   const { auth, setAuth } = useAuth();
@@ -94,6 +95,7 @@ function App() {
             <Route index element={<UserData />} />
             <Route path="infos" element={<UserData />} />
             <Route path="fournisseurs" element={<UserSupplier />} />
+            <Route path="commandes" element={<Orders />} />
             <Route path='*' element={<NotFound />} />
           </Route>
           <Route path='kits' element={<Kits />} />
