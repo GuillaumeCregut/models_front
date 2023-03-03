@@ -14,6 +14,7 @@ import BuilderSelector from '../../selectors/builderselector/BuilderSelector';
 import CategorySelector from '../../selectors/categoryselector/CategorySelector';
 import ScaleSelector from '../../selectors/scaleselector/ScaleSelector';
 import PeriodSelector from '../../selectors/periodSelector/PeriodSelector';
+import { AiFillHeart,AiOutlineHeart } from "react-icons/ai";
 
 import './ModelBlock.scss';
 
@@ -33,7 +34,7 @@ const ModelBlock = ({ model }) => {
     const [newName, setNewName] = useState(model.name);
     const [newRef, setNewRef] = useState(model.reference);
     const [newLink, setNewLink] = useState(model.link ? model.link : '');
-
+    const [isLiked,setIsLiked]=useState(false)
     ////
     const { auth } = useAuth();
     const axiosPrivate = useAxiosPrivate();
@@ -42,7 +43,9 @@ const ModelBlock = ({ model }) => {
     let rankUser = auth?.rank;
     if (!rankUser)
         rankUser = 0;
-
+    let idUser=auth.id;
+    if(!idUser)
+        idUser=0;
     useEffect(() => {
         if (fileUpload) {
             const img = URL.createObjectURL(fileUpload)
@@ -50,6 +53,10 @@ const ModelBlock = ({ model }) => {
         }
 
     }, [fileUpload])
+
+    useEffect(()=>{
+        setIsLiked(model.like)
+    },[model.like])
 
     const turnCard = () => {
         setDisplayBack(!displayBack);
@@ -108,6 +115,25 @@ const ModelBlock = ({ model }) => {
         }
     }
     Modal.setAppElement('#root');
+
+    const handleClick=()=>{
+        setIsLiked((prev)=>!prev)
+        const  data={
+            modelId:model.id,
+            owner:idUser,
+            like : !isLiked
+        }
+        const url = `${process.env.REACT_APP_API_URL}model/favorite/`;
+        axiosPrivate
+            .post(url,data)
+            .then((resp)=>{
+
+            })
+            .catch((err)=>{
+                console.error(err)
+            })
+    }
+
     return (
         <article className='model-block'>
             <div className="model-card-container" onClick={turnCard} >
@@ -131,6 +157,9 @@ const ModelBlock = ({ model }) => {
             <h3 className='model-card-title'> {model.brandName}<br />
                 {model.name}</h3>
             <p className='model-reference'>{model.reference} - {model.scaleName}</p>
+           {idUser!==0
+           ? <p onClick={handleClick}>{isLiked?<AiFillHeart className='model-like model-like-true'/>:<AiOutlineHeart className='model-like'/>}</p>
+            :null}
             <div className={rankUser === ranks.admin ? "card-btn-container" : ''}><UpDateRemoveBtn
                 deleteAction={handleDelete}
                 updateAction={handleModalUpdate} /></div>
