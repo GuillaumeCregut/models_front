@@ -10,6 +10,7 @@ import './Orders.scss';
 const Orders = () => {
     const [orders, setOrders] = useState([]);
     const [listModel, setListModel] = useState([]);
+    const [refresh,setRefresh]=useState(false);
     const [provider, setProvider] = useState(0);
     const axiosPrivate = useAxiosPrivate();
     const orderRefRef = useRef();
@@ -41,6 +42,7 @@ const Orders = () => {
             axiosPrivate
                 .get(url)
                 .then((resp) => {
+                    console.log(resp.data)
                     setOrders(resp.data)
                 })
                 .catch((err) => {
@@ -48,7 +50,7 @@ const Orders = () => {
                 })
         }
         getOrders();
-    }, []);
+    }, [refresh]);
 
     useEffect(()=>{
         if(listModel.length>0 || provider!==0){
@@ -61,6 +63,11 @@ const Orders = () => {
     }
     },[listModel,provider]);
 
+    const resetForm=()=>{
+        //set provider 0,
+        //Empty list
+        //clear ref
+    }
     const handleSubmit = (e) => {
         e.preventDefault();
         if (orderRefRef.current.value === '') {
@@ -69,7 +76,7 @@ const Orders = () => {
         else {
             if (parseInt(provider) !== 0) { //penser à tester si la liste est vide.
                 const list = listModel.map((model) => {
-                    return { idmodel: model.idModel, qtty: model.qtty, price: model.price }
+                    return { idModel: model.idModel, qtty: model.qtty, price: model.price }
                 })
                 const dataSend = {
                     owner: idUser,
@@ -78,7 +85,15 @@ const Orders = () => {
                     list: list
                 }
                 if (window.confirm('voulez vous valider la commande ?')) {
-                    console.log(dataSend);
+                    const url = `${process.env.REACT_APP_API_URL}order/`;
+                    axiosPrivate
+                        .post(url,dataSend)
+                        .then((resp)=>{
+                            setRefresh(!refresh)
+                        })
+                        .catch((err)=>{
+                            console.log(err)
+                        })
                 }
             }
             else
@@ -139,9 +154,9 @@ const Orders = () => {
             Mes commandes :
             {orders.length > 0
                 ? <ul>
-                    {orders.map((order) => {
+                    {orders.map((order) => (
                         <li key={order.reference}>{order.reference}</li>
-                    })}
+                    ))}
                 </ul>
                 : <p>Vous n'avez pas de commandes enregistrées</p>
             }
