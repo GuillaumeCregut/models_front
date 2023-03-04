@@ -97,13 +97,11 @@ const OrderModel = ({ addModel }) => {
                 scale: selectedModelItem.scaleName,
                 builder: selectedModelItem.builderName
             }
-            console.log(item)
             addModel(item)
         }
     }
 
     const changeModel = (e) => {
-        console.log(e.target.value)
         setSelectedModel(parseInt(e.target.value));
     }
 

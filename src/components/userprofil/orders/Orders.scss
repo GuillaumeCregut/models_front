@@ -1,0 +1,24 @@
+.orders-container{
+    
+    .order-model-table{
+        margin: 20px 0;
+        border-spacing: 0 20px;
+        font-size:  1.3rem;
+    }
+
+    .order-head-cells{
+        padding: 0 5px;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .qtty-cell{
+        min-width: 70px;
+    }
+
+    @media screen and (max-width: 768px) {
+        .order-model-table{
+            font-size: 0.8rem;
+        }
+    }
+}
