@@ -18,7 +18,7 @@ const Orders = () => {
     if (!idUser) {
         idUser = 0;
     }
-
+    //const referenceCde=
     useEffect(() => {
         const getOrders = () => {
             const url = `${process.env.REACT_APP_API_URL}order/user/${idUser}`;
@@ -33,6 +33,15 @@ const Orders = () => {
         }
         getOrders();
     }, []);
+
+    useEffect(()=>{
+        const orderStore={
+            provider:parseInt(provider),
+            reference: orderRefRef.current.value,
+            list: listModel
+        }
+        window.localStorage.setItem("myOrder",JSON.stringify(orderStore));
+    },[listModel,provider,orderRefRef.current.value]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -58,6 +67,7 @@ const Orders = () => {
                 alert('Veuillez choisir un fournisseur')
         }
     }
+
 
     const addModel = (model) => {
         if (parseInt(model.qtty) < 1)
@@ -87,6 +97,7 @@ const Orders = () => {
         else {
             setListModel([...listModel, { ...model,idModel: model.idModel, price: parseFloat(model.price), qtty: parseInt(model.qtty) }]);
         }
+       
     }
 
     const setNewQtty=(id,newQtty)=>{
