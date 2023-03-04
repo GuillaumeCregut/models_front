@@ -38,6 +38,11 @@
         height: 50px;
     }
 
+    .user-buttons{
+        display: flex;
+        justify-content: space-between;
+    }
+
     .model-like {
         width: 30px;
         height: auto;
@@ -45,6 +50,12 @@
     
     .model-like-true{
         color : red;
+    }
+
+    .add-cart-model{
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
     }
 
 }
