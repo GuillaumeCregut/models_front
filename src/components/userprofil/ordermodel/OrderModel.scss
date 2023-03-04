@@ -4,7 +4,56 @@
         display: flex;
     }
 
-    .order-model-favorite{
+    .order-model-all-models-container{
+        width:45%;
+        margin: 20px auto;
+        line-height: 1.8rem;
+    }
+
+    .order-model-list-all-models{
+        height :100px;
+        width: max-content;
+        padding :5px 25px;
+        margin-top: 10px;
+        overflow-y: scroll;
+        border : 1px solid black;
+    }
+
+    .order-model-inputs-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         width: 50%;
+        margin: 10px auto;
+    }
+
+    .order-model-inputs{
+        margin: 10px 5px;
+    }
+
+    @media screen and (max-width: 768px) {
+        width: 90%;
+        margin : 0 auto;
+
+        .order-model-list-container{
+            flex-direction: column;
+        }
+
+        .order-model-favorite-container{
+            width: 90%;
+        }
+    
+        .order-model-all-models-container{
+            width: 90%;
+            font-size: 0.8rem;
+        }
+
+        .order-model-list-all-models{
+            margin :10px auto;
+        }
+
+        .order-model-inputs{
+            margin: 5px 0;
+        }
     }
 }
