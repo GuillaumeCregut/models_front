@@ -18,7 +18,23 @@ const Orders = () => {
     if (!idUser) {
         idUser = 0;
     }
-    //const referenceCde=
+    useEffect(()=>{
+        try{
+            const ls=JSON.parse(window.localStorage.getItem("myOrder"));
+            if(ls?.provider){
+                setProvider(ls.provider)
+            }
+            if(ls?.reference){
+                orderRefRef.current.value=ls.reference;
+            }
+            if(ls?.list)
+                setListModel([...ls.list]);
+        }
+        catch (err){
+            console.error(err)
+        }
+    },[]);
+
     useEffect(() => {
         const getOrders = () => {
             const url = `${process.env.REACT_APP_API_URL}order/user/${idUser}`;
@@ -35,13 +51,15 @@ const Orders = () => {
     }, []);
 
     useEffect(()=>{
+        if(listModel.length>0 || provider!==0){
         const orderStore={
             provider:parseInt(provider),
-            reference: orderRefRef.current.value,
+            reference: orderRefRef?.current.value,
             list: listModel
         }
         window.localStorage.setItem("myOrder",JSON.stringify(orderStore));
-    },[listModel,provider,orderRefRef.current.value]);
+    }
+    },[listModel,provider]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
