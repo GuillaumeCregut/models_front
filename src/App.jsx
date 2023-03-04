@@ -98,7 +98,9 @@ function App() {
             <Route path="commandes" element={<Orders />} />
             <Route path='*' element={<NotFound />} />
           </Route>
-          <Route path='kits' element={<Kits />} />
+          <Route path='kits' element={<Kits />} >
+            <Route path='*' element={<NotFound />} />
+          </Route>
           <Route path='login' element={<Login />} />
           <Route path="signup" element={<SignUp />} />
           <Route path='*' element={<NotFound />} />
