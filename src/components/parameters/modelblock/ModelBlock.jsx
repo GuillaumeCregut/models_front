@@ -15,7 +15,7 @@ import CategorySelector from '../../selectors/categoryselector/CategorySelector'
 import ScaleSelector from '../../selectors/scaleselector/ScaleSelector';
 import PeriodSelector from '../../selectors/periodSelector/PeriodSelector';
 import { AiFillHeart,AiOutlineHeart } from "react-icons/ai";
-
+import { MdOutlineAddShoppingCart } from "react-icons/md";
 import './ModelBlock.scss';
 
 
@@ -117,7 +117,6 @@ const ModelBlock = ({ model }) => {
     Modal.setAppElement('#root');
 
     const handleClick=()=>{
-        setIsLiked((prev)=>!prev)
         const  data={
             modelId:model.id,
             owner:idUser,
@@ -127,11 +126,27 @@ const ModelBlock = ({ model }) => {
         axiosPrivate
             .post(url,data)
             .then((resp)=>{
-
+                setIsLiked((prev)=>!prev)
             })
             .catch((err)=>{
                 console.error(err)
             })
+    }
+
+    const handleCart=()=>{
+        if(window.confirm("Voulez-vous ajouter ce modèle dans votre stock ?")){
+            const url = `${process.env.REACT_APP_API_URL}users/model/`;
+            axiosPrivate
+                .post(url,{user:idUser,model:model.id})
+                .then((resp)=>{
+                    alert("Le modèle a bien été ajouté. Pour modifier, veuillez vous rendre dans votre stock.")
+                })
+                .catch((err)=>{
+                    console.error(err)
+                    alert("Une erreur est survenue, le modèle n'a put être ajouté au stock")
+                })
+
+        }
     }
 
     return (
@@ -158,7 +173,10 @@ const ModelBlock = ({ model }) => {
                 {model.name}</h3>
             <p className='model-reference'>{model.reference} - {model.scaleName}</p>
            {idUser!==0
-           ? <p onClick={handleClick}>{isLiked?<AiFillHeart className='model-like model-like-true'/>:<AiOutlineHeart className='model-like'/>}</p>
+           ? <div className='user-buttons'>
+                <p onClick={handleClick}>{isLiked?<AiFillHeart className='model-like model-like-true'/>:<AiOutlineHeart className='model-like'/>}</p>
+                <MdOutlineAddShoppingCart className="add-cart-model" onClick={handleCart}/>
+            </div>
             :null}
             <div className={rankUser === ranks.admin ? "card-btn-container" : ''}><UpDateRemoveBtn
                 deleteAction={handleDelete}
