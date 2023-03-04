@@ -15,6 +15,7 @@ const Orders = () => {
     const [refresh, setRefresh] = useState(false);
     const [provider, setProvider] = useState(0);
     const [deployed, setDeployed] = useState(false);
+    const [closeModel,setCloseModel]=useState(false);
     const axiosPrivate = useAxiosPrivate();
     const orderRefRef = useRef();
     const { auth } = useAuth();
@@ -193,9 +194,10 @@ const Orders = () => {
                                 setProvider={setProvider} />
                         </label>
                     </div>
-                    <Popup trigger={<button type="button">Ajouter un modèle à la commande</button>} position="right center" modal className='popupmodel'>
+                    <Popup trigger={<button type="button">Ajouter un modèle à la commande</button>} open={closeModel} position="center center" modal className='popupmodel'>
                         <OrderModel
-                            addModel={addModel} />
+                            addModel={addModel} 
+                            setCloseModel={setCloseModel}/>
                     </Popup>
                     <div className="model-list-added">
                         <table className='order-model-table'>

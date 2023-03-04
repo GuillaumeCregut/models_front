@@ -1,9 +1,20 @@
 .order-model-container{
     background-color: rgb(224, 226, 228);
+    position: relative;
     width: 1000px;
     padding: 10px;
     .order-model-list-container{
         display: flex;
+    }
+
+    .close-model-add{
+        position: absolute;
+        top : 5px;
+        right: 5px;
+        color : red;
+        width: 35px;
+        height: 35px;
+        cursor: pointer;
     }
 
     .order-model-all-models-container{

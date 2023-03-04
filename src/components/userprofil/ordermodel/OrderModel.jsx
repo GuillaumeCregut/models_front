@@ -1,4 +1,4 @@
-
+import { RxCrossCircled } from "react-icons/rx";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
@@ -9,7 +9,7 @@ import { AwaitLoad } from "../../awaitload/AwaitLoad";
 
 import './OrderModel.scss';
 
-const OrderModel = ({ addModel }) => {
+const OrderModel = ({ addModel,setCloseModel }) => {
     const [price, setPrice] = useState(0.0);
     const [isLoaded, setIsLoaded] = useState(false);
     const [isFavoriteLoaded, setIsFavoriteLoaded] = useState(false);
@@ -27,6 +27,10 @@ const OrderModel = ({ addModel }) => {
     if (!idUser) {
         idUser = 0;
     }
+
+    useEffect(()=>{
+        setCloseModel(true);
+    },[])
 
     useEffect(() => {
         if (isLoaded) {
@@ -97,7 +101,8 @@ const OrderModel = ({ addModel }) => {
                 scale: selectedModelItem.scaleName,
                 builder: selectedModelItem.builderName
             }
-            addModel(item)
+            addModel(item);
+            setCloseModel(false);
         }
     }
 
@@ -163,6 +168,7 @@ const OrderModel = ({ addModel }) => {
                 </label>
             <button onClick={handleClik}>Ajouter</button>
             </div>
+            <RxCrossCircled onClick={()=>setCloseModel(false)} className="close-model-add"/>
         </div>
     )
 }
