@@ -11,6 +11,7 @@ import './Orders.scss';
 
 const Orders = () => {
     const [orders, setOrders] = useState([]);
+    const [isRefresh,setIsRefresh]=useState(false);
     const [listModel, setListModel] = useState([]);
     const [refresh, setRefresh] = useState(false);
     const [provider, setProvider] = useState(0);
@@ -34,6 +35,7 @@ const Orders = () => {
             }
             if (ls?.list)
                 setListModel([...ls.list]);
+            setIsRefresh(true);
         }
         catch (err) {
             console.error(err)
@@ -56,7 +58,7 @@ const Orders = () => {
     }, [refresh]);
 
     useEffect(() => {
-        if (listModel.length > 0 || provider !== 0) {
+        if (listModel.length > 0 || provider !== 0|| isRefresh) {
             const orderStore = {
                 provider: parseInt(provider),
                 reference: orderRefRef?.current.value,
