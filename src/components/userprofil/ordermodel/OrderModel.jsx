@@ -118,7 +118,8 @@ const OrderModel = ({ addModel }) => {
                                     name="model"
                                     value={item.modelId}
                                     checked={selectedModel === item.modelId}
-                                    onChange={changeModel} />
+                                    onChange={changeModel} 
+                                    className='radio-model-item'/>
                                     {item.modelName}</p>
                             ))
                             : <AwaitLoad />}
@@ -127,7 +128,7 @@ const OrderModel = ({ addModel }) => {
                 <div className="order-model-all-models-container">
                     <h3>Liste des modèles</h3>
                     <p>Filtre : <input type="text" value={filter} onChange={(e) => setFilter(e.target.value)} /></p>
-                    <div className="order-model-list-all-models">
+                    <div className="order-model-list-all-models all-models-list">
                         {isLoaded
                             ? filteredModel.map((model) => (
                                 <p key={model.id}><input
@@ -136,6 +137,7 @@ const OrderModel = ({ addModel }) => {
                                     value={model.id}
                                     checked={selectedModel === model.id}
                                     onChange={changeModel}
+                                    className='radio-model-item'
                                 />{model.brandName}-{model.builderName}-{model.name} - {model.scaleName}</p>
                             ))
                             : null}

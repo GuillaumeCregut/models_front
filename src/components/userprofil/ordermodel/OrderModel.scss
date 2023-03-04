@@ -1,5 +1,7 @@
 .order-model-container{
-    
+    background-color: rgb(224, 226, 228);
+    width: 1000px;
+    padding: 10px;
     .order-model-list-container{
         display: flex;
     }
@@ -27,6 +29,10 @@
         margin: 10px auto;
     }
 
+    .radio-model-item{
+        margin-right: 2px;
+    }
+
     .order-model-inputs{
         margin: 10px 5px;
     }
@@ -50,10 +56,15 @@
 
         .order-model-list-all-models{
             margin :10px auto;
+            font-size: 0.8rem;
         }
 
         .order-model-inputs{
             margin: 5px 0;
+        }
+
+        .all-models-list{
+            width: 100%;
         }
     }
 }
