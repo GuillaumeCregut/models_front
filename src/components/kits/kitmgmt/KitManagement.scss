@@ -1,0 +1,10 @@
+.kits-management-page {
+   
+    h2{
+        text-align: center;
+    }
+    
+    @media screen and (max-width: 768px) {
+        grid-area: 1 / 2 / 1/ 1;
+    }
+}
