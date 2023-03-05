@@ -35,6 +35,7 @@ import UserSupplier from './components/userprofil/usersupplier/UserSupplier';
 
 import './App.css';
 import Orders from './components/userprofil/orders/Orders';
+import Columns from './components/tests/columns/Columns';
 
 function App() {
   const { auth, setAuth } = useAuth();
