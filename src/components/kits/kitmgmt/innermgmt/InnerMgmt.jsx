@@ -19,7 +19,25 @@ const InnerMgmt = ({ orderedModels, likedModels, workbenchModels, finishedModels
             if (!result.destination) {
                 return
             }
-            console.log(result)
+            const dataToSend = {
+                id: result.draggableId,
+                newState: 0
+            }
+            switch (result.destination.droppableId) {
+                case 'liked': dataToSend.newState = 4;
+                    break;
+                case 'stocked': dataToSend.newState = 1;
+                    break;
+                case 'ordered': dataToSend.newState = 5;
+                    break;
+                case 'workbench': dataToSend.newState = 2;
+                    break;
+                case 'finished': dataToSend.newState = 3;
+                    break;
+            }
+            //Sending to BDD
+            //If not OK->return, else
+            console.log(dataToSend)
             dispatch({
                 type: 'MOVE',
                 from: result.source.droppableId,
@@ -39,17 +57,17 @@ const InnerMgmt = ({ orderedModels, likedModels, workbenchModels, finishedModels
                     <Droppable droppableId='liked' type="PERSON">
                         {(provided, snapshot) => {
                             return (
-                                <ul {...provided.droppableProps} ref={provided.innerRef} className={snapshot.isDraggingOver?'dropzone dropOK':'dropzone'}>
+                                <ul {...provided.droppableProps} ref={provided.innerRef} className={snapshot.isDraggingOver ? 'dropzone dropOK' : 'dropzone'}>
                                     {state.liked.map((item, index) => {
                                         return (
                                             <Draggable key={item.id} draggableId={item.id.toString()} index={index}>
-                                                {(provided,snapshot)=>{ //snapshot should be use for style
-                                                    return(
-                                                <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className={snapshot.isDragging?'line moving':'line'}>
-                                                    <KitCard kitDetails={item} />
-                                                </li>
-                                                )
-                                            }}
+                                                {(provided, snapshot) => { //snapshot should be use for style
+                                                    return (
+                                                        <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className={snapshot.isDragging ? 'line moving' : 'line'}>
+                                                            <KitCard kitDetails={item} />
+                                                        </li>
+                                                    )
+                                                }}
                                             </Draggable>
                                         )
                                     })}
@@ -64,17 +82,17 @@ const InnerMgmt = ({ orderedModels, likedModels, workbenchModels, finishedModels
                     <Droppable droppableId='stocked' type="PERSON">
                         {(provided, snapshot) => {
                             return (
-                                <ul {...provided.droppableProps} ref={provided.innerRef}  className={snapshot.isDraggingOver?'dropzone dropOK':'dropzone'}>
+                                <ul {...provided.droppableProps} ref={provided.innerRef} className={snapshot.isDraggingOver ? 'dropzone dropOK' : 'dropzone'}>
                                     {state.stocked.map((item, index) => {
                                         return (
                                             <Draggable key={item.id} draggableId={item.id.toString()} index={index}>
-                                                {(provided,snapshot)=>{ //snapshot should be use for style
-                                                    return(
-                                                <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className={snapshot.isDragging?'line moving':'line'}>
-                                                    <KitCard kitDetails={item} />
-                                                </li>
-                                                )
-                                            }}
+                                                {(provided, snapshot) => { //snapshot should be use for style
+                                                    return (
+                                                        <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className={snapshot.isDragging ? 'line moving' : 'line'}>
+                                                            <KitCard kitDetails={item} />
+                                                        </li>
+                                                    )
+                                                }}
                                             </Draggable>
                                         )
                                     })}
@@ -89,17 +107,17 @@ const InnerMgmt = ({ orderedModels, likedModels, workbenchModels, finishedModels
                     <Droppable droppableId='ordered' type="PERSON">
                         {(provided, snapshot) => {
                             return (
-                                <ul {...provided.droppableProps} ref={provided.innerRef}  className={snapshot.isDraggingOver?'dropzone dropOK':'dropzone'}>
+                                <ul {...provided.droppableProps} ref={provided.innerRef} className={snapshot.isDraggingOver ? 'dropzone dropOK' : 'dropzone'}>
                                     {state.ordered.map((item, index) => {
                                         return (
                                             <Draggable key={item.id} draggableId={item.id.toString()} index={index}>
-                                                {(provided,snapshot)=>{ //snapshot should be use for style
-                                                    return(
-                                                <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className={snapshot.isDragging?'line moving':'line'}>
-                                                    <KitCard kitDetails={item} />
-                                                </li>
-                                                )
-                                            }}
+                                                {(provided, snapshot) => { //snapshot should be use for style
+                                                    return (
+                                                        <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className={snapshot.isDragging ? 'line moving' : 'line'}>
+                                                            <KitCard kitDetails={item} />
+                                                        </li>
+                                                    )
+                                                }}
                                             </Draggable>
                                         )
                                     })}
@@ -114,17 +132,17 @@ const InnerMgmt = ({ orderedModels, likedModels, workbenchModels, finishedModels
                     <Droppable droppableId='workbench' type="PERSON">
                         {(provided, snapshot) => {
                             return (
-                                <ul {...provided.droppableProps} ref={provided.innerRef}  className={snapshot.isDraggingOver?'dropzone dropOK':'dropzone'}>
+                                <ul {...provided.droppableProps} ref={provided.innerRef} className={snapshot.isDraggingOver ? 'dropzone dropOK' : 'dropzone'}>
                                     {state.workbench.map((item, index) => {
                                         return (
                                             <Draggable key={item.id} draggableId={item.id.toString()} index={index}>
-                                                {(provided,snapshot)=>{ //snapshot should be use for style
-                                                    return(
-                                                <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className={snapshot.isDragging?'line moving':'line'}>
-                                                    <KitCard kitDetails={item} />
-                                                </li>
-                                                )
-                                            }}
+                                                {(provided, snapshot) => { //snapshot should be use for style
+                                                    return (
+                                                        <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className={snapshot.isDragging ? 'line moving' : 'line'}>
+                                                            <KitCard kitDetails={item} />
+                                                        </li>
+                                                    )
+                                                }}
                                             </Draggable>
                                         )
                                     })}
@@ -139,17 +157,17 @@ const InnerMgmt = ({ orderedModels, likedModels, workbenchModels, finishedModels
                     <Droppable droppableId='finished' type="PERSON">
                         {(provided, snapshot) => {
                             return (
-                                <ul {...provided.droppableProps} ref={provided.innerRef}  className={snapshot.isDraggingOver?'dropzone dropOK':'dropzone'}>
+                                <ul {...provided.droppableProps} ref={provided.innerRef} className={snapshot.isDraggingOver ? 'dropzone dropOK' : 'dropzone'}>
                                     {state.finished.map((item, index) => {
                                         return (
                                             <Draggable key={item.id} draggableId={item.id.toString()} index={index}>
-                                                {(provided,snapshot)=>{ //snapshot should be use for style
-                                                    return(
-                                                <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className={snapshot.isDragging?'line moving':'line'}>
-                                                    <KitCard kitDetails={item} />
-                                                </li>
-                                                )
-                                            }}
+                                                {(provided, snapshot) => { //snapshot should be use for style
+                                                    return (
+                                                        <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className={snapshot.isDragging ? 'line moving' : 'line'}>
+                                                            <KitCard kitDetails={item} />
+                                                        </li>
+                                                    )
+                                                }}
                                             </Draggable>
                                         )
                                     })}
