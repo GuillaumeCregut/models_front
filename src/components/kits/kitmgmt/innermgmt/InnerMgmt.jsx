@@ -45,7 +45,7 @@ const InnerMgmt = ({ orderedModels, likedModels, workbenchModels, finishedModels
                                             <Draggable key={item.id} draggableId={item.id.toString()} index={index}>
                                                 {(provided,snapshot)=>{ //snapshot should be use for style
                                                     return(
-                                                <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} >
+                                                <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className={snapshot.isDragging?'line moving':'line'}>
                                                     <KitCard kitDetails={item} />
                                                 </li>
                                                 )
@@ -70,7 +70,7 @@ const InnerMgmt = ({ orderedModels, likedModels, workbenchModels, finishedModels
                                             <Draggable key={item.id} draggableId={item.id.toString()} index={index}>
                                                 {(provided,snapshot)=>{ //snapshot should be use for style
                                                     return(
-                                                <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                                                <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className={snapshot.isDragging?'line moving':'line'}>
                                                     <KitCard kitDetails={item} />
                                                 </li>
                                                 )
@@ -95,7 +95,7 @@ const InnerMgmt = ({ orderedModels, likedModels, workbenchModels, finishedModels
                                             <Draggable key={item.id} draggableId={item.id.toString()} index={index}>
                                                 {(provided,snapshot)=>{ //snapshot should be use for style
                                                     return(
-                                                <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                                                <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className={snapshot.isDragging?'line moving':'line'}>
                                                     <KitCard kitDetails={item} />
                                                 </li>
                                                 )
@@ -120,7 +120,7 @@ const InnerMgmt = ({ orderedModels, likedModels, workbenchModels, finishedModels
                                             <Draggable key={item.id} draggableId={item.id.toString()} index={index}>
                                                 {(provided,snapshot)=>{ //snapshot should be use for style
                                                     return(
-                                                <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                                                <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className={snapshot.isDragging?'line moving':'line'}>
                                                     <KitCard kitDetails={item} />
                                                 </li>
                                                 )
@@ -145,7 +145,7 @@ const InnerMgmt = ({ orderedModels, likedModels, workbenchModels, finishedModels
                                             <Draggable key={item.id} draggableId={item.id.toString()} index={index}>
                                                 {(provided,snapshot)=>{ //snapshot should be use for style
                                                     return(
-                                                <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                                                <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className={snapshot.isDragging?'line moving':'line'}>
                                                     <KitCard kitDetails={item} />
                                                 </li>
                                                 )
