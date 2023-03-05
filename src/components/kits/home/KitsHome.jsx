@@ -5,7 +5,7 @@ import './KitsHome.scss';
 const KitsHome = () => {
     return (
         <div className='kits-container-page'>
-            Mes Kits
+            <h2>Mes Kits</h2>
         </div>
     )
 }

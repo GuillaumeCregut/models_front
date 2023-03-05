@@ -1,15 +1,24 @@
 .inner-management-container{
     display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-around;
 
     .drop-container{
         padding: 5px;
         margin: 5px;
+        width : 300px;
         border :1px solid black;
+        overflow-y: scroll;
+        height : 400px;
     }
 
     .dropzone{
-        border: 1px solid black;
+        width: 100%;
+        margin: 0 auto;
         min-height: 50px;
+        padding : 5px;
+        
     }
 
     .dropOK{
@@ -17,11 +26,20 @@
     }
 
     .line{
-        margin: 3px;
+        margin: 10px auto;
         padding: 3px;
-        border: 1px solid black;
     }
+    
     .moving{
         background-color: aqua;
+    }
+
+    @media screen and (max-width: 768px) {
+        flex-direction: column;
+
+        .drop-container{
+            margin: 5px auto;
+            width: 90%;
+        }
     }
 }

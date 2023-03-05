@@ -3,9 +3,9 @@ import { dragReducer } from '../../../../reducers/dragReducer';
 import KitCard from '../kitcard/KitCard';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import useAuth from '../../../../hooks/useAuth';
+import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 
 import './InnerMgmt.scss';
-import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 
 const InnerMgmt = ({ orderedModels, likedModels, workbenchModels, finishedModels, stockModels }) => {
     const axiosPrivate = useAxiosPrivate();
@@ -76,7 +76,7 @@ const InnerMgmt = ({ orderedModels, likedModels, workbenchModels, finishedModels
         <div className='inner-management-container'>
             <DragDropContext onDragEnd={handleDragEnd}>
                 <div className='drop-container'>
-                    <p>Modèle likés</p>
+                    <p className='dopzone-title'>Modèle likés</p>
                     <Droppable droppableId='liked' type="PERSON">
                         {(provided, snapshot) => {
                             return (
@@ -101,32 +101,7 @@ const InnerMgmt = ({ orderedModels, likedModels, workbenchModels, finishedModels
                     </Droppable>
                 </div>
                 <div className='drop-container'>
-                    <p>Modèle en stock</p>
-                    <Droppable droppableId='stocked' type="PERSON">
-                        {(provided, snapshot) => {
-                            return (
-                                <ul {...provided.droppableProps} ref={provided.innerRef} className={snapshot.isDraggingOver ? 'dropzone dropOK' : 'dropzone'}>
-                                    {state.stocked.map((item, index) => {
-                                        return (
-                                            <Draggable key={item.id} draggableId={item.id.toString()} index={index}>
-                                                {(provided, snapshot) => { //snapshot should be use for style
-                                                    return (
-                                                        <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className={snapshot.isDragging ? 'line moving' : 'line'}>
-                                                            <KitCard kitDetails={item} />
-                                                        </li>
-                                                    )
-                                                }}
-                                            </Draggable>
-                                        )
-                                    })}
-                                    {provided.placeholder}
-                                </ul>
-                            )
-                        }}
-                    </Droppable>
-                </div>
-                <div className='drop-container'>
-                    <p>Modèle commandés</p>
+                    <p className='dopzone-title'>Modèle commandés</p>
                     <Droppable droppableId='ordered' type="PERSON">
                         {(provided, snapshot) => {
                             return (
@@ -151,7 +126,32 @@ const InnerMgmt = ({ orderedModels, likedModels, workbenchModels, finishedModels
                     </Droppable>
                 </div>
                 <div className='drop-container'>
-                    <p>Modèle en cours</p>
+                    <p className='dopzone-title'>Modèle en stock</p>
+                    <Droppable droppableId='stocked' type="PERSON">
+                        {(provided, snapshot) => {
+                            return (
+                                <ul {...provided.droppableProps} ref={provided.innerRef} className={snapshot.isDraggingOver ? 'dropzone dropOK' : 'dropzone'}>
+                                    {state.stocked.map((item, index) => {
+                                        return (
+                                            <Draggable key={item.id} draggableId={item.id.toString()} index={index}>
+                                                {(provided, snapshot) => { //snapshot should be use for style
+                                                    return (
+                                                        <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className={snapshot.isDragging ? 'line moving' : 'line'}>
+                                                            <KitCard kitDetails={item} />
+                                                        </li>
+                                                    )
+                                                }}
+                                            </Draggable>
+                                        )
+                                    })}
+                                    {provided.placeholder}
+                                </ul>
+                            )
+                        }}
+                    </Droppable>
+                </div>
+                <div className='drop-container'>
+                    <p className='dopzone-title'>Modèle en cours</p>
                     <Droppable droppableId='workbench' type="PERSON">
                         {(provided, snapshot) => {
                             return (
@@ -176,7 +176,7 @@ const InnerMgmt = ({ orderedModels, likedModels, workbenchModels, finishedModels
                     </Droppable>
                 </div>
                 <div className='drop-container'>
-                    <p>Modèle terminés</p>
+                    <p className='dopzone-title'>Modèle terminés</p>
                     <Droppable droppableId='finished' type="PERSON">
                         {(provided, snapshot) => {
                             return (
