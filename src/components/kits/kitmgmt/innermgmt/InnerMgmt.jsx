@@ -2,10 +2,17 @@ import { useReducer, useCallback } from 'react';
 import { dragReducer } from '../../../../reducers/dragReducer';
 import KitCard from '../kitcard/KitCard';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import useAuth from '../../../../hooks/useAuth';
 
 import './InnerMgmt.scss';
+import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 
 const InnerMgmt = ({ orderedModels, likedModels, workbenchModels, finishedModels, stockModels }) => {
+    const axiosPrivate = useAxiosPrivate();
+    const { auth } = useAuth();
+    let userId = auth.id;
+    if (!userId)
+        userId = 0;
     const [state, dispatch] = useReducer(dragReducer, {
         ordered: orderedModels,
         liked: likedModels,
@@ -14,13 +21,28 @@ const InnerMgmt = ({ orderedModels, likedModels, workbenchModels, finishedModels
         stocked: stockModels,
     });
 
-    const handleDragEnd = useCallback((result) => {
+    const sendData = async (data) => {
+        const url = `${process.env.REACT_APP_API_URL}model/stock/`;
+        const result = await axiosPrivate
+            .put(url, data)
+            .then((resp) => {
+                return true;
+            })
+            .catch((err) => {
+                console.log(err)
+                return false;
+            })
+        return result
+    }
+
+    const handleDragEnd = useCallback(async (result) => {
         if (result.reason === 'DROP') {
             if (!result.destination) {
                 return
             }
             const dataToSend = {
-                id: result.draggableId,
+                id: parseInt(result.draggableId),
+                owner: userId,
                 newState: 0
             }
             switch (result.destination.droppableId) {
@@ -36,8 +58,9 @@ const InnerMgmt = ({ orderedModels, likedModels, workbenchModels, finishedModels
                     break;
             }
             //Sending to BDD
-            //If not OK->return, else
-            console.log(dataToSend)
+            const dbResult = await sendData(dataToSend);
+            if (!dbResult)
+                return
             dispatch({
                 type: 'MOVE',
                 from: result.source.droppableId,
