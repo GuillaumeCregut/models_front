@@ -5,7 +5,7 @@ const KitMenu = () => {
         <div className='kit-menu'>
             <ul className="kit-links-container">
                 <li className="link-param-item">
-                    <NavLink to="test" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>Kits en souhaits</NavLink>
+                    <NavLink to="gestion" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>Gestion du stock</NavLink>
                 </li>
                 <li className="link-param-item">
                     <NavLink to="test" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>Kits commandés</NavLink>

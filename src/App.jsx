@@ -36,6 +36,8 @@ import UserSupplier from './components/userprofil/usersupplier/UserSupplier';
 import './App.css';
 import Orders from './components/userprofil/orders/Orders';
 import Columns from './components/tests/columns/Columns';
+import KitsHome from './components/kits/home/KitsHome';
+import KitManagement from './components/kits/kitmgmt/KitManagement';
 
 function App() {
   const { auth, setAuth } = useAuth();
@@ -100,6 +102,8 @@ function App() {
             <Route path='*' element={<NotFound />} />
           </Route>
           <Route path='kits' element={<Kits />} >
+            <Route index element={<KitsHome />} />
+            <Route path="gestion" element={<KitManagement />}/>
             <Route path='*' element={<NotFound />} />
           </Route>
           <Route path='login' element={<Login />} />
