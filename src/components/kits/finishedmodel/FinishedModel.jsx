@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
 import useAuth from '../../../hooks/useAuth';
 import useAxiosPrivate from '../../../hooks/useAxiosPrivate';
+import { AwaitLoad } from '../../awaitload/AwaitLoad';
 import FinishDetail from './finishdetail/FinishDetail';
 
 import './FinishedModel.scss';
 
-const FinishedModel = (props) => {
+const FinishedModel = () => {
     const [listModel, setListModel] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
     const [display, setDisplay] = useState(false);
@@ -32,8 +33,8 @@ const FinishedModel = (props) => {
         getModelsUSer();
     }, []);
 
-    const handleClick = (id) => {
-        setIdModel(id);
+    const handleClick = (model) => {
+        setIdModel(model);
         setDisplay(true);
     }
 
@@ -43,16 +44,17 @@ const FinishedModel = (props) => {
                 <h2>Modèles finis</h2>
                 <div className="list-finished-model-container">
                     <ul className='list-finished-model'>
-                        {listModel && listModel.filter(item => item.state === 3).map((item) => (
+                        {isLoaded
+                        ?listModel.filter(item => item.state === 3).map((item) => (
                             <li key={item.id} onClick={() => handleClick(item.id)} className='list-finished-item'>{item.modelName}</li>
-                        ))}
+                        ))
+                        :<AwaitLoad />}
                     </ul>
                 </div>
             </div>
             <div className={display?"finished-bottom-page":"finished-bottom-page page-hidden"}>
                 <button onClick={()=>setDisplay(false)}>Fermer</button>
-                <FinishDetail idModel={idModel}/>
-                coucou {idModel}
+                <FinishDetail model={idModel}/>
             </div>
         </div>
     )
