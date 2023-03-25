@@ -9,8 +9,6 @@ import './FinishedModel.scss';
 const FinishedModel = () => {
     const [listModel, setListModel] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
-    const [display, setDisplay] = useState(false);
-    const [idModel,setIdModel]=useState(0);
     const axiosPrivate = useAxiosPrivate();
     const { auth } = useAuth();
     let userId = auth.id;
@@ -33,10 +31,6 @@ const FinishedModel = () => {
         getModelsUSer();
     }, []);
 
-    const handleClick = (model) => {
-        setIdModel(model);
-        setDisplay(true);
-    }
 
     return (
         <div className='finished-models'>
@@ -52,10 +46,6 @@ const FinishedModel = () => {
                     </ul>
                 </div>
             </div>
-            {/* <div className={display?"finished-bottom-page":"finished-bottom-page page-hidden"}>
-                <button onClick={()=>setDisplay(false)}>Fermer</button>
-                <FinishDetail model={idModel}/>
-            </div> */}
         </div>
     )
 }
