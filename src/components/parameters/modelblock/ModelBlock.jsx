@@ -19,7 +19,7 @@ import { MdOutlineAddShoppingCart } from "react-icons/md";
 import './ModelBlock.scss';
 
 
-const ModelBlock = ({ model }) => {
+const ModelBlock = ({ model, setReload }) => {
     const url = `${process.env.REACT_APP_URL}`;
     const [displayBack, setDisplayBack] = useState(false);
     const [showModal, setShowModal] = useState(false);
@@ -92,6 +92,7 @@ const ModelBlock = ({ model }) => {
                 .then((resp) => {
                     if(resp?.data){
                         dispatch(updateModel([resp.data,model.id]))
+                        setReload(prev=>!prev);
                     }
                 })
                 .catch((err) => {
@@ -107,7 +108,8 @@ const ModelBlock = ({ model }) => {
             axiosPrivate
                 .delete(urlApi)
                 .then(() => {
-                    dispatch(deleteModel(model.id))
+                    dispatch(deleteModel(model.id));
+                    setReload(prev=>!prev);
                 })
                 .catch((err) => {
                     console.error(err)
