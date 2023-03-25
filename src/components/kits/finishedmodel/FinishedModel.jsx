@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import useAuth from '../../../hooks/useAuth';
 import useAxiosPrivate from '../../../hooks/useAxiosPrivate';
+import { Link } from 'react-router-dom';
 import { AwaitLoad } from '../../awaitload/AwaitLoad';
-import FinishDetail from './finishdetail/FinishDetail';
 
 import './FinishedModel.scss';
 
@@ -46,16 +46,16 @@ const FinishedModel = () => {
                     <ul className='list-finished-model'>
                         {isLoaded
                         ?listModel.filter(item => item.state === 3).map((item) => (
-                            <li key={item.id} onClick={() => handleClick(item.id)} className='list-finished-item'>{item.modelName}</li>
+                            <li key={item.id} className='list-finished-item'><Link to={`details/${item.id}`}>{item.modelName}</Link></li>
                         ))
                         :<AwaitLoad />}
                     </ul>
                 </div>
             </div>
-            <div className={display?"finished-bottom-page":"finished-bottom-page page-hidden"}>
+            {/* <div className={display?"finished-bottom-page":"finished-bottom-page page-hidden"}>
                 <button onClick={()=>setDisplay(false)}>Fermer</button>
                 <FinishDetail model={idModel}/>
-            </div>
+            </div> */}
         </div>
     )
 }

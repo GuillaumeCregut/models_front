@@ -1,31 +1,39 @@
-import { useEffect, useState } from 'react'
-import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
-import { AwaitLoad } from '../../../awaitload/AwaitLoad';
+import { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom'
+import useAuth from '../../../hooks/useAuth';
+import useAxiosPrivate from '../../../hooks/useAxiosPrivate';
+import { AwaitLoad } from '../../awaitload/AwaitLoad';
 
-import './FinishDetail.scss';
-
-const FinishDetail = ({ model }) => {
-    const [modelDetail, setModelDetail] = useState([]);
-    const [isLoaded, setIsLoaded] = useState(false);
+const KitDetails = () => {
+    const { id } = useParams();
     const axiosPrivate = useAxiosPrivate();
+    const [modelDetail, setModelDetail] = useState({});
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [isError,setIsError]=useState(false);
     const urlDetail = `${process.env.REACT_APP_URL}`;
+    const { auth } = useAuth();
+    let idUser = auth?.id;
+    if (!idUser) {
+        idUser = 0;
+    }
+
     useEffect(() => {
-        const getInfos = () => {
-            const url = `${process.env.REACT_APP_API_URL}model/info/${model}`;
+        const getModel = () => {
+            const url = `${process.env.REACT_APP_API_URL}model/info/${id}/user/${idUser}`;
+            console.log(url);
             axiosPrivate
                 .get(url)
                 .then((resp) => {
-                    setModelDetail(resp.data);
-                    console.log(url)
-                    setIsLoaded(true);
+                   setModelDetail(resp.data);
+                   setIsLoaded(true);
                 })
                 .catch((err) => {
                     console.error(err);
+                    setIsError(true);
                 })
         }
-        getInfos();
-    }, [model]);
-
+        getModel();
+    }, []);
     return (
         <div>
             {
@@ -55,29 +63,12 @@ const FinishDetail = ({ model }) => {
                             </div>
                         </div>
                     </div>)
-                    : <AwaitLoad />
+                    : isError?(<p>Vous n'êtes pas autoriser à voir ce contenu. Contactez l'administrateur du site</p>):
+                    <AwaitLoad />
             }
+           <p> <Link to="/kits/finis">Retour à la page précédente</Link></p>
         </div>
     )
 }
 
-export default FinishDetail
-
-/*
-{
- 
-    "provider": null,
-    "pictures": null, 
-    "price": null, -
-    "modelName": "Photo Paris 2",-
-    "picture": "uploads\\models\\20220729_020348.jpg",-
-    "reference": "référence", -
-    "scalemates": null, -
-    "brandName": "Special Hobby", -
-    "periodName": "WWII", -
-    "scaleName": "1/24", -
-    "builderName": "Focke Wulf", -
-    "categoryName": "Véhicules", -
-    "providerName": null -
-}
-*/
+export default KitDetails
