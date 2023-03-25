@@ -49,7 +49,6 @@ const ModelsContainer = () => {
     },[isFavoriteLoaded,isLoaded]);
 
     useEffect(() => {
-        console.log('passe le chargement')
         const getModels = async () => {
             await axios
                 .get(url)
