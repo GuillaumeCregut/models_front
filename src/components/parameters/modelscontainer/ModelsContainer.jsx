@@ -19,6 +19,7 @@ const ModelsContainer = () => {
     const [isFavoriteLoaded,setIsFavoriteLoaded]=useState(false);
     const [favoriteModels,setFavoriteModels]=useState([]);
     const [filter, setFilter] = useState({});
+    const [reload, setReload]=useState(false);
     const [modelsFiltered, setModelsFiltered] = useState([]);
     const modelData = useSelector((state) => state.models.model)
     const url = `${process.env.REACT_APP_API_URL}model`;
@@ -48,6 +49,7 @@ const ModelsContainer = () => {
     },[isFavoriteLoaded,isLoaded]);
 
     useEffect(() => {
+        console.log('passe le chargement')
         const getModels = async () => {
             await axios
                 .get(url)
@@ -66,7 +68,7 @@ const ModelsContainer = () => {
         else
             setModelsFiltered([...modelData]);
         setIsLoaded(true);
-    }, []);
+    }, [reload]);
     
     useEffect(()=>{
         const getFavorites=()=>{
@@ -119,6 +121,7 @@ const ModelsContainer = () => {
                             <ModelBlock
                                 key={item.id}
                                 model={item}
+                                setReload={setReload}
                             // showModal={setModal}
                             />
                         )
@@ -128,7 +131,7 @@ const ModelsContainer = () => {
             </div>
             {rankUser >= ranks.user
                 ? <div className="add-model">
-                    <FormAddModel />
+                    <FormAddModel setReload={setReload}/>
                 </div>
                 : null}
 

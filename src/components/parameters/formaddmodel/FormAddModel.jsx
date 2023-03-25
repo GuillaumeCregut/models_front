@@ -11,7 +11,7 @@ import { addModel } from '../../../feature/Model.slice';
 
 import './FormAddModel.scss';
 
-const FormAddModel = () => {
+const FormAddModel = ({setReload}) => {
     const [selectedScale, setSelectedScale] = useState(0);
     const [selectedBuilder, setSelectedBuilder] = useState(0);
     const [selectedPeriod, setSelectedPeriod] = useState(0);
@@ -44,6 +44,7 @@ const FormAddModel = () => {
                 .post(url, formData)
                 .then((resp) => {
                     dispatch(addModel(resp.data));
+                    setReload(prev=>!prev);
                     clearForm();
                 })
                 .catch((err) => {
