@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import useAuth from '../../../hooks/useAuth';
 import useAxiosPrivate from '../../../hooks/useAxiosPrivate';
 import { AwaitLoad } from '../../awaitload/AwaitLoad';
+import FileUploader from '../fileuploader/FileUploader';
 
 import './KitDetails.scss';
 
@@ -35,6 +36,11 @@ const KitDetails = () => {
         }
         getModel();
     }, []);
+
+    const handleFiles=(files)=>{
+
+    }
+
     return (
         <div>
             {
@@ -62,6 +68,11 @@ const KitDetails = () => {
                                     :<p>Pas d'image en stock</p>
                                 }
                             </div>
+                            <FileUploader
+                            label='Téléchargement'
+                            updateFilesCb ={handleFiles}
+                            multiple={true}
+                            />
                         </div>
                     </div>)
                     : isError?(<p>Vous n'êtes pas autoriser à voir ce contenu. Contactez l'administrateur du site</p>):
