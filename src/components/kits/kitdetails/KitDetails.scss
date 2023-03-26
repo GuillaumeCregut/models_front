@@ -5,6 +5,24 @@
         height: auto;
     }
 
+    .picture-container{
+        display: flex;
+        justify-content: space-around;
+        border: 1px solid black;
+        padding : 10px;
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .picture-item{
+
+    }
+
+    .img-model{
+        width: 150px;
+        height: auto;
+    }
+
     @media screen and (max-width: 768px) {
         position: relative;
         top: -150px;
