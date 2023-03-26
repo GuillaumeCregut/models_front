@@ -32,7 +32,6 @@ const KitDetails = () => {
             axiosPrivate
                 .get(url)
                 .then((resp) => {
-                    console.log(resp.data);
                     setModelDetail(resp.data);
                     let count = resp.data.pictures?.files.length;
                     if (count) {
