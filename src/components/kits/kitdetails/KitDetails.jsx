@@ -4,6 +4,8 @@ import useAuth from '../../../hooks/useAuth';
 import useAxiosPrivate from '../../../hooks/useAxiosPrivate';
 import { AwaitLoad } from '../../awaitload/AwaitLoad';
 
+import './KitDetails.scss';
+
 const KitDetails = () => {
     const { id } = useParams();
     const axiosPrivate = useAxiosPrivate();
@@ -20,7 +22,6 @@ const KitDetails = () => {
     useEffect(() => {
         const getModel = () => {
             const url = `${process.env.REACT_APP_API_URL}model/info/${id}/user/${idUser}`;
-            console.log(url);
             axiosPrivate
                 .get(url)
                 .then((resp) => {
