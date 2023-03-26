@@ -38,7 +38,7 @@ const KitDetails = () => {
     }, []);
 
     const handleFiles=(files)=>{
-
+        console.log(files)
     }
 
     return (
@@ -72,6 +72,7 @@ const KitDetails = () => {
                             label='Téléchargement'
                             updateFilesCb ={handleFiles}
                             multiple={true}
+                            maxFile={4}
                             />
                         </div>
                     </div>)

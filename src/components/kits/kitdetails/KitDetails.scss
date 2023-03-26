@@ -1,8 +1,12 @@
 .detail-container{
-
+   
     .detail-img{
         width: 250px;
         height: auto;
     }
 
+    @media screen and (max-width: 768px) {
+        position: relative;
+        top: -150px;
+    }
 }
