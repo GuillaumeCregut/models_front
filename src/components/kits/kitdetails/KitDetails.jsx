@@ -4,10 +4,13 @@ import useAuth from '../../../hooks/useAuth';
 import useAxiosPrivate from '../../../hooks/useAxiosPrivate';
 import { AwaitLoad } from '../../awaitload/AwaitLoad';
 import FileUploader from '../fileuploader/FileUploader';
-import Zoom from 'react-medium-image-zoom'
-import 'react-medium-image-zoom/dist/styles.css'
+import Zoom from 'react-medium-image-zoom';
+import useAxiosPrivateMulti from '../../../hooks/useAxiosMulti';
+
+import 'react-medium-image-zoom/dist/styles.css';
 
 import './KitDetails.scss';
+import axios from 'axios';
 
 
 const MAX_FILE_UPLOAD = 4;
@@ -20,6 +23,7 @@ const KitDetails = () => {
     const [isError, setIsError] = useState(false);
     const [maxCount, setMaxCount] = useState(0);
     const urlDetail = `${process.env.REACT_APP_URL}`;
+    const axiosPrivateMulti = useAxiosPrivateMulti();
     const { auth } = useAuth();
     let idUser = auth?.id;
     if (!idUser) {
@@ -48,10 +52,28 @@ const KitDetails = () => {
     }, []);
 
     const handleFiles = (files) => {
-        console.log(files)
+        console.log(files);
+        // idUser
+        //id
+        const url=`${process.env.REACT_APP_API_URL}model/user/picture/${id}`;
+        console.log(url);
+        const formData = new FormData();
+        for (let i = 0; i < files.length; i++) {
+            formData.append('file',files[i])
+          }
+        for (const value of formData.values()) {
+            console.log(value);
+          }
+        axiosPrivateMulti
+                .post(url, formData)
+                .then((resp) => {
+                    console.log(resp)
+                })
+                .catch((err) => {
+                    console.error(err);
+                })
     }
 
-    console.log(maxCount)
     return (
         <div>
             {
