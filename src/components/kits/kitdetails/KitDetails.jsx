@@ -6,6 +6,7 @@ import { AwaitLoad } from '../../awaitload/AwaitLoad';
 import FileUploader from '../fileuploader/FileUploader';
 import Zoom from 'react-medium-image-zoom';
 import useAxiosPrivateMulti from '../../../hooks/useAxiosMulti';
+import { FaTrash } from "react-icons/fa";
 
 import 'react-medium-image-zoom/dist/styles.css';
 
@@ -22,6 +23,7 @@ const KitDetails = () => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [isError, setIsError] = useState(false);
     const [maxCount, setMaxCount] = useState(0);
+    const [reload, setReload] = useState(false);
     const urlDetail = `${process.env.REACT_APP_URL}`;
     const axiosPrivateMulti = useAxiosPrivateMulti();
     const { auth } = useAuth();
@@ -49,29 +51,42 @@ const KitDetails = () => {
                 })
         }
         getModel();
-    }, []);
+    }, [reload]);
 
     const handleFiles = (files) => {
         console.log(files);
         // idUser
         //id
-        const url=`${process.env.REACT_APP_API_URL}model/user/picture/${id}`;
+        const url = `${process.env.REACT_APP_API_URL}model/user/picture/${id}`;
         console.log(url);
         const formData = new FormData();
         for (let i = 0; i < files.length; i++) {
-            formData.append('file',files[i])
-          }
+            formData.append('file', files[i])
+        }
         for (const value of formData.values()) {
             console.log(value);
-          }
+        }
         axiosPrivateMulti
-                .post(url, formData)
-                .then((resp) => {
-                    console.log(resp)
-                })
-                .catch((err) => {
-                    console.error(err);
-                })
+            .post(url, formData)
+            .then((resp) => {
+                console.log(resp)
+            })
+            .catch((err) => {
+                console.error(err);
+            })
+    }
+
+    const handleDelete = (file) => {
+        const url = `${process.env.REACT_APP_API_URL}model/user/picture/${id}?file=${file}`;
+        console.log(url);
+        axiosPrivate
+            .delete(url)
+            .then((resp) => {
+                setReload(!reload);
+            })
+            .catch((err) => {
+                console.error(err);
+            })
     }
 
     return (
@@ -80,33 +95,42 @@ const KitDetails = () => {
                 isLoaded
                     ? (<div className="detail-container">
                         <div className='detail-zone'>
-                            <div className="detailk-kit">
-                                <h3>{modelDetail.builderName} {modelDetail.modelName}</h3>
-                                <p>Période : {modelDetail.periodName} </p>
-                                <p>Catégorie : {modelDetail.categoryName}</p>
-                                <p>{modelDetail.brandName} - {modelDetail.scaleName} - {modelDetail.reference}</p>
-                                {modelDetail.picture ? <p><img src={`${urlDetail}${modelDetail.picture}`} alt={modelDetail.modelName} className="detail-img" /></p> : null}
-                                {modelDetail.scalemates ? <a href={modelDetail.scalemates} no-referrer no-opener target='_blank'>Lien scalemates</a> : null}
+                            <div className='details-zone-flex'>
+                                <div className="detailk-kit">
+
+                                    <h3>{modelDetail.builderName} {modelDetail.modelName}</h3>
+                                    <p>Période : {modelDetail.periodName} </p>
+                                    <p>Catégorie : {modelDetail.categoryName}</p>
+                                    <p>{modelDetail.brandName} - {modelDetail.scaleName} - {modelDetail.reference}</p>
+                                </div>
+                                <div>
+                                    {modelDetail.picture ? <p><img src={`${urlDetail}${modelDetail.picture}`} alt={modelDetail.modelName} className="detail-img" /></p> : null}
+                                    {modelDetail.scalemates ? <a href={modelDetail.scalemates} no-referrer no-opener target='_blank'>Lien scalemates</a> : null}
+                                    {modelDetail.providerName
+                                        ? (<div className="detail-order">
+                                            <p>Fournisseur  : {modelDetail.providerName}</p>
+                                            <p>Prix d'achat : {modelDetail.price}</p>
+                                        </div>
+                                        )
+                                        : null}
+                                </div>
                             </div>
-                            {modelDetail.providerName
-                                ? (<div className="detail-order">
-                                    <p>Fournisseur  : {modelDetail.providerName}</p>
-                                    <p>Prix d'achat : {modelDetail.price}</p>
-                                </div>)
-                                : null}
                             <div className="picturebox">
                                 {
                                     modelDetail.pictures
                                         ? <ul className='picture-container'>
                                             {modelDetail.pictures.files.map((file) => (
                                                 <li key={file} className='picture-item'>
-                                                    <Zoom>
-                                                        <img
-                                                            src={`${urlDetail}${modelDetail.pictures.baseFolder}/${file}`}
-                                                            alt={file}
-                                                            className='img-model'
-                                                        />
-                                                    </Zoom>
+                                                    <div>
+                                                        <Zoom>
+                                                            <img
+                                                                src={`${urlDetail}${modelDetail.pictures.baseFolder}/${file}`}
+                                                                alt={file}
+                                                                className='img-model'
+                                                            />
+                                                        </Zoom>
+                                                        <button onClick={() => handleDelete(file)} className="btn-delete-picture"><FaTrash className="trash-delete-icon" /></button>
+                                                    </div>
                                                 </li>
                                             )
                                             )
