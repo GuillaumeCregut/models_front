@@ -102,7 +102,7 @@ const KitDetails = () => {
                                                 <li key={file} className='picture-item'>
                                                     <Zoom>
                                                         <img
-                                                            src={`${urlDetail}${modelDetail.pictures.baseFolder}${file}`}
+                                                            src={`${urlDetail}${modelDetail.pictures.baseFolder}/${file}`}
                                                             alt={file}
                                                             className='img-model'
                                                         />
