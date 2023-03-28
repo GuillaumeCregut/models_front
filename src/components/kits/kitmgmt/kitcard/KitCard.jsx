@@ -2,7 +2,6 @@
 import './KitCard.scss';
 
 const KitCard = ({kitDetails}) => {
-    console.log(kitDetails);
     const url = `${process.env.REACT_APP_URL}`;
 
     return (

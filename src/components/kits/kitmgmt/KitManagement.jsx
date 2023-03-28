@@ -31,6 +31,7 @@ const KitManagement = () => {
         }
         getModelsUSer();
     }, []);
+    
     return (
         <section className='kits-management-page'>
             <h2>Gestion de mes kits</h2>
