@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect,useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 /* Common components*/
 import { NavBar } from './components/navbar/NavBar';
@@ -35,16 +35,32 @@ import UserSupplier from './components/userprofil/usersupplier/UserSupplier';
 
 import './App.css';
 import Orders from './components/userprofil/orders/Orders';
-import Columns from './components/tests/columns/Columns';
 import KitsHome from './components/kits/home/KitsHome';
 import KitManagement from './components/kits/kitmgmt/KitManagement';
 import FinishedModel from './components/kits/finishedmodel/FinishedModel';
 import KitDetails from './components/kits/kitdetails/KitDetails';
 
+//Version of front end 
+const LocalVersion="1.0";
+
 function App() {
   const { auth, setAuth } = useAuth();
   const localStorageUser = JSON.parse(localStorage.getItem('ModelsKitUser'));
+  const [versionChecker,setVersionChecker]=useState(true);
 
+  useEffect(()=>{
+    const url=`${process.env.REACT_APP_URL}`;
+    axios
+      .get(url)
+      .then((resp)=>{
+        const {version}=resp.data;
+        if(LocalVersion!==version){
+          alert("Attention les versions diverges entre l'API et le site");
+          setVersionChecker(false);
+        }
+      })
+      .catch((err)=>console.error(err))
+  },[])
 
   useEffect( () => {
     const refreshContext = async () => {
@@ -81,7 +97,11 @@ function App() {
     <div className="App">
       <div className='app-container'>
         <Header />
-        <NavBar />
+        {versionChecker
+          ?<NavBar />
+            :null
+        }
+       
         <Routes>
           <Route index element={<Home />} />
           <Route path='accueil' element={<Home />} />
