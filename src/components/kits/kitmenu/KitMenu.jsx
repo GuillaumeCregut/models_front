@@ -11,7 +11,7 @@ const KitMenu = () => {
                     <NavLink to="test" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>Kits commandés</NavLink>
                 </li>
                 <li className="link-param-item">
-                    <NavLink to="test" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>Kits en stock</NavLink>
+                    <NavLink to="inStock" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>Kits en stock</NavLink>
                 </li>
                 <li className="link-param-item">
                     <NavLink to="test" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>Kits en cours</NavLink>
