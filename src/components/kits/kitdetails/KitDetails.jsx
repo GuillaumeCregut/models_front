@@ -58,18 +58,14 @@ const KitDetails = () => {
         // idUser
         //id
         const url = `${process.env.REACT_APP_API_URL}model/user/picture/${id}`;
-        console.log(url);
         const formData = new FormData();
         for (let i = 0; i < files.length; i++) {
             formData.append('file', files[i])
         }
-        for (const value of formData.values()) {
-            console.log(value);
-        }
         axiosPrivateMulti
             .post(url, formData)
             .then((resp) => {
-                console.log(resp)
+                setReload(!reload)
             })
             .catch((err) => {
                 console.error(err);
@@ -78,7 +74,6 @@ const KitDetails = () => {
 
     const handleDelete = (file) => {
         const url = `${process.env.REACT_APP_API_URL}model/user/picture/${id}?file=${file}`;
-        console.log(url);
         axiosPrivate
             .delete(url)
             .then((resp) => {
