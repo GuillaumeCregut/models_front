@@ -60,7 +60,7 @@ const KitInStock = () => {
             { isLoaded
                 ? filteredKits.map((kit)=>(
                     <li key={kit.id}>
-                        <KitCard kitDetails={kit} />
+                        <KitCard kitDetails={kit} displayImage={true} />
                     </li>
                 ))
                 : <AwaitLoad />

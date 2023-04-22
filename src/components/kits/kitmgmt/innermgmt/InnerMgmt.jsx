@@ -8,7 +8,7 @@ import {updateStock} from '../../../../feature/stockUser.slice';
 import './InnerMgmt.scss';
 import { useDispatch } from 'react-redux';
 
-const InnerMgmt = ({ orderedModels, likedModels, workbenchModels, finishedModels, stockModels }) => {
+const InnerMgmt = ({ orderedModels, likedModels, workbenchModels, finishedModels, stockModels,displayImage }) => {
     const axiosPrivate = useAxiosPrivate();
     const { auth } = useAuth();
     const dispatcher=useDispatch();
@@ -78,20 +78,20 @@ const InnerMgmt = ({ orderedModels, likedModels, workbenchModels, finishedModels
 
     return (
         <div className='inner-management-container'>
-            <DragDropContext onDragEnd={handleDragEnd}>
+            <DragDropContext onDragEnd={handleDragEnd} >
                 <div className='drop-container'>
-                    <p className='dopzone-title'>Modèle likés</p>
-                    <Droppable droppableId='liked' type="PERSON">
+                    <p className='dopzone-title'>Modèles likés</p>
+                    <Droppable droppableId='liked' type="PERSON" >
                         {(provided, snapshot) => {
                             return (
                                 <ul {...provided.droppableProps} ref={provided.innerRef} className={snapshot.isDraggingOver ? 'dropzone dropOK' : 'dropzone'}>
                                     {state.liked.map((item, index) => {
                                         return (
-                                            <Draggable key={item.id} draggableId={item.id.toString()} index={index}>
+                                            <Draggable key={item.id} draggableId={item.id.toString()} index={index} >
                                                 {(provided, snapshot) => { //snapshot should be use for style
                                                     return (
                                                         <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className={snapshot.isDragging ? 'line moving' : 'line'}>
-                                                            <KitCard kitDetails={item} />
+                                                            <KitCard kitDetails={item} displayImage={displayImage} />
                                                         </li>
                                                     )
                                                 }}
@@ -116,7 +116,7 @@ const InnerMgmt = ({ orderedModels, likedModels, workbenchModels, finishedModels
                                                 {(provided, snapshot) => { //snapshot should be use for style
                                                     return (
                                                         <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className={snapshot.isDragging ? 'line moving' : 'line'}>
-                                                            <KitCard kitDetails={item} />
+                                                            <KitCard kitDetails={item}  displayImage={displayImage} />
                                                         </li>
                                                     )
                                                 }}
@@ -141,7 +141,7 @@ const InnerMgmt = ({ orderedModels, likedModels, workbenchModels, finishedModels
                                                 {(provided, snapshot) => { //snapshot should be use for style
                                                     return (
                                                         <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className={snapshot.isDragging ? 'line moving' : 'line'}>
-                                                            <KitCard kitDetails={item} />
+                                                            <KitCard kitDetails={item}  displayImage={displayImage}/>
                                                         </li>
                                                     )
                                                 }}
@@ -166,7 +166,7 @@ const InnerMgmt = ({ orderedModels, likedModels, workbenchModels, finishedModels
                                                 {(provided, snapshot) => { //snapshot should be use for style
                                                     return (
                                                         <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className={snapshot.isDragging ? 'line moving' : 'line'}>
-                                                            <KitCard kitDetails={item} />
+                                                            <KitCard kitDetails={item}  displayImage={displayImage}/>
                                                         </li>
                                                     )
                                                 }}
@@ -191,7 +191,7 @@ const InnerMgmt = ({ orderedModels, likedModels, workbenchModels, finishedModels
                                                 {(provided, snapshot) => { //snapshot should be use for style
                                                     return (
                                                         <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className={snapshot.isDragging ? 'line moving' : 'line'}>
-                                                            <KitCard kitDetails={item} />
+                                                            <KitCard kitDetails={item}  displayImage={displayImage}/>
                                                         </li>
                                                     )
                                                 }}

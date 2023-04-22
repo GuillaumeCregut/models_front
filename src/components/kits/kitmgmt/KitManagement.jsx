@@ -11,6 +11,7 @@ import './KitManagement.scss';
 const KitManagement = () => {
     const [kits, setKits] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
+    const [displayPicture, setDisplayPicture]=useState(false);
     const { auth } = useAuth();
     const dispatch = useDispatch();
     const StocksData = useSelector((state) => state.stockUsers.stockUser);
@@ -45,6 +46,9 @@ const KitManagement = () => {
     return (
         <section className='kits-management-page'>
             <h2>Gestion de mes kits</h2>
+            <label htmlFor="display">
+                <input type="checkbox" id="display" checked={displayPicture}  onChange={(e)=>setDisplayPicture(!displayPicture)} className="display-image"/>
+                Afficher les images</label>
             {isLoaded
                 ? <InnerMgmt
                     orderedModels={kits.filter(item => item.state === 5)}
@@ -52,6 +56,7 @@ const KitManagement = () => {
                     workbenchModels={kits.filter(item => item.state === 2)}
                     finishedModels={kits.filter(item => item.state === 3)}
                     stockModels={kits.filter(item => item.state === 1)}
+                    displayImage={displayPicture}
                 />
                 : <AwaitLoad />}
         </section>
