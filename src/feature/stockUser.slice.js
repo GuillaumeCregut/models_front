@@ -12,12 +12,13 @@ export const StockUserSlice=createSlice({
             state.stockUser.push(payload);
         },
         updateStock:(state,{payload})=>{
+            console.log(payload)
             state.stockUser=state.stockUser.map((item)=>{
                 if(item.id===payload[1]){
                     //Changer cette partie
-                    const name=payload[0].name;
+                    const itemState=payload[0];
                     //Peut être celle-ci
-                    return {...item,name}
+                    return {...item,state:itemState}
                 }else
                     return item;
             })

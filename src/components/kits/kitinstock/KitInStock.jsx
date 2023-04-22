@@ -3,9 +3,9 @@ import useAuth from "../../../hooks/useAuth";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import { AwaitLoad } from "../../awaitload/AwaitLoad";
 import { setStock } from "../../../feature/stockUser.slice";
-import './KitInStock.scss';
 import KitCard from "../kitmgmt/kitcard/KitCard";
 import { useDispatch,useSelector } from "react-redux";
+import './KitInStock.scss';
 
 const KitInStock = () => {
     const [kits, setKits] = useState([]);
@@ -48,7 +48,7 @@ const KitInStock = () => {
     },[search,kits])
 
     return (
-        <div>
+        <div className="kit-instock">
              Kits en stock : {kits.length}
             <div className="filter">
                 <label htmlFor="filter">
@@ -56,7 +56,7 @@ const KitInStock = () => {
                 </label>
             </div>
           
-           <ul>
+           <ul className="list-kit-in-stock">
             { isLoaded
                 ? filteredKits.map((kit)=>(
                     <li key={kit.id}>

@@ -4,12 +4,14 @@ import KitCard from '../kitcard/KitCard';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import useAuth from '../../../../hooks/useAuth';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
-
+import {updateStock} from '../../../../feature/stockUser.slice';
 import './InnerMgmt.scss';
+import { useDispatch } from 'react-redux';
 
 const InnerMgmt = ({ orderedModels, likedModels, workbenchModels, finishedModels, stockModels }) => {
     const axiosPrivate = useAxiosPrivate();
     const { auth } = useAuth();
+    const dispatcher=useDispatch();
     let userId = auth.id;
     if (!userId)
         userId = 0;
@@ -26,6 +28,8 @@ const InnerMgmt = ({ orderedModels, likedModels, workbenchModels, finishedModels
         const result = await axiosPrivate
             .put(url, data)
             .then((resp) => {
+                console.log(data)
+                dispatcher(updateStock([data.newState,data.id]));
                 return true;
             })
             .catch((err) => {
