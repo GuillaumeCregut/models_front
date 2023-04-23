@@ -14,7 +14,6 @@ const BuilderFrame = ({ builder }) => {
     const url = `${process.env.REACT_APP_API_URL}builder/${builder.id}`;
 
     const handleDelete = () => {
-        console.log(url);
         axiosPrivate
             .delete(url)
             .then((resp) => {

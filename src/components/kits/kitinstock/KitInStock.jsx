@@ -6,8 +6,6 @@ import { setStock } from "../../../feature/stockUser.slice";
 import KitCard from "../kitmgmt/kitcard/KitCard";
 import { useDispatch,useSelector } from "react-redux";
 import './KitInStock.scss';
-import { useParams } from "react-router-dom";
-import kitState from '../../../feature/kitState';
 
 const KitInStock = ({keySearch,title}) => {
    

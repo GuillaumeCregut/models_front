@@ -54,9 +54,6 @@ const KitDetails = () => {
     }, [reload]);
 
     const handleFiles = (files) => {
-        console.log(files);
-        // idUser
-        //id
         const url = `${process.env.REACT_APP_API_URL}model/user/picture/${id}`;
         const formData = new FormData();
         for (let i = 0; i < files.length; i++) {

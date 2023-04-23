@@ -28,7 +28,6 @@ const InnerMgmt = ({ orderedModels, likedModels, workbenchModels, finishedModels
         const result = await axiosPrivate
             .put(url, data)
             .then((resp) => {
-                console.log(data)
                 dispatcher(updateStock([data.newState,data.id]));
                 return true;
             })
