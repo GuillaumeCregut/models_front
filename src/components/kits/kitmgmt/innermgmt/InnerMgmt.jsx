@@ -7,6 +7,7 @@ import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import {updateStock} from '../../../../feature/stockUser.slice';
 import './InnerMgmt.scss';
 import { useDispatch } from 'react-redux';
+import kitState from '../../../../feature/kitState'
 
 const InnerMgmt = ({ orderedModels, likedModels, workbenchModels, finishedModels, stockModels,displayImage }) => {
     const axiosPrivate = useAxiosPrivate();
@@ -49,15 +50,15 @@ const InnerMgmt = ({ orderedModels, likedModels, workbenchModels, finishedModels
                 newState: 0
             }
             switch (result.destination.droppableId) {
-                case 'liked': dataToSend.newState = 4;
+                case 'liked': dataToSend.newState = kitState.wish;
                     break;
-                case 'stocked': dataToSend.newState = 1;
+                case 'stocked': dataToSend.newState = kitState.stock;
                     break;
-                case 'ordered': dataToSend.newState = 5;
+                case 'ordered': dataToSend.newState = kitState.ordered;
                     break;
-                case 'workbench': dataToSend.newState = 2;
+                case 'workbench': dataToSend.newState = kitState.wip;
                     break;
-                case 'finished': dataToSend.newState = 3;
+                case 'finished': dataToSend.newState = kitState.finished;
                     break;
             }
             //Sending to BDD

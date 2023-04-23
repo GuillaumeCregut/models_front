@@ -5,6 +5,7 @@ import { AwaitLoad } from "../../awaitload/AwaitLoad";
 import InnerMgmt from "./innermgmt/InnerMgmt";
 import { setStock } from "../../../feature/stockUser.slice";
 import { useDispatch, useSelector } from "react-redux";
+import kitState from "../../../feature/kitState";
 
 import './KitManagement.scss';
 
@@ -51,11 +52,11 @@ const KitManagement = () => {
                 Afficher les images</label>
             {isLoaded
                 ? <InnerMgmt
-                    orderedModels={kits.filter(item => item.state === 5)}
-                    likedModels={kits.filter(item => item.state === 4)}
-                    workbenchModels={kits.filter(item => item.state === 2)}
-                    finishedModels={kits.filter(item => item.state === 3)}
-                    stockModels={kits.filter(item => item.state === 1)}
+                    orderedModels={kits.filter(item => item.state === kitState.ordered)}
+                    likedModels={kits.filter(item => item.state === kitState.wish)}
+                    workbenchModels={kits.filter(item => item.state === kitState.wip)}
+                    finishedModels={kits.filter(item => item.state === kitState.finished)}
+                    stockModels={kits.filter(item => item.state === kitState.stock)}
                     displayImage={displayPicture}
                 />
                 : <AwaitLoad />}
