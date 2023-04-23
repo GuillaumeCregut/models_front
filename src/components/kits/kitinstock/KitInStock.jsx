@@ -6,8 +6,11 @@ import { setStock } from "../../../feature/stockUser.slice";
 import KitCard from "../kitmgmt/kitcard/KitCard";
 import { useDispatch,useSelector } from "react-redux";
 import './KitInStock.scss';
+import { useParams } from "react-router-dom";
+import kitState from '../../../feature/kitState';
 
-const KitInStock = () => {
+const KitInStock = ({keySearch,title}) => {
+   
     const [kits, setKits] = useState([]);
     const [search, setSearch]=useState('');
     const [filteredKits,setFilteredKits]=useState([]);
@@ -27,7 +30,7 @@ const KitInStock = () => {
             axiosPrivate
                 .get(url)
                 .then((resp) => {
-                    setKits(resp.data.filter(item => item.state === 1));
+                    setKits(resp.data.filter(item => item.state === keySearch));
                     dispatch(setStock(resp.data))
                     setIsLoaded(true);
                 })
@@ -39,9 +42,9 @@ const KitInStock = () => {
             getModelsUser();
         else{
             setIsLoaded(true);
-            setKits(StocksData.filter(item => item.state === 1));
+            setKits(StocksData.filter(item => item.state === keySearch));
         }
-    }, []);
+    }, [keySearch]);
 
     useEffect(()=>{
         setFilteredKits(kits.filter((kit)=>kit.modelName.toLowerCase().includes(search.toLowerCase())))
@@ -49,7 +52,7 @@ const KitInStock = () => {
 
     return (
         <div className="kit-instock">
-             Kits en stock : {kits.length}
+             Kits {title}: {kits.length}
             <div className="filter">
                 <label htmlFor="filter">
                    Recherche par nom : <input type="text" id="filter"  value={search} onChange={(e)=>setSearch(e.target.value)}/>
