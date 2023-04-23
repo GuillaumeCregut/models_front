@@ -1,8 +1,9 @@
 .inner-management-container{
     display: flex;
     flex-wrap: wrap;
+    gap : 20px;
     width: 100%;
-    justify-content: space-around;
+    justify-content: flex-start;
 
     .drop-container{
         padding: 5px;

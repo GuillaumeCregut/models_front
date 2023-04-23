@@ -4,12 +4,15 @@ import KitCard from '../kitcard/KitCard';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import useAuth from '../../../../hooks/useAuth';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
-
+import {updateStock} from '../../../../feature/stockUser.slice';
 import './InnerMgmt.scss';
+import { useDispatch } from 'react-redux';
+import kitState from '../../../../feature/kitState'
 
-const InnerMgmt = ({ orderedModels, likedModels, workbenchModels, finishedModels, stockModels }) => {
+const InnerMgmt = ({ orderedModels, likedModels, workbenchModels, finishedModels, stockModels,displayImage }) => {
     const axiosPrivate = useAxiosPrivate();
     const { auth } = useAuth();
+    const dispatcher=useDispatch();
     let userId = auth.id;
     if (!userId)
         userId = 0;
@@ -26,6 +29,7 @@ const InnerMgmt = ({ orderedModels, likedModels, workbenchModels, finishedModels
         const result = await axiosPrivate
             .put(url, data)
             .then((resp) => {
+                dispatcher(updateStock([data.newState,data.id]));
                 return true;
             })
             .catch((err) => {
@@ -46,15 +50,15 @@ const InnerMgmt = ({ orderedModels, likedModels, workbenchModels, finishedModels
                 newState: 0
             }
             switch (result.destination.droppableId) {
-                case 'liked': dataToSend.newState = 4;
+                case 'liked': dataToSend.newState = kitState.wish;
                     break;
-                case 'stocked': dataToSend.newState = 1;
+                case 'stocked': dataToSend.newState = kitState.stock;
                     break;
-                case 'ordered': dataToSend.newState = 5;
+                case 'ordered': dataToSend.newState = kitState.ordered;
                     break;
-                case 'workbench': dataToSend.newState = 2;
+                case 'workbench': dataToSend.newState = kitState.wip;
                     break;
-                case 'finished': dataToSend.newState = 3;
+                case 'finished': dataToSend.newState = kitState.finished;
                     break;
             }
             //Sending to BDD
@@ -74,20 +78,20 @@ const InnerMgmt = ({ orderedModels, likedModels, workbenchModels, finishedModels
 
     return (
         <div className='inner-management-container'>
-            <DragDropContext onDragEnd={handleDragEnd}>
+            <DragDropContext onDragEnd={handleDragEnd} >
                 <div className='drop-container'>
-                    <p className='dopzone-title'>Modèle likés</p>
-                    <Droppable droppableId='liked' type="PERSON">
+                    <p className='dopzone-title'>Modèles likés</p>
+                    <Droppable droppableId='liked' type="PERSON" >
                         {(provided, snapshot) => {
                             return (
                                 <ul {...provided.droppableProps} ref={provided.innerRef} className={snapshot.isDraggingOver ? 'dropzone dropOK' : 'dropzone'}>
                                     {state.liked.map((item, index) => {
                                         return (
-                                            <Draggable key={item.id} draggableId={item.id.toString()} index={index}>
+                                            <Draggable key={item.id} draggableId={item.id.toString()} index={index} >
                                                 {(provided, snapshot) => { //snapshot should be use for style
                                                     return (
                                                         <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className={snapshot.isDragging ? 'line moving' : 'line'}>
-                                                            <KitCard kitDetails={item} />
+                                                            <KitCard kitDetails={item} displayImage={displayImage} />
                                                         </li>
                                                     )
                                                 }}
@@ -112,7 +116,7 @@ const InnerMgmt = ({ orderedModels, likedModels, workbenchModels, finishedModels
                                                 {(provided, snapshot) => { //snapshot should be use for style
                                                     return (
                                                         <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className={snapshot.isDragging ? 'line moving' : 'line'}>
-                                                            <KitCard kitDetails={item} />
+                                                            <KitCard kitDetails={item}  displayImage={displayImage} />
                                                         </li>
                                                     )
                                                 }}
@@ -137,7 +141,7 @@ const InnerMgmt = ({ orderedModels, likedModels, workbenchModels, finishedModels
                                                 {(provided, snapshot) => { //snapshot should be use for style
                                                     return (
                                                         <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className={snapshot.isDragging ? 'line moving' : 'line'}>
-                                                            <KitCard kitDetails={item} />
+                                                            <KitCard kitDetails={item}  displayImage={displayImage}/>
                                                         </li>
                                                     )
                                                 }}
@@ -162,7 +166,7 @@ const InnerMgmt = ({ orderedModels, likedModels, workbenchModels, finishedModels
                                                 {(provided, snapshot) => { //snapshot should be use for style
                                                     return (
                                                         <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className={snapshot.isDragging ? 'line moving' : 'line'}>
-                                                            <KitCard kitDetails={item} />
+                                                            <KitCard kitDetails={item}  displayImage={displayImage}/>
                                                         </li>
                                                     )
                                                 }}
@@ -187,7 +191,7 @@ const InnerMgmt = ({ orderedModels, likedModels, workbenchModels, finishedModels
                                                 {(provided, snapshot) => { //snapshot should be use for style
                                                     return (
                                                         <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className={snapshot.isDragging ? 'line moving' : 'line'}>
-                                                            <KitCard kitDetails={item} />
+                                                            <KitCard kitDetails={item}  displayImage={displayImage}/>
                                                         </li>
                                                     )
                                                 }}

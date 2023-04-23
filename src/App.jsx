@@ -29,6 +29,7 @@ import ranks from './feature/ranks';
 import useAuth from './hooks/useAuth';
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
+import kitState from './feature/kitState';
 /*User profil components */
 import UserData from './components/userprofil/userdata/UserData';
 import UserSupplier from './components/userprofil/usersupplier/UserSupplier';
@@ -39,6 +40,7 @@ import KitsHome from './components/kits/home/KitsHome';
 import KitManagement from './components/kits/kitmgmt/KitManagement';
 import FinishedModel from './components/kits/finishedmodel/FinishedModel';
 import KitDetails from './components/kits/kitdetails/KitDetails';
+import KitInStock from './components/kits/kitinstock/KitInStock';
 
 //Version of front end 
 const LocalVersion="1.0";
@@ -126,6 +128,9 @@ function App() {
           <Route path='kits' element={<Kits />} >
             <Route index element={<KitsHome />} />
             <Route path="gestion" element={<KitManagement />}/>
+            <Route path="inStock" element={<KitInStock keySearch={kitState.stock} title="en stock"/>}/>
+            <Route path="ordered" element={<KitInStock keySearch={kitState.ordered} title="commandés"/>}/>
+            <Route path="wip" element={<KitInStock keySearch={kitState.wip} title="en cours"/>}/>
             <Route path="finis" element={<FinishedModel />} />
             <Route path="finis/details/:id" element={<KitDetails />}/>
             <Route path='*' element={<NotFound />} />
