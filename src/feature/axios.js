@@ -13,3 +13,9 @@ export const axiosPrivateMultiPart=axios.create({
     headers:{'Content-Type':'multipart/form-data'},
     withCredentials :true
 })
+
+export const axiosPdfBlob=axios.create({
+    baseURL:url,
+    withCredentials:true,
+    responseType:'blob'
+})
