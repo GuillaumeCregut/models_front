@@ -45,6 +45,7 @@ import PdfStats from './components/userprofil/pdfstats/PdfStats';
 
 import './App.css';
 import Logs from './components/admin/logs/Logs';
+import UserMgmt from './components/admin/usersmgmt/UserMgmt';
 //Version of front end 
 const LocalVersion="1.0";
 
@@ -147,6 +148,7 @@ function App() {
           <Route element={<RequireAuth allowedRoles={ranks.admin} />}>
             <Route path='admin' element={<AdminPage />} >
               <Route path="logs" element={<Logs />} />
+              <Route path="users" element={<UserMgmt />} />
               </Route>
           </Route>
         </Routes>
