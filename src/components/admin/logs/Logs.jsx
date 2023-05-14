@@ -6,7 +6,7 @@ const Logs = () => {
     const logType=logsType;
     return (
         <div className='logs'>
-            <h1>Logs serveur</h1>
+            <h1 className='logs-title'>Logs serveur</h1>
             <div className="log-container">
                 <LogsItem logType={logType.error} />
             </div>
