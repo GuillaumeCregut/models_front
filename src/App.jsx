@@ -34,7 +34,6 @@ import kitState from './feature/kitState';
 import UserData from './components/userprofil/userdata/UserData';
 import UserSupplier from './components/userprofil/usersupplier/UserSupplier';
 
-import './App.css';
 import Orders from './components/userprofil/orders/Orders';
 import KitsHome from './components/kits/home/KitsHome';
 import KitManagement from './components/kits/kitmgmt/KitManagement';
@@ -44,6 +43,8 @@ import KitInStock from './components/kits/kitinstock/KitInStock';
 import Statistics from './components/userprofil/statistics/Statistics';
 import PdfStats from './components/userprofil/pdfstats/PdfStats';
 
+import './App.css';
+import Logs from './components/admin/logs/Logs';
 //Version of front end 
 const LocalVersion="1.0";
 
@@ -144,7 +145,9 @@ function App() {
           <Route path='*' element={<NotFound />} />
           {/* Admin routes*/}
           <Route element={<RequireAuth allowedRoles={ranks.admin} />}>
-            <Route path='admin' element={<AdminPage />} />
+            <Route path='admin' element={<AdminPage />} >
+              <Route path="logs" element={<Logs />} />
+              </Route>
           </Route>
         </Routes>
       </div>
