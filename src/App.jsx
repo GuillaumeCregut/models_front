@@ -41,6 +41,7 @@ import KitManagement from './components/kits/kitmgmt/KitManagement';
 import FinishedModel from './components/kits/finishedmodel/FinishedModel';
 import KitDetails from './components/kits/kitdetails/KitDetails';
 import KitInStock from './components/kits/kitinstock/KitInStock';
+import Statistics from './components/userprofil/statistics/Statistics';
 import PdfStats from './components/userprofil/pdfstats/PdfStats';
 
 //Version of front end 
@@ -124,6 +125,7 @@ function App() {
             <Route path="infos" element={<UserData />} />
             <Route path="fournisseurs" element={<UserSupplier />} />
             <Route path="commandes" element={<Orders />} />
+            <Route path='statistiques' element={<Statistics />} />
             <Route path="pdf" element={<PdfStats />} />
             <Route path='*' element={<NotFound />} />
           </Route>
