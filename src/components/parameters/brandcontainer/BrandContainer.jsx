@@ -53,7 +53,7 @@ const BrandContainer = () => {
 
     return (
         <section className="brand-component">
-        <h2 className='brand-title'>Les pays</h2>
+        <h2 className='brand-title'>Les marques</h2>
         <div className='brand-container'>
             {isLoaded ? brandsData.map(item => (
                 <SimpleCardContainer

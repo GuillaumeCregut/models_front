@@ -1,11 +1,24 @@
-import React from 'react'
+import { Outlet } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
+import ranks from '../../feature/ranks';
+import Login from '../../components/login/Login';
 
-const AdminPage = (props) => {
-    const {auth}=useAuth();
+import './AdminPage.scss';
+import AdminMenu from '../../components/admin/adminmenu/AdminMenu';
+
+const AdminPage = () => {
+    const { auth } = useAuth();
+    const rankUser = auth?.rank;
+   
     return (
-        <div>
-            Admin
+        <div className='admin'>
+            {rankUser === ranks.admin
+                ? <AdminMenu />
+                : null}
+            {rankUser === ranks.admin
+                ? <Outlet />
+                : <Login />
+            }
         </div>
     )
 }
