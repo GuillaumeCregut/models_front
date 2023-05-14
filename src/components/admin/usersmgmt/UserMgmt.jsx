@@ -24,7 +24,7 @@ const UserMgmt = () => {
 
     return (
         <section className='admin-user'>
-            Gestion des utilisateurs
+           <h1 className='admin-user-title'>Gestion des utilisateurs</h1> 
             <table>
                 <thead>
                     <tr>
