@@ -4,7 +4,7 @@ This repo is the front end part of ModelKit database. It is built with React (CR
 
 The aim of this project is to have a multi users management tool for managing plastik models kits.
 
-You should find back-end repo here [frontend](https://github.com/GuillaumeCregut/models_back/).
+You should find back-end repo here [backend](https://github.com/GuillaumeCregut/models_back/).
 
 
 
