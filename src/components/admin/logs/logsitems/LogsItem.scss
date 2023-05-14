@@ -1,0 +1,13 @@
+.log-item-container{
+    .log-item-value{
+        width: 850px;
+        max-height: 450px;
+        padding: 10px;
+        border : 1px solid black;
+        overflow: auto;
+        overflow-x: scroll;
+        word-wrap: none;
+        white-space: nowrap;
+        font-size: 0.8rem;
+    }
+}
