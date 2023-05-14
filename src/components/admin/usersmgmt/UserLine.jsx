@@ -20,11 +20,9 @@ const UserLine = ({user}) => {
     const handleChange=(e)=>{
         if(window.confirm('Voulez-vous changer le role ')){
             const newRank=parseInt(e.target.value,10);
-            console.log('User : ',user.id)
             axiosPrivate
             .patch(`${process.env.REACT_APP_API_URL}users/admin/${user.id}`,{rank:newRank})
             .then((resp)=>{
-                console.log(resp.data)
                 setUserRank(newRank);
                 })
             .catch((err)=>{
