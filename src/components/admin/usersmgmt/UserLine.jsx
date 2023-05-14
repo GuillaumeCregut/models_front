@@ -4,7 +4,7 @@ import ranks from '../../../feature/ranks';
 import useAxiosPrivate from '../../../hooks/useAxiosPrivate';
 
 const UserLine = ({user}) => {
-    const idFirstUser=5; //To be 1
+    const idFirstUser=1;
     const [userRank, setUserRank]=useState(user.rank);
     const axiosPrivate=useAxiosPrivate();
     let userRole='';
