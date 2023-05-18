@@ -8,6 +8,7 @@ import BuilderFrame from '../builderframe/BuilderFrame';
 import useAuth from '../../../hooks/useAuth';
 import ranks from '../../../feature/ranks';
 import CountrySelector from '../../selectors/countryselector/CountrySelector';
+import { ToastContainer, toast } from 'react-toastify';
 
 import './BuilderContainer.scss';
 
@@ -35,7 +36,7 @@ const BuilderContainer = () => {
                     setIsLoaded(true);
                 })
                 .catch((err) => {
-                    console.log(err);
+                    toast.error('Une erreur est survenue');
                 })
         }
         if (!buildersData)
@@ -67,18 +68,18 @@ const BuilderContainer = () => {
                         dispatch(addBuilder(newBuilderDb));
                     })
                     .catch((err) => {
-                        console.log(err);
-                        alert("Vous n'êtes pas autorisé à ajouter un élément.")
+                        toast.error("Vous n'êtes pas autorisé à ajouter un élément.")
                     })
             }
         }
         else {
-            alert("Veuillez remplir tous les champs");
+           toast.warn("Veuillez remplir tous les champs");
         }
     }
 
     return (
         <section className='builders-container-page'>
+            <ToastContainer />
             <h2 className='builders-container-title'>Constructeurs</h2>
             <label htmlFor="find-builder" className='builder-search-label'>Rechercher un constructeur :
                 <input

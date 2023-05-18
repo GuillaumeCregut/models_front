@@ -4,6 +4,7 @@ import './ModifierCard.scss';
 import close from '../../../assets/pictures/close.png';
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import { useDispatch } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
 
 export const ModifierCard = ({ id,name, url, action, hide }) => {
     const [newName, setNewName] = useState(name);
@@ -34,18 +35,17 @@ export const ModifierCard = ({ id,name, url, action, hide }) => {
              })
              .catch((err)=>{
                 switch(err.response.status){
-                    case 401 : alert("Vous n'êtes pas autoriser à modifier");
+                    case 401 : toast.error("Vous n'êtes pas autoriser à modifier");
                         break;
-                    case 403 : alert("Vous n'êtes pas autoriser à modifier");
+                    case 403 : toast.error("Vous n'êtes pas autoriser à modifier");
                         break;
-                    case 404 :  alert("L'élément n'existe pas");
+                    case 404 :  toast.warn("L'élément n'existe pas");
                         break;
-                    case 422 : alert("Veuillez vérifier les valeurs");
+                    case 422 : toast.warn("Veuillez vérifier les valeurs");
                         break;
-                    case 500 : alert("Une erreur serveur est survenue.");
+                    case 500 : toast.error("Une erreur serveur est survenue.");
                         break;
-                    default : alert(`action impossible : ${err.response.status}`);
-                        console.error(err)
+                    default : toast.error(`action impossible : ${err.response.status}`);
                 }
              })
         }
@@ -59,6 +59,7 @@ export const ModifierCard = ({ id,name, url, action, hide }) => {
 
     return (
         <div className='form-update-card-container'>
+            <ToastContainer />
             <form className='form-update-card' onSubmit={handleUpdate} ref={formRef}>
                 <label htmlFor="new-name">
                     Nouveau nom : <br />

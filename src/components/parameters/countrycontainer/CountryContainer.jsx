@@ -6,6 +6,7 @@ import { SimpleCardContainer } from '../simplecardcontainer/SimpleCardContainer'
 import { setCountry, deleteCountry,addCountry,updateCountry } from '../../../feature/Country.slice';
 import { AwaitLoad } from '../../awaitload/AwaitLoad';
 import FormAddSimple from '../formaddsimple/FormAddSimple';
+import { ToastContainer, toast } from 'react-toastify';
 
 import './CountryContainer.scss';
 
@@ -25,8 +26,7 @@ const CountryContainer = () => {
                     dispatch(addCountry(newCountry));
                 })
                 .catch((err)=>{
-                    console.log(err);
-                    alert("Vous n'êtes pas autorisé à ajouter un élément.")
+                    toast.error("Vous n'êtes pas autorisé à ajouter un élément.");
                 })
         }
     }
@@ -56,6 +56,7 @@ const CountryContainer = () => {
 
     return (
         <section className="country-component">
+            <ToastContainer />
             <h2 className='country-title'>Les pays</h2>
             <div className='country-container'>
                 {isLoaded ? countriesData.map(item => (

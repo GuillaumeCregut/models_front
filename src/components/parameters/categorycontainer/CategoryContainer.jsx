@@ -3,9 +3,10 @@ import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { SimpleCardContainer } from '../simplecardcontainer/SimpleCardContainer';
-import { addCategory,setCategory,updateCategory,deleteCategory } from '../../../feature/Category.slice';
+import { addCategory, setCategory, updateCategory, deleteCategory } from '../../../feature/Category.slice';
 import { AwaitLoad } from '../../awaitload/AwaitLoad';
 import FormAddSimple from '../formaddsimple/FormAddSimple';
+import { ToastContainer, toast } from 'react-toastify';
 
 import './CategoryContainer.scss';
 
@@ -14,20 +15,19 @@ const CategoryContainer = () => {
     const dispatch = useDispatch();
     const categoriesData = useSelector((state) => state.categories.category);
     const url = `${process.env.REACT_APP_API_URL}category`;
-    const axiosPrivate=useAxiosPrivate();
+    const axiosPrivate = useAxiosPrivate();
 
 
-    const addAction=(newData)=>{
-        if(window.confirm("Voulez vous ajouter l'élément ?")){
+    const addAction = (newData) => {
+        if (window.confirm("Voulez vous ajouter l'élément ?")) {
             axiosPrivate
-                .post(url,newData)
-                .then((resp)=>{
-                    const newCategory=resp.data;
+                .post(url, newData)
+                .then((resp) => {
+                    const newCategory = resp.data;
                     dispatch(addCategory(newCategory));
                 })
-                .catch((err)=>{
-                    console.log(err);
-                    alert("Vous n'êtes pas autorisé à ajouter un élément.")
+                .catch((err) => {
+                    toast.error("Vous n'êtes pas autorisé à ajouter un élément.")
                 })
         }
     }
@@ -45,32 +45,33 @@ const CategoryContainer = () => {
     }, []);
 
 
-    const wrapper={
+    const wrapper = {
         deleteAction: deleteCategory,
         updateAction: updateCategory,
         kind: "la catégorie",
-        url:url
+        url: url
     }
 
 
     return (
         <section className="category-component">
-        <h2 className='category-title'>Les pays</h2>
-        <div className='category-container'>
-            {isLoaded ? categoriesData.map(item => (
-                <SimpleCardContainer
-                    key={item.id}
-                    item={item}
-                    wrapper={wrapper}
-                />
-            ))
-                : <AwaitLoad />
-            }
-        </div>
-        <FormAddSimple
-        action={addAction}
-         />
-    </section>
+            <ToastContainer />
+            <h2 className='category-title'>Les pays</h2>
+            <div className='category-container'>
+                {isLoaded ? categoriesData.map(item => (
+                    <SimpleCardContainer
+                        key={item.id}
+                        item={item}
+                        wrapper={wrapper}
+                    />
+                ))
+                    : <AwaitLoad />
+                }
+            </div>
+            <FormAddSimple
+                action={addAction}
+            />
+        </section>
     )
 }
 
