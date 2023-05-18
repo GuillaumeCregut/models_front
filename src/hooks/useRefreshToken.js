@@ -15,8 +15,7 @@ const useRefreshToken=()=>{
             })
         })
         .catch((err)=>{
-            newToken=''
-            console.err('Failed to obtain secure connection'); //to modify
+            newToken='';
         })
         return newToken;
     }

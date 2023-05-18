@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import useAuth from '../../../hooks/useAuth';
 import useAxiosPrivate from '../../../hooks/useAxiosPrivate';
+import { ToastContainer, toast } from 'react-toastify';
+
 import './ProviderSelector.scss';
 
 const ProviderSelector = ({id, provider, setProvider}) => {
@@ -20,13 +22,15 @@ const ProviderSelector = ({id, provider, setProvider}) => {
                    setProviders(resp.data)
                 })
                 .catch((err)=>{
-                    console.error(err);
+                    toast.error('Une erreur est survenue');
                 })
         }
         getProviders();
     },[]);
 
     return (
+        <>
+        <ToastContainer />
         <select
         id={id}
         value={provider}
@@ -39,6 +43,7 @@ const ProviderSelector = ({id, provider, setProvider}) => {
             :null
             }
         </select>
+        </>
     )
 }
 

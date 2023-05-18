@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import useAuth from "../../../hooks/useAuth"
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import SupplierDetails from "../supplierdetails/SupplierDetails";
+import { ToastContainer, toast } from 'react-toastify';
 
 import './UserSupplier.scss';
 
@@ -23,7 +24,7 @@ const UserSupplier = () => {
                     setSuppliers(resp.data)
                 })
                 .catch((err) => {
-                    console.log(err)
+                    toast.error('Une erreur est survenue');
                 })
         }
         getSuppliers();
@@ -45,7 +46,7 @@ const UserSupplier = () => {
                         nameRef.current.value='';
                     })
                     .catch((err)=>{
-                        console.error(err);
+                        toast.error('Une erreur est survenue');
                     })
             }
         }
@@ -54,6 +55,7 @@ const UserSupplier = () => {
 
     return (
         <div className="supplier-page">
+            <ToastContainer />
             <h2 className="supplier-title">Fournisseurs</h2>
             <ul className="supplier-container">
                 {suppliers.map((item) => (

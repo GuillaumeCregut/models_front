@@ -3,6 +3,7 @@ import useAuth from '../../../hooks/useAuth';
 import useAxiosPrivate from '../../../hooks/useAxiosPrivate';
 import { Link } from 'react-router-dom';
 import { AwaitLoad } from '../../awaitload/AwaitLoad';
+import { ToastContainer, toast } from 'react-toastify';
 
 import './FinishedModel.scss';
 
@@ -25,7 +26,7 @@ const FinishedModel = () => {
                     setIsLoaded(true);
                 })
                 .catch((err) => {
-                    console.error(err);
+                    toast.error('Une erreur est survenue');
                 })
         }
         getModelsUSer();
@@ -34,6 +35,7 @@ const FinishedModel = () => {
 
     return (
         <div className='finished-models'>
+            <ToastContainer />
             <div className="finished-top-page">
                 <h2>Modèles finis</h2>
                 <div className="list-finished-model-container">

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { setPeriod } from '../../../feature/Period.slice';
 import { useDispatch, useSelector } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
 
 import './PeriodSelector.scss';
 
@@ -20,7 +21,7 @@ const PeriodSelector = ({selectedPeriod,setSelectedPeriod, id}) => {
                     setPeriodLoaded(true);
                 })
                 .catch((err)=>{
-                    console.error(err)
+                    toast.error('Une erreur est survenue');
                 })
         }
         if(!periodData)
@@ -32,6 +33,8 @@ const PeriodSelector = ({selectedPeriod,setSelectedPeriod, id}) => {
 
 
     return (
+        <>
+        <ToastContainer />
         <select
         id={id}
         value={selectedPeriod}
@@ -47,6 +50,7 @@ const PeriodSelector = ({selectedPeriod,setSelectedPeriod, id}) => {
             )
             :null}
         </select>
+        </>
     )
 }
 

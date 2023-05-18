@@ -3,6 +3,8 @@ import { useDispatch } from 'react-redux';
 import UpDateRemoveBtn from '../updateremovebtn/UpDateRemoveBtn';
 import { ModifierCard } from './ModifierCard';
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
+import { ToastContainer, toast } from 'react-toastify';
+
 import './SimpleCardContainer.scss';
 
 
@@ -22,13 +24,13 @@ export const SimpleCardContainer = ({ item, wrapper }) => {
         })
         .catch((err) => {
           if (err.response.status === 404) {
-            alert("L'élément n'existe pas")
+            toast.warn("L'élément n'existe pas")
           }
           if (err.response.status < 404) {
-            alert("Vous n'êtes pas autoriser à supprimer")
+            toast.warn("Vous n'êtes pas autoriser à supprimer")
           }
           if (err.response.status === 500) {
-            alert("Une erreur serveur est survenue")
+            toast.error("Une erreur serveur est survenue")
           }
         })
     }
@@ -39,6 +41,7 @@ export const SimpleCardContainer = ({ item, wrapper }) => {
 
   return (
     <div className="container-Card">
+      <ToastContainer /> 
       <h3 className='card-title'>{item.name}</h3>
       {displayModifier ?
         <ModifierCard

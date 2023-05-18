@@ -4,6 +4,8 @@ import { useDispatch } from 'react-redux';
 import UpDateRemoveBtn from '../updateremovebtn/UpDateRemoveBtn';
 import BuilderModifier from './BuilderModifier';
 import { updateBuilder, deleteBuilder } from '../../../feature/Builder.slice';
+import { ToastContainer, toast } from 'react-toastify';
+
 import './BuilderFrame.scss';
 
 
@@ -17,12 +19,10 @@ const BuilderFrame = ({ builder }) => {
         axiosPrivate
             .delete(url)
             .then((resp) => {
-
                 dispatch(deleteBuilder(builder.id));
             })
             .catch((err) => {
-                console.log(err);
-                alert("Vous n'êtes pas autorisé à ajouter un élément.")
+                toast.error("Vous n'êtes pas autorisé à ajouter un élément.");
             })
     }
 
@@ -42,18 +42,18 @@ const BuilderFrame = ({ builder }) => {
             dispatch(updateBuilder([item,builder.id]));
         })
         .catch((err) => {
-            console.log(err);
             if(err.response.status===422){
-                alert(`Erreur : ${err.response.data}`)
+                toast.error(`Erreur : ${err.response.data}`)
             }
             else
-                alert("Vous n'êtes pas autorisé à ajouter un élément.")
+                toast.error("Vous n'êtes pas autorisé à ajouter un élément.")
         })
         //Close modif zone
         setDisplayModifier(false);
     }
     return (
         <div className='builderElement'>
+            <ToastContainer />
             <h3> {builder.name}</h3>
             <p>{builder.countryName}</p>
             {displayModifier

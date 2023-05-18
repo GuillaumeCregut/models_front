@@ -8,6 +8,7 @@ import PeriodSelector from "../../selectors/periodSelector/PeriodSelector";
 import ScaleSelector from "../../selectors/scaleselector/ScaleSelector";
 import { useDispatch } from 'react-redux';
 import { addModel } from '../../../feature/Model.slice';
+import { ToastContainer, toast } from 'react-toastify';
 
 import './FormAddModel.scss';
 
@@ -48,7 +49,7 @@ const FormAddModel = ({setReload}) => {
                     clearForm();
                 })
                 .catch((err) => {
-                    console.error(err);
+                    toast.error('Une erreur est survenue');
                 })
         }
 
@@ -75,6 +76,7 @@ const FormAddModel = ({setReload}) => {
     }, [fileUpload])
     return (
         <div className="form-add-model-container">
+            <ToastContainer />
             <h2>Ajouter un modèle</h2>
             <form onSubmit={handleSubmit} className='form-add-model' encType="multipart/form-data">
                 <div className="form-add-model-inputs-container">

@@ -2,6 +2,7 @@ import {useState} from 'react';
 
 import ranks from '../../../feature/ranks';
 import useAxiosPrivate from '../../../hooks/useAxiosPrivate';
+import { ToastContainer, toast } from 'react-toastify';
 
 const UserLine = ({user}) => {
     const idFirstUser=1;
@@ -26,12 +27,13 @@ const UserLine = ({user}) => {
                 setUserRank(newRank);
                 })
             .catch((err)=>{
-                console.log(err);
+                toast.error('Une erreur est survenue');
             })
         }
     }
     return (
-        <tr>    
+        <tr>   
+            <ToastContainer /> 
             <td>{user.firstname}</td>
             <td>{user.lastname}</td>
             <td>{user.id===idFirstUser

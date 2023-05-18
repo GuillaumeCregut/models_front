@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { setCategory } from '../../../feature/Category.slice';
 import { useDispatch, useSelector } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
 
 import './CategorySelector.scss';
 
@@ -20,7 +21,7 @@ const CategorySelector = ({id,selectedCategory,setSelectedCategory}) => {
                     setCategoryLoaded(true);
                 })
                 .catch((err)=>{
-                    console.error(err)
+                    toast.error('Une erreur est survenue');
                 })
         }
         if(!categoryData){
@@ -31,6 +32,8 @@ const CategorySelector = ({id,selectedCategory,setSelectedCategory}) => {
     },[])
 
     return (
+        <>
+         <ToastContainer />
         <select
         id={id}
         value={selectedCategory}
@@ -47,6 +50,7 @@ const CategorySelector = ({id,selectedCategory,setSelectedCategory}) => {
                 : null
             }
         </select>
+        </>
     )
 }
 

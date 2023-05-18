@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import useAxiospdfBlob from '../../../hooks/useAxiospdfBlob';
 import useAuth from '../../../hooks/useAuth';
 import { AwaitLoad } from '../../awaitload/AwaitLoad';
+import { ToastContainer, toast } from 'react-toastify';
 
 import './PdfStats.scss';
 
@@ -25,7 +26,7 @@ const PdfStats = () => {
                     setPath(href)
                 })
                 .catch((err) => {
-                    console.error(err)
+                    toast.error('Une erreur est survenue');
                 })
         }
         getPdf();
@@ -33,6 +34,7 @@ const PdfStats = () => {
 
     return (
         <section className='pdf-container'>
+            <ToastContainer />
             <h1 className='pdf-title'>Statistiques</h1>
             {path === ''
                 ? <AwaitLoad />

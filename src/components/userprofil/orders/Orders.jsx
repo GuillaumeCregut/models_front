@@ -6,8 +6,10 @@ import ProviderSelector from '../../selectors/provideselector/ProviderSelector';
 import OrderModel from '../ordermodel/OrderModel';
 import ModelLine from './ModelLine';
 import OrderDetails from './orderdetails/OrderDetails';
+import { ToastContainer, toast } from 'react-toastify';
 
 import './Orders.scss';
+
 
 const Orders = () => {
     const [orders, setOrders] = useState([]);
@@ -38,7 +40,7 @@ const Orders = () => {
             setIsRefresh(true);
         }
         catch (err) {
-            console.error(err)
+            toast.error('Une erreur est survenue');
         }
     }, []);
 
@@ -51,7 +53,7 @@ const Orders = () => {
                     setOrders(resp.data)
                 })
                 .catch((err) => {
-                    console.error(err)
+                    toast.error('Une erreur est survenue');
                 })
         }
         getOrders();
@@ -80,7 +82,7 @@ const Orders = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (orderRefRef.current.value === '') {
-            alert('Veuillez saisir la référence')
+            toast.warn('Veuillez saisir la référence')
         }
         else {
             if (parseInt(provider) !== 0) { //penser à tester si la liste est vide.
@@ -102,12 +104,12 @@ const Orders = () => {
                             setRefresh(!refresh)
                         })
                         .catch((err) => {
-                            console.log(err)
+                            toast.error('Une erreur est survenue');
                         })
                 }
             }
             else
-                alert('Veuillez choisir un fournisseur')
+                toast.warn('Veuillez choisir un fournisseur')
         }
     }
 
@@ -225,7 +227,7 @@ const Orders = () => {
                 </form>
 
             </div>
-
+            <ToastContainer />
         </section>)
         : <p>Vous n'êtes pas connecté</p>
     )
