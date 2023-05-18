@@ -33,8 +33,8 @@ const UserLine = ({user}) => {
     }
     return (
         <tr>   
-            <ToastContainer /> 
-            <td>{user.firstname}</td>
+            
+            <td>{user.firstname}<ToastContainer /> </td>
             <td>{user.lastname}</td>
             <td>{user.id===idFirstUser
                 ?'administrateur'
