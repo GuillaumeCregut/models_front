@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import useAuth from '../../../hooks/useAuth';
 import useAxiosPrivate from '../../../hooks/useAxiosPrivate';
 import ChartPie from './chartspie/ChartPie';
+import { ToastContainer, toast } from 'react-toastify';
+
 import './Statistics.scss';
 
 const Statistics = () => {
@@ -21,7 +23,7 @@ const Statistics = () => {
                     setAllStats(resp.data);
                     setLoaded(true)
                 })
-                .catch((err) => console.error(err))
+                .catch((err) =>  toast.error('Une erreur est survenue'))
         }
         getStats();
     }, [])
@@ -30,6 +32,7 @@ const Statistics = () => {
     return (
 
         <div className='stat-container'>
+            <ToastContainer />
             <h2 className='stat-title'>Statistiques</h2>
             <div className='pies-container'>
                 {loaded && <ChartPie data={allStats.state} title='Etat' color="#82ca9d"/>}

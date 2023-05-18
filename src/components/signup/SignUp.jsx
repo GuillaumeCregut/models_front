@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import {FaCheck, FaTimes, FaInfoCircle} from 'react-icons/fa';
 import axios from "axios";
-import './SignUp.scss';
 import { Link } from 'react-router-dom';
+
+import './SignUp.scss';
 
 const SignUp = () => {
     const userRef = useRef();
@@ -70,7 +71,6 @@ const SignUp = () => {
                 axios
                 .post(url,newUser)
                 .then ((res)=>{
-                    console.log(res)
                     setSuccess(true);
                 })
                 .catch((err)=>{
@@ -79,7 +79,6 @@ const SignUp = () => {
                     }
                     if (err.response?.status){
                         //Afficher le message d'erreur
-                        console.log(err)
                         let errorMsg=err.response?.data;
                         if(!errorMsg)
                             errorMsg="Une erreur serveur est survenue."

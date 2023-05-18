@@ -9,6 +9,7 @@ import useAuth from '../../../hooks/useAuth';
 import ranks from '../../../feature/ranks';
 import FilterModel from '../filtermodel/FilterModel';
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
+import { ToastContainer, toast } from 'react-toastify';
 
 import './ModelsContainer.scss';
 
@@ -58,7 +59,7 @@ const ModelsContainer = () => {
                     setIsLoaded(true);
                 })
                 .catch((err) => {
-                    console.error(err)
+                    toast.error('Une erreur est survenue');
                 })
         }
         if (!modelData) {
@@ -80,7 +81,7 @@ const ModelsContainer = () => {
 
                 })
                 .catch((err)=>{
-                    console.error(err);
+                    toast.error('Une erreur est survenue');
                 })
         }
         if(idUser!==0)
@@ -110,6 +111,7 @@ const ModelsContainer = () => {
 
     return (
         <section className='model-component'>
+            <ToastContainer />
             <h2 className="model-title">Les modèles</h2>
             <div className="main-model-container">
 

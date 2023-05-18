@@ -5,9 +5,11 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import useAuth from '../../../../hooks/useAuth';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
 import {updateStock} from '../../../../feature/stockUser.slice';
-import './InnerMgmt.scss';
 import { useDispatch } from 'react-redux';
 import kitState from '../../../../feature/kitState'
+import { ToastContainer, toast } from 'react-toastify';
+
+import './InnerMgmt.scss';
 
 const InnerMgmt = ({ orderedModels, likedModels, workbenchModels, finishedModels, stockModels,displayImage }) => {
     const axiosPrivate = useAxiosPrivate();
@@ -33,7 +35,7 @@ const InnerMgmt = ({ orderedModels, likedModels, workbenchModels, finishedModels
                 return true;
             })
             .catch((err) => {
-                console.log(err)
+                toast.error('Une erreur est survenue');
                 return false;
             })
         return result
@@ -78,6 +80,7 @@ const InnerMgmt = ({ orderedModels, likedModels, workbenchModels, finishedModels
 
     return (
         <div className='inner-management-container'>
+            <ToastContainer />
             <DragDropContext onDragEnd={handleDragEnd} >
                 <div className='drop-container'>
                     <p className='dopzone-title'>Modèles likés</p>

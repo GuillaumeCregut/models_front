@@ -5,6 +5,8 @@ import { AwaitLoad } from "../../awaitload/AwaitLoad";
 import { setStock } from "../../../feature/stockUser.slice";
 import KitCard from "../kitmgmt/kitcard/KitCard";
 import { useDispatch,useSelector } from "react-redux";
+import { ToastContainer, toast } from 'react-toastify';
+
 import './KitInStock.scss';
 
 const KitInStock = ({keySearch,title}) => {
@@ -33,7 +35,7 @@ const KitInStock = ({keySearch,title}) => {
                     setIsLoaded(true);
                 })
                 .catch((err) => {
-                    console.error(err);
+                    toast.error('Une erreur est survenue');
                 })
         }
         if(! StocksData)
@@ -50,6 +52,7 @@ const KitInStock = ({keySearch,title}) => {
 
     return (
         <div className="kit-instock">
+            <ToastContainer />
              Kits {title}: {kits.length}
             <div className="filter">
                 <label htmlFor="filter">
