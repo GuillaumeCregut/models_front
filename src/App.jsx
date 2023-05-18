@@ -92,7 +92,7 @@ function App() {
           }
         })
         .catch((err) => {
-          toast.error('Une erreur est survenue');
+         
         })
     }
 
