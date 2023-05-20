@@ -1,5 +1,6 @@
 import {  useState } from "react";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
+import { ToastContainer, toast } from 'react-toastify';
 
 import "./SupplierDetails.scss";
 
@@ -22,7 +23,7 @@ const SupplierDetails = ({supplier, setSuppliers,suppliers}) => {
                     setSuppliers(suppliers.filter((item)=>item.id!==id))
                 })
                 .catch((err)=>{
-                    console.error(err);
+                    toast.error('Une erreur est survenue');
                 })
         }
     }
@@ -49,13 +50,14 @@ const SupplierDetails = ({supplier, setSuppliers,suppliers}) => {
                     handleEdit();
                 })
                 .catch((err)=>{
-                    console.error(err)
+                    toast.error('Une erreur est survenue');
                 })
         }
     }
 
     return (
         <li className="supplier-details-container">
+            <ToastContainer />
            {update
            ? <p><input type="text" value={newName} onChange={(e)=>setNewName(e.target.value)}/> <button onClick={handleUpdate}>Valider</button> <button onClick={handleEdit}>Fermer</button></p>
            :<div><button onClick={handleDelete}>-</button>{supplier.name} <button  onClick={handleEdit}>Modifier</button></div>}

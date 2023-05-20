@@ -6,6 +6,7 @@ import { SimpleCardContainer } from '../simplecardcontainer/SimpleCardContainer'
 import { addBrand,setBrand,updateBrand,deleteBrand } from '../../../feature/Brand.slice';
 import { AwaitLoad } from '../../awaitload/AwaitLoad';
 import FormAddSimple from '../formaddsimple/FormAddSimple';
+import { ToastContainer, toast } from 'react-toastify';
 
 import './BrandContainer.scss';
 
@@ -25,8 +26,7 @@ const BrandContainer = () => {
                     dispatch(addBrand(newBrand));
                 })
                 .catch((err)=>{
-                    console.log(err);
-                    alert("Vous n'êtes pas autorisé à ajouter un élément.")
+                    toast.error("Vous n'êtes pas autorisé à ajouter un élément.");
                 })
         }
     }
@@ -53,6 +53,7 @@ const BrandContainer = () => {
 
     return (
         <section className="brand-component">
+            <ToastContainer />
         <h2 className='brand-title'>Les marques</h2>
         <div className='brand-container'>
             {isLoaded ? brandsData.map(item => (

@@ -1,7 +1,9 @@
 import {useEffect,useState} from 'react';
 import logsType from '../../../../feature/logsInfos';
-import './LogsItem.scss';
 import useAxiosPrivate from '../../../../hooks/useAxiosPrivate';
+import { ToastContainer, toast } from 'react-toastify';
+
+import './LogsItem.scss';
 
 const LogsItem = ({logType}) => {
     const [log, setLog]=useState('');
@@ -15,7 +17,7 @@ const LogsItem = ({logType}) => {
                     setLog(resp.data);
                 })
                 .catch((err)=>{
-                    console.log(err)
+                    toast.error('Une erreur est survenue');
                 })
         }
         getLogs();
@@ -36,6 +38,7 @@ const LogsItem = ({logType}) => {
     }
     return (
         <div className='log-item-container'>
+            <ToastContainer />
             <h2>Logs : {title} </h2>
             <div className="log-item-value">
                 <ul>

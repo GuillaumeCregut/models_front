@@ -16,6 +16,8 @@ import ScaleSelector from '../../selectors/scaleselector/ScaleSelector';
 import PeriodSelector from '../../selectors/periodSelector/PeriodSelector';
 import { AiFillHeart,AiOutlineHeart } from "react-icons/ai";
 import { MdOutlineAddShoppingCart } from "react-icons/md";
+import { ToastContainer, toast } from 'react-toastify';
+
 import './ModelBlock.scss';
 
 
@@ -96,7 +98,7 @@ const ModelBlock = ({ model, setReload }) => {
                     }
                 })
                 .catch((err) => {
-                    console.error(err)
+                    toast.error('Une erreur est survenue');
                 })
         }
         closeModal();
@@ -112,7 +114,7 @@ const ModelBlock = ({ model, setReload }) => {
                     setReload(prev=>!prev);
                 })
                 .catch((err) => {
-                    console.error(err)
+                    toast.error('Une erreur est survenue');
                 })
         }
     }
@@ -131,7 +133,7 @@ const ModelBlock = ({ model, setReload }) => {
                 setIsLiked((prev)=>!prev)
             })
             .catch((err)=>{
-                console.error(err)
+                toast.error('Une erreur est survenue');
             })
     }
 
@@ -141,11 +143,10 @@ const ModelBlock = ({ model, setReload }) => {
             axiosPrivate
                 .post(url,{user:idUser,model:model.id})
                 .then((resp)=>{
-                    alert("Le modèle a bien été ajouté. Pour modifier, veuillez vous rendre dans votre stock.")
+                    toast.info("Le modèle a bien été ajouté. Pour modifier, veuillez vous rendre dans votre stock.")
                 })
                 .catch((err)=>{
-                    console.error(err)
-                    alert("Une erreur est survenue, le modèle n'a put être ajouté au stock")
+                    toast.error("Une erreur est survenue, le modèle n'a put être ajouté au stock");
                 })
 
         }
@@ -153,6 +154,7 @@ const ModelBlock = ({ model, setReload }) => {
 
     return (
         <article className='model-block'>
+            <ToastContainer />
             <div className="model-card-container" onClick={turnCard} >
                 <ReactCardFlip isFlipped={displayBack} flipDirection="horizontal" containerClassName="card-settings">
                     <div className='flip-card-front'>

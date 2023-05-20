@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import { setModel } from '../../../feature/Model.slice';
-
+import { ToastContainer, toast } from 'react-toastify';
 import useAuth from "../../../hooks/useAuth";
 import { AwaitLoad } from "../../awaitload/AwaitLoad";
 
@@ -58,7 +58,7 @@ const OrderModel = ({ addModel,setCloseModel }) => {
                     setIsFavoriteLoaded(true);
                 })
                 .catch((err) => {
-                    console.error(err);
+                    toast.error('Une erreur est survenue');
                 })
         }
         getFavorites();
@@ -75,7 +75,7 @@ const OrderModel = ({ addModel,setCloseModel }) => {
                     setIsLoaded(true);
                 })
                 .catch((err) => {
-                    console.error(err)
+                    toast.error('Une erreur est survenue');
                 })
         }
         if (!modelData) {
@@ -112,6 +112,7 @@ const OrderModel = ({ addModel,setCloseModel }) => {
 
     return (
         <div className="order-model-container">
+            <ToastContainer />
             <div className="order-model-list-container">
                 <div className="order-model-all-models-container">
                     <h3>Liste des modèles favoris</h3>

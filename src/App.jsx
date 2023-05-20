@@ -44,8 +44,10 @@ import Statistics from './components/userprofil/statistics/Statistics';
 import PdfStats from './components/userprofil/pdfstats/PdfStats';
 
 import './App.css';
+import "react-toastify/dist/ReactToastify.css";
 import Logs from './components/admin/logs/Logs';
 import UserMgmt from './components/admin/usersmgmt/UserMgmt';
+import { ToastContainer, toast } from 'react-toastify';
 //Version of front end 
 const LocalVersion="1.0";
 
@@ -61,11 +63,13 @@ function App() {
       .then((resp)=>{
         const {version}=resp.data;
         if(LocalVersion!==version){
-          alert("Attention les versions diverges entre l'API et le site");
+          toast.error("Attention les versions diverges entre l'API et le site");
           setVersionChecker(false);
         }
       })
-      .catch((err)=>console.error(err))
+      .catch((err)=>{
+        toast.error('Une erreur est survenue');
+      })
   },[])
 
   useEffect( () => {
@@ -88,7 +92,7 @@ function App() {
           }
         })
         .catch((err) => {
-          console.log(err)
+         
         })
     }
 
@@ -102,6 +106,7 @@ function App() {
   return (
     <div className="App">
       <div className='app-container'>
+        <ToastContainer />
         <Header />
         {versionChecker
           ?<NavBar />

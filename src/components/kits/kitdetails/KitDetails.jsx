@@ -7,6 +7,7 @@ import FileUploader from '../fileuploader/FileUploader';
 import Zoom from 'react-medium-image-zoom';
 import useAxiosPrivateMulti from '../../../hooks/useAxiosMulti';
 import { FaTrash } from "react-icons/fa";
+import { ToastContainer, toast } from 'react-toastify';
 
 import 'react-medium-image-zoom/dist/styles.css';
 
@@ -46,7 +47,6 @@ const KitDetails = () => {
                     setIsLoaded(true);
                 })
                 .catch((err) => {
-                    console.error(err);
                     setIsError(true);
                 })
         }
@@ -65,7 +65,7 @@ const KitDetails = () => {
                 setReload(!reload)
             })
             .catch((err) => {
-                console.error(err);
+                toast.error('Une erreur est survenue');
             })
     }
 
@@ -77,12 +77,13 @@ const KitDetails = () => {
                 setReload(!reload);
             })
             .catch((err) => {
-                console.error(err);
+                toast.error('Une erreur est survenue');
             })
     }
 
     return (
         <div>
+            <ToastContainer />
             {
                 isLoaded
                     ? (<div className="detail-container">

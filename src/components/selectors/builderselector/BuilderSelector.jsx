@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import {setBuilder} from '../../../feature/Builder.slice';
+import { ToastContainer, toast } from 'react-toastify';
 
 import './BuilderSelector.scss';
 
@@ -20,7 +21,7 @@ const BuilderSelector = ({id,selectedBuilder, setSelectedBuilder}) => {
                     setBuilderLoaded(true);
                 })
                 .catch((err)=>{
-                    console.error(err)
+                    toast.error('Une erreur est survenue');
                 })
         }
         if(!builderData)
@@ -30,6 +31,8 @@ const BuilderSelector = ({id,selectedBuilder, setSelectedBuilder}) => {
     },[]);
 
     return (
+        <>
+        <ToastContainer />
         <select
             id={id}
             value={selectedBuilder}
@@ -46,6 +49,7 @@ const BuilderSelector = ({id,selectedBuilder, setSelectedBuilder}) => {
         :null
         }   
         </select>
+        </>
     )
 }
 
